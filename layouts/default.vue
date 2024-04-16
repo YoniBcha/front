@@ -9,7 +9,7 @@
       class="h-[100vh]"
     >
       <div class="flex justify-center items-center h-[60px] text-white mt-3">
-        <img src="~assets/img/addis.png" class="w-36" />
+        <img src="~assets/img/addis.png" class="w-28" />
       </div>
       <a-divider
         style="background: white; margin-left: 12px; margin-right: 40px"
@@ -34,9 +34,12 @@
               <span> Enterprise Registration </span>
             </span>
           </template>
-          <a-menu-item key="2.1">Tom</a-menu-item>
+          <a-menu-item key="2.1">
+            <router-link to="/enterprise_registration">
+              <span> Enterprise List </span>
+            </router-link>
+          </a-menu-item>
           <a-menu-item key="2.2">Bill</a-menu-item>
-          <a-menu-item key="2.3">Alex</a-menu-item>
         </a-sub-menu>
         <a-menu-item key="3" :style="sidebarMenuItemStyle">
           <router-link to="/jobless_registration">
