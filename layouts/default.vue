@@ -22,45 +22,51 @@
         style="background: #1518ba; margin-top: 20px"
       >
         <a-menu-item key="1" :style="sidebarMenuItemStyle">
+          <router-link to="/">
+            <UserAddOutlined class="text-xl" />
+            <span> Dashboard </span>
+          </router-link>
+        </a-menu-item>
+        <a-menu-item key="2" :style="sidebarMenuItemStyle">
           <router-link to="/jobless_registration">
             <UserAddOutlined class="text-xl" />
             <span> Jobless Registration </span>
           </router-link>
         </a-menu-item>
-        <a-sub-menu key="2" :style="submenuStyle">
+        <a-sub-menu key="3" :style="submenuStyle">
           <template #title>
             <span>
               <TeamOutlined class="text-xl" />
               <span> Enterprise Registration </span>
             </span>
           </template>
-          <a-menu-item key="2.1">
+          <a-menu-item key="3.1">
             <router-link to="/enterprise_registration">
               <span> Enterprise List </span>
             </router-link>
           </a-menu-item>
-          <a-menu-item key="2.2">Bill</a-menu-item>
+          <a-menu-item key="3.2">Bill</a-menu-item>
         </a-sub-menu>
-        <a-menu-item key="3" :style="sidebarMenuItemStyle">
-          <router-link to="/jobless_registration">
+        <a-menu-item key="4" :style="sidebarMenuItemStyle">
+          <router-link to="/workplace_registration">
             <HomeOutlined class="text-xl" />
             <span> Workplace Registration </span>
           </router-link>
         </a-menu-item>
-        <a-menu-item key="4" :style="sidebarMenuItemStyle">
-          <router-link to="/jobless_registration">
+        <a-menu-item key="5" :style="sidebarMenuItemStyle">
+          <router-link to="/contract_document">
             <ReconciliationOutlined class="text-xl" />
             <span> Contract Document </span>
           </router-link>
         </a-menu-item>
-        <a-menu-item key="5" :style="sidebarMenuItemStyle">
-          <router-link to="/jobless_registration">
+        <a-menu-item key="6" :style="sidebarMenuItemStyle">
+          <router-link to="/complain_document">
             <CommentOutlined class="text-xl" />
             <span> Complain Document </span>
           </router-link>
         </a-menu-item>
-        <a-menu-item key="6" :style="sidebarMenuItemStyle">
-          <router-link to="/jobless_registration">
+        <a-menu-item key="7" :style="sidebarMenuItemStyle">
+          <router-link to="/help">
             <PlusCircleOutlined class="text-xl" />
             <span> Help </span>
           </router-link>
@@ -68,14 +74,14 @@
         <a-divider
           style="background: white; margin-left: 12px; margin-right: 40px"
         />
-        <a-menu-item key="7" :style="sidebarMenuItemStyle">
-          <router-link to="/jobless_registration">
+        <a-menu-item key="8" :style="sidebarMenuItemStyle">
+          <router-link to="/contact_us">
             <ContactsOutlined class="text-xl" />
             <span> Contact Us </span>
           </router-link>
         </a-menu-item>
-        <a-menu-item key="8" :style="sidebarMenuItemStyle">
-          <router-link to="/jobless_registration">
+        <a-menu-item key="9" :style="sidebarMenuItemStyle">
+          <router-link to="/setting">
             <SettingOutlined class="text-xl" />
             <span> Setting </span>
           </router-link>
