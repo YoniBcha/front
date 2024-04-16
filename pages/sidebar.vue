@@ -47,8 +47,8 @@ function toggleDropdown() {
       :style="sidebarStyle"
       class="h-[100vh]"
     >
-      <div class="flex justify-center items-center h-[60px] text-white mt-3">
-        <img src="~assets/img/addis.png" class="w-36" />
+      <div class="flex justify-center items-center h-[60px] text-white">
+        LOGO
       </div>
       <a-menu
         v-model:selectedKeys="selectedKeys"
@@ -95,9 +95,9 @@ function toggleDropdown() {
     <a-layout>
       <a-layout-header
         style="background: #fff; padding: 0"
-        class="flex h-full justify-between items-center"
+        class="flex justify-between items-center"
       >
-        <div class="flex items-center h-full px-5">
+        <div class="px-5">
           <menu-unfold-outlined
             v-if="collapsed"
             class="text-3xl"
@@ -108,10 +108,6 @@ function toggleDropdown() {
             class="text-3xl"
             @click="() => (collapsed = !collapsed)"
           />
-          <div class="flex justify-center h-full items-center text-center font-bold text-lg ml-7 w-[700px]">
-            ADDIS ABEBA CITY ADMINISTRATION ENTERPRISE AND INDUSTRY <br /> DEVELOPMENT
-            OFFICE
-          </div>
         </div>
         <div class="flex relative gap-3 items-center h-full pr-5">
           <div class="flex flex-col justify-center h-full">
