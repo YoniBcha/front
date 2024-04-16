@@ -11,45 +11,71 @@
       <div class="flex justify-center items-center h-[60px] text-white mt-3">
         <img src="~assets/img/addis.png" class="w-36" />
       </div>
+      <a-divider
+        style="background: white; margin-left: 12px; margin-right: 40px"
+      />
       <a-menu
         v-model:selectedKeys="selectedKeys"
         theme="dark"
         mode="inline"
         class="mt-5"
-        :style="sidebarMenuStyle"
+        style="background: #1518ba; margin-top: 20px"
       >
         <a-menu-item key="1" :style="sidebarMenuItemStyle">
-          <pie-chart-outlined style="font-size: 20px" />
-          <span> Dashboard</span>
+          <router-link to="/jobless_registration">
+            <UserAddOutlined class="text-xl" />
+            <span> Jobless Registration </span>
+          </router-link>
         </a-menu-item>
-        <a-menu-item key="2" :style="sidebarMenuItemStyle">
-          <desktop-outlined style="font-size: 20px" />
-          <span>Option 2</span>
-        </a-menu-item>
-        <a-sub-menu key="sub1" :style="submenuStyle">
+        <a-sub-menu key="2" :style="submenuStyle">
           <template #title>
             <span>
-              <user-outlined style="font-size: 20px" />
-              <span>User</span>
+              <TeamOutlined class="text-xl" />
+              <span> Enterprise Registration </span>
             </span>
           </template>
-          <a-menu-item key="3">Tom</a-menu-item>
-          <a-menu-item key="4">Bill</a-menu-item>
-          <a-menu-item key="5">Alex</a-menu-item>
+          <a-menu-item key="2.1">Tom</a-menu-item>
+          <a-menu-item key="2.2">Bill</a-menu-item>
+          <a-menu-item key="2.3">Alex</a-menu-item>
         </a-sub-menu>
-        <a-sub-menu key="sub2">
-          <template #title>
-            <span>
-              <team-outlined />
-              <span>Team</span>
-            </span>
-          </template>
-          <a-menu-item key="6">Team 1</a-menu-item>
-          <a-menu-item key="8">Team 2</a-menu-item>
-        </a-sub-menu>
-        <a-menu-item key="9">
-          <file-outlined />
-          <span>File</span>
+        <a-menu-item key="3" :style="sidebarMenuItemStyle">
+          <router-link to="/jobless_registration">
+            <HomeOutlined class="text-xl" />
+            <span> Workplace Registration </span>
+          </router-link>
+        </a-menu-item>
+        <a-menu-item key="4" :style="sidebarMenuItemStyle">
+          <router-link to="/jobless_registration">
+            <ReconciliationOutlined class="text-xl" />
+            <span> Contract Document </span>
+          </router-link>
+        </a-menu-item>
+        <a-menu-item key="5" :style="sidebarMenuItemStyle">
+          <router-link to="/jobless_registration">
+            <CommentOutlined class="text-xl" />
+            <span> Complain Document </span>
+          </router-link>
+        </a-menu-item>
+        <a-menu-item key="6" :style="sidebarMenuItemStyle">
+          <router-link to="/jobless_registration">
+            <PlusCircleOutlined class="text-xl" />
+            <span> Help </span>
+          </router-link>
+        </a-menu-item>
+        <a-divider
+          style="background: white; margin-left: 12px; margin-right: 40px"
+        />
+        <a-menu-item key="7" :style="sidebarMenuItemStyle">
+          <router-link to="/jobless_registration">
+            <ContactsOutlined class="text-xl" />
+            <span> Contact Us </span>
+          </router-link>
+        </a-menu-item>
+        <a-menu-item key="8" :style="sidebarMenuItemStyle">
+          <router-link to="/jobless_registration">
+            <SettingOutlined class="text-xl" />
+            <span> Setting </span>
+          </router-link>
         </a-menu-item>
       </a-menu>
     </a-layout-sider>
@@ -133,18 +159,12 @@ const contentStyle = reactive({
 const sidebarStyle = reactive({
   background: "#1518ba",
 });
-const sidebarMenuStyle = reactive({
-  background: "#1518ba",
-});
+
 const sidebarMenuItemStyle = reactive({
-  fontSize: "20px",
-  display: "flex",
-  alignItems: "center",
-  height: "50px",
+  height: "48px",
 });
 
 const submenuStyle = reactive({
-  fontSize: "20px",
   background: "#1518ba",
 });
 
