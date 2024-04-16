@@ -23,20 +23,20 @@
       >
         <a-menu-item key="1" :style="sidebarMenuItemStyle">
           <router-link to="/">
-            <UserAddOutlined class="text-xl" />
+            <AppstoreOutlined />
             <span> Dashboard </span>
           </router-link>
         </a-menu-item>
         <a-menu-item key="2" :style="sidebarMenuItemStyle">
           <router-link to="/jobless_registration">
-            <UserAddOutlined class="text-xl" />
+            <UserAddOutlined />
             <span> Jobless Registration </span>
           </router-link>
         </a-menu-item>
         <a-sub-menu key="3" :style="submenuStyle">
           <template #title>
             <span>
-              <TeamOutlined class="text-xl" />
+              <TeamOutlined />
               <span> Enterprise Registration </span>
             </span>
           </template>
@@ -49,25 +49,25 @@
         </a-sub-menu>
         <a-menu-item key="4" :style="sidebarMenuItemStyle">
           <router-link to="/workplace_registration">
-            <HomeOutlined class="text-xl" />
+            <HomeOutlined />
             <span> Workplace Registration </span>
           </router-link>
         </a-menu-item>
         <a-menu-item key="5" :style="sidebarMenuItemStyle">
           <router-link to="/contract_document">
-            <ReconciliationOutlined class="text-xl" />
+            <ReconciliationOutlined />
             <span> Contract Document </span>
           </router-link>
         </a-menu-item>
         <a-menu-item key="6" :style="sidebarMenuItemStyle">
           <router-link to="/complain_document">
-            <CommentOutlined class="text-xl" />
+            <CommentOutlined />
             <span> Complain Document </span>
           </router-link>
         </a-menu-item>
         <a-menu-item key="7" :style="sidebarMenuItemStyle">
           <router-link to="/help">
-            <PlusCircleOutlined class="text-xl" />
+            <PlusCircleOutlined />
             <span> Help </span>
           </router-link>
         </a-menu-item>
@@ -76,13 +76,13 @@
         />
         <a-menu-item key="8" :style="sidebarMenuItemStyle">
           <router-link to="/contact_us">
-            <ContactsOutlined class="text-xl" />
+            <ContactsOutlined />
             <span> Contact Us </span>
           </router-link>
         </a-menu-item>
         <a-menu-item key="9" :style="sidebarMenuItemStyle">
           <router-link to="/setting">
-            <SettingOutlined class="text-xl" />
+            <SettingOutlined />
             <span> Setting </span>
           </router-link>
         </a-menu-item>
