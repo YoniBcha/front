@@ -17,10 +17,8 @@
         :style="{ width: '300px'}"
       />
     </div>
+    <div class="mt-5">
+      <DatatableTable />
+    </div>
   </div>
 </template>
-
-<script setup>
-
-
-</script>
