@@ -14,11 +14,11 @@
       <a-input-search
         placeholder="search jobless person"
         @search="onSearch"
-        :style="{ width: '300px'}"
+        :style="{ width: '300px' }"
       />
     </div>
     <div class="mt-5">
-      <DatatableTable />
+      <DatatableJoblessDataTable />
     </div>
   </div>
 </template>

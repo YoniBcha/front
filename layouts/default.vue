@@ -65,19 +65,14 @@
             <span> Complain Document </span>
           </router-link>
         </a-menu-item>
+
+        <a-divider
+          style="background: white; margin-left: 12px; margin-right: 40px"
+        />
         <a-menu-item key="7" :style="sidebarMenuItemStyle">
           <router-link to="/help">
             <PlusCircleOutlined />
             <span> Help </span>
-          </router-link>
-        </a-menu-item>
-        <a-divider
-          style="background: white; margin-left: 12px; margin-right: 40px"
-        />
-        <a-menu-item key="8" :style="sidebarMenuItemStyle">
-          <router-link to="/contact_us">
-            <ContactsOutlined />
-            <span> Contact Us </span>
           </router-link>
         </a-menu-item>
         <a-menu-item key="9" :style="sidebarMenuItemStyle">
