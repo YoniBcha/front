@@ -5,38 +5,43 @@
   >
     New Jobless
   </button>
-  <a-table bordered :data-source="dataSource" :columns="columns">
+  <a-table :columns="columns" :data-source="dataSource" bordered>
     <template #bodyCell="{ column, text, record }">
-      <template v-if="column.dataIndex === 'name'">
+      <template
+        v-if="
+          column.dataIndex === 'name' ||
+          column.dataIndex === 'age' ||
+          column.dataIndex === 'address'
+        "
+      >
         <div class="editable-cell">
           <div
-            v-if="editableData[record.key]"
+            v-if="
+              editableData[record.key] &&
+              editableData[record.key][column.dataIndex]
+            "
             class="editable-cell-input-wrapper"
           >
             <a-input
-              v-model:value="editableData[record.key].name"
-              @pressEnter="save(record.key)"
+              v-model:value="editableData[record.key][column.dataIndex]"
+              @pressEnter="save(record.key, column.dataIndex)"
             />
             <check-outlined
               class="editable-cell-icon-check"
-              @click="save(record.key)"
+              @click="save(record.key, column.dataIndex)"
             />
           </div>
           <div v-else class="editable-cell-text-wrapper">
             {{ text || " " }}
             <edit-outlined
               class="editable-cell-icon"
-              @click="edit(record.key)"
+              @click="edit(record.key, column.dataIndex)"
             />
           </div>
         </div>
       </template>
       <template v-else-if="column.dataIndex === 'operation'">
-        <a-popconfirm
-          v-if="dataSource.length"
-          title="Sure to delete?"
-          @confirm="onDelete(record.key)"
-        >
+        <a-popconfirm title="Sure to delete?" @confirm="onDelete(record.key)">
           <a>Delete</a>
         </a-popconfirm>
       </template>
@@ -82,18 +87,27 @@ const dataSource = ref([
 ]);
 const count = computed(() => dataSource.value.length + 1);
 const editableData = reactive({});
-const edit = (key) => {
-  editableData[key] = cloneDeep(
-    dataSource.value.filter((item) => key === item.key)[0]
+
+const edit = (key, dataIndex) => {
+  if (!editableData[key]) {
+    editableData[key] = {};
+  }
+  editableData[key][dataIndex] = cloneDeep(
+    dataSource.value.find((item) => item.key === key)[dataIndex]
   );
 };
-const save = (key) => {
-  Object.assign(
-    dataSource.value.filter((item) => key === item.key)[0],
-    editableData[key]
-  );
-  delete editableData[key];
+
+const save = (key, dataIndex) => {
+  const itemIndex = dataSource.value.findIndex((item) => item.key === key);
+  if (itemIndex !== -1) {
+    dataSource.value[itemIndex][dataIndex] = editableData[key][dataIndex];
+  }
+  delete editableData[key][dataIndex];
+  if (Object.keys(editableData[key]).length === 0) {
+    delete editableData[key];
+  }
 };
+
 const onDelete = (key) => {
   dataSource.value = dataSource.value.filter((item) => item.key !== key);
 };
