@@ -1,11 +1,11 @@
 <template>
-  <a-layout :style="{ width: layoutWidth }">
+  <a-layout style="position: fixed; background: #0a58a4; width: 100%">
     <a-layout-sider
       v-model:collapsed="collapsed"
       :trigger="null"
       collapsible
       :width="siderWidth"
-      :style="sidebarStyle"
+      style="background: #0a58a4; overflow-y: auto"
       class="h-[100vh]"
     >
       <div class="flex justify-center items-center h-[60px] text-white mt-3">
@@ -16,10 +16,10 @@
       />
       <a-menu
         v-model:selectedKeys="selectedKeys"
-        theme="dark"
+        theme="light"
         mode="inline"
         class="mt-5"
-        style="background: #1518ba; margin-top: 20px"
+        style="background: #0a58a4; color: white; margin-top: 20px"
       >
         <a-menu-item key="1" :style="sidebarMenuItemStyle">
           <router-link to="/">
@@ -86,7 +86,7 @@
     <a-layout>
       <a-layout-header
         style="background: #fff; padding: 0"
-        class="flex h-full justify-between items-center"
+        class="flex h-full z-10 justify-between items-center"
       >
         <div class="flex items-center h-full px-5 border-b">
           <menu-unfold-outlined
@@ -139,7 +139,8 @@
           </div>
         </div>
       </a-layout-header>
-      <a-layout-content :style="contentStyle"
+      <a-layout-content
+        style="background: white; height: 100vh; margin: 24px 16px; padding: 24px; overflow-y:auto"
         ><router-view></router-view>
       </a-layout-content>
     </a-layout>
@@ -151,25 +152,11 @@ import { ref, reactive } from "vue";
 
 const selectedKeys = ref(["1"]);
 const collapsed = ref(false);
-const layoutWidth = "100%";
+const layoutPosition = "fixed";
 const siderWidth = "260px";
-
-const contentStyle = reactive({
-  margin: "24px 16px",
-  padding: "24px",
-  background: "#fff",
-  minHeight: "280px",
-});
-const sidebarStyle = reactive({
-  background: "#1518ba",
-});
 
 const sidebarMenuItemStyle = reactive({
   height: "48px",
-});
-
-const submenuStyle = reactive({
-  background: "#1518ba",
 });
 
 const showDropdown = ref(false);
