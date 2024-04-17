@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="flex justify-between">
-      <div class="font-bold text-lg text-[#0a58a4]">Jobless Registration</div>
+      <div class="font-bold text-xl text-[#0a58a4]">Jobless Registration</div>
     </div>
     <div class="mt-5">
       <a-input-search

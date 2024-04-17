@@ -5,7 +5,13 @@
       :trigger="null"
       collapsible
       :width="siderWidth"
-      style="background: #0a58a4; overflow-y: auto"
+      style="
+        background: #0a58a4;
+        overflow-y: visible;
+        overflow-x: hidden;
+        scrollbar-width: thin;
+        scrollbar-color: transparent transparent;
+      "
       class="h-[100vh]"
     >
       <div class="flex justify-center items-center h-[60px] text-white mt-3">
@@ -140,7 +146,15 @@
         </div>
       </a-layout-header>
       <a-layout-content
-        style="background: white; height: 100vh; margin: 24px 16px; padding: 24px; overflow-y:auto"
+        style="
+          background: white;
+          height: 100vh;
+          margin: 24px 16px;
+          padding: 24px;
+          overflow-y: auto;
+          scrollbar-width: thin;
+          scrollbar-color: transparent transparent;
+        "
         ><router-view></router-view>
       </a-layout-content>
     </a-layout>
