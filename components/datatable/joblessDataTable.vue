@@ -1,6 +1,6 @@
 <template>
   <button
-    class="bg-[#0a58a4] text-white px-5 py-2 rounded-lg text-semibold mb-10 float-end -mt-24"
+    class="bg-[#0a58a4] text-white px-5 py-2 rounded-sm mb-10 float-end text-lg -mt-24"
     @click="handleAdd"
   >
     New Jobless
@@ -43,6 +43,7 @@
     </template>
   </a-table>
 </template>
+
 <script setup>
 import { computed, reactive, ref } from "vue";
 import { cloneDeep } from "lodash-es";
@@ -106,6 +107,7 @@ const handleAdd = () => {
   dataSource.value.push(newData);
 };
 </script>
+
 <style lang="less" scoped>
 .editable-cell {
   position: relative;
