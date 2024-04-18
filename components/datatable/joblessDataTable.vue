@@ -1,10 +1,10 @@
 <template>
-  <button
-    class="bg-[#0a58a4] text-white px-4 py-1 rounded-sm mb-10 float-end text-[16px] -mt-24"
+  <!-- <button
+    class="bg-[#0a58a4] text-white px-4 py-1 rounded-sm mb-10 float-end text-[16px]"
     @click="handleAdd"
   >
     New Jobless
-  </button>
+  </button> -->
   <a-table
     :columns="columns"
     :data-source="dataSource"
@@ -33,7 +33,10 @@
           >
             <a-input
               v-model:value="editableData[record.key][column.dataIndex]"
-              @pressEnter="save(record.key, column.dataIndex)"
+              :data-key="record.key"
+              @keydown.enter="save(record.key)"
+              @blur="save(record.key)"
+              @input="onInput($event, column.dataIndex)"
             />
             <check-outlined
               class="editable-cell-icon-check"
@@ -68,8 +71,13 @@
           </a-tag>
         </span>
       </template>
+
       <template v-else-if="column.dataIndex === 'operation'">
-        <a-popconfirm title="Sure to delete?" @confirm="onDelete(record.key)">
+        <a-popconfirm
+          title="Sure to delete?"
+          :okText="'Yes, delete ' + record.name"
+          @confirm="onDelete(record.key)"
+        >
           <a>Delete</a>
         </a-popconfirm>
       </template>
@@ -80,6 +88,14 @@
 <script setup>
 import { computed, reactive, ref } from "vue";
 import { cloneDeep } from "lodash-es";
+
+const onInput = (event, dataIndex) => {
+  const key = event.target.dataset.key;
+  const value = event.target.value;
+  if (editableData[key]) {
+    editableData[key][dataIndex] = value;
+  }
+};
 
 const columns = [
   {
@@ -163,22 +179,27 @@ const count = computed(() => dataSource.value.length + 1);
 const editableData = reactive({});
 
 const edit = (key, dataIndex) => {
-  if (!editableData[key]) {
-    editableData[key] = {};
+  const original = dataSource.value.find((item) => item.key === key);
+  if (original) {
+    editableData[key] = editableData[key] || {};
+    editableData[key][dataIndex] = original[dataIndex] || "";
   }
-  editableData[key][dataIndex] = cloneDeep(
-    dataSource.value.find((item) => item.key === key)[dataIndex]
-  );
 };
 
-const save = (key, dataIndex) => {
-  const itemIndex = dataSource.value.findIndex((item) => item.key === key);
-  if (itemIndex !== -1) {
-    dataSource.value[itemIndex][dataIndex] = editableData[key][dataIndex];
-  }
-  delete editableData[key][dataIndex];
-  if (Object.keys(editableData[key]).length === 0) {
-    delete editableData[key];
+const save = (key) => {
+  const item = dataSource.value.find((item) => item.key === key);
+  if (item && editableData[key]) {
+    let shouldSave = false; // Flag to check if saving is necessary
+    for (const prop in editableData[key]) {
+      const editedValue = editableData[key][prop].trim();
+      if (editedValue !== "") {
+        item[prop] = editedValue;
+        shouldSave = true; // Set flag to true if any non-empty value is found
+      }
+    }
+    if (shouldSave) {
+      delete editableData[key]; // Clean up after saving only if saving is necessary
+    }
   }
 };
 
