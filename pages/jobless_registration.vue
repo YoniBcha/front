@@ -12,12 +12,10 @@
         <a-modal
           v-model:open="open"
           width="1000px"
-          title="Basic Modal"
+          title="New JoblessForm"
           @ok="handleOk"
         >
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
+          <formsJoblessForm />
         </a-modal>
       </div>
     </div>
