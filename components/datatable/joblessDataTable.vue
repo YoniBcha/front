@@ -1,16 +1,25 @@
 <template>
   <button
-    class="bg-[#0a58a4] text-white px-5 py-2 rounded-sm mb-10 float-end text-lg -mt-24"
+    class="bg-[#0a58a4] text-white px-4 py-1 rounded-sm mb-10 float-end text-[16px] -mt-24"
     @click="handleAdd"
   >
     New Jobless
   </button>
-  <a-table :columns="columns" :data-source="dataSource" bordered>
+  <a-table
+    :columns="columns"
+    :data-source="dataSource"
+    :scroll="{ x: 1300, y: 1000 }"
+    bordered
+  >
     <template #bodyCell="{ column, text, record }">
+      <!-- existing editable cells template -->
       <template
         v-if="
           column.dataIndex === 'name' ||
+          column.dataIndex === 'gender' ||
           column.dataIndex === 'age' ||
+          column.dataIndex === 'phonenumber' ||
+          column.dataIndex === 'email' ||
           column.dataIndex === 'address'
         "
       >
@@ -40,6 +49,25 @@
           </div>
         </div>
       </template>
+
+      <!-- existing status cells template -->
+      <template v-else-if="column.dataIndex === 'tags'">
+        <span>
+          <a-tag
+            v-for="tag in record.tags"
+            :key="tag"
+            :color="
+              tag === 'loser'
+                ? 'volcano'
+                : tag.length > 5
+                ? 'geekblue'
+                : 'green'
+            "
+          >
+            {{ tag.toUpperCase() }}
+          </a-tag>
+        </span>
+      </template>
       <template v-else-if="column.dataIndex === 'operation'">
         <a-popconfirm title="Sure to delete?" @confirm="onDelete(record.key)">
           <a>Delete</a>
@@ -52,37 +80,83 @@
 <script setup>
 import { computed, reactive, ref } from "vue";
 import { cloneDeep } from "lodash-es";
+
 const columns = [
   {
-    title: "name",
+    title: "Full Name",
     dataIndex: "name",
-    width: "30%",
+    width: "16%",
+    fixed: "left",
   },
   {
-    title: "age",
+    title: "Sex",
+    dataIndex: "gender",
+    width: "8%",
+    fixed: "left",
+  },
+  {
+    title: "Age",
     dataIndex: "age",
+    width: "8%",
+  },
+  {
+    title: "Phone Number",
+    dataIndex: "phonenumber",
+    width: "17%",
   },
   {
     title: "address",
     dataIndex: "address",
+    width: "20%",
+  },
+  {
+    title: "Email",
+    dataIndex: "email",
+    width: "20%",
+  },
+  {
+    title: "Status",
+    dataIndex: "tags",
+    fixed: "right",
+    width: "10%",
   },
   {
     title: "operation",
     dataIndex: "operation",
+    fixed: "right",
+    width: "10%",
   },
 ];
 const dataSource = ref([
   {
-    key: "0",
+    key: "1",
     name: "Edward King 0",
+    gender: "M",
     age: 32,
+    phonenumber: "+(251)567-48-47",
     address: "London, Park Lane no. 0",
+    email: "example22@gmail.com",
+    tags: ["loser"],
   },
   {
-    key: "1",
+    key: "2",
     name: "Edward King 1",
+    gender: "M",
     age: 32,
+    phonenumber: "+(251)567-48-47",
     address: "London, Park Lane no. 1",
+    email: "test44@gmail.com",
+    tags: ["pass"],
+  },
+  {
+    key: "3",
+    name: "Edward King 0",
+    gender: "F",
+    age: 32,
+    phonenumber: "+(251)567-48-47",
+    address: "London, Park Lane no. 0",
+    email: "newone66@gmail.com",
+    tags: ["pending"],
   },
 ]);
 const count = computed(() => dataSource.value.length + 1);
