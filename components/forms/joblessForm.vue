@@ -40,10 +40,23 @@
           <a-select
             v-model:value="formState.region"
             placeholder="please enter your gender"
+            class="mb-6"
           >
             <a-select-option value="shanghai">Male</a-select-option>
             <a-select-option value="beijing">Female</a-select-option>
           </a-select>
+          <a-input
+            v-model:value="jobless_city"
+            placeholder="enter your city name"
+            allow-clear
+            class="mb-6"
+          />
+          <a-input
+            v-model:value="jobless_phonenumber"
+            placeholder="enter your phone number"
+            allow-clear
+            class="mb-6"
+          />
         </div>
         <div class="">
           <a-input
@@ -52,14 +65,43 @@
             allow-clear
             class="mb-6"
           />
+          <div class="flex">
+            <a-input
+              type="number"
+              v-model:value="jobless_age"
+              placeholder="your age"
+              allow-clear
+              class="mb-6"
+            />
+            <a-input
+              v-model:value="jobless_kebele"
+              placeholder="your kebele"
+              allow-clear
+              class="mb-6 ml-2"
+            />
+          </div>
           <a-input
-            type="number"
-            v-model:value="jobless_grandfather_name"
-            placeholder="please enter your age"
+            v-model:value="jobless_subcity"
+            placeholder="enter your Sub City name"
             allow-clear
-            class=""
+            class="mb-6"
+          />
+          <a-input
+            type="email"
+            v-model:value="jobless_subcity"
+            placeholder="enter your email please"
+            allow-clear
+            class="mb-6"
           />
         </div>
+      </div>
+      <div class="mx-5 mt-12">
+        <a-input
+            v-model:value="jobless_grandfather_name"
+            placeholder="please enter your profession to tran and work with"
+            allow-clear
+            class="mb-6"
+          />
       </div>
     </div>
   </a-form>
