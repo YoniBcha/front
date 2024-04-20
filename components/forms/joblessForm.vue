@@ -174,7 +174,7 @@
           <a-input
             v-model:value="jobless_family_status"
             :rules="[
-              { required: false, message: 'Please select your fmily status!' },
+              { required: false, message: 'Please select your family status!' },
             ]"
             placeholder="enter your family status"
             allow-clear
@@ -193,34 +193,45 @@
           />
         </div>
         <a-form-item class="pl-8 pb-18 w-96">
-          <a-form-item name="dragger" no-style>
-            <a-upload-dragger
-              v-model:fileList="formState.dragger"
-              name="files"
-              action="/upload.do"
-            >
-              <p class="ant-upload-drag-icon">
-                <InboxOutlined />
-              </p>
-              <p class="ant-upload-text">
-                Click or drag your photo to this area to upload
-              </p>
-              <p class="ant-upload-hint">
-                Support for a single or bulk upload.
-              </p>
-            </a-upload-dragger>
-          </a-form-item>
+          <a-upload-dragger
+            v-model:fileList="formState.jobless_identification_card"
+            :rules="[
+              {
+                required: false,
+                message: 'Please select your idetification card!',
+              },
+            ]"
+            name="jobless_identification_card"
+            action="/upload.do"
+          >
+            <p class="ant-upload-drag-icon">
+              <InboxOutlined />
+            </p>
+            <p class="ant-upload-text">
+              Click or drag your identification card
+            </p>
+            <p class="ant-upload-hint">Support for a single or bulk upload.</p>
+          </a-upload-dragger>
         </a-form-item>
       </div>
 
       <div class="flex mx-5 mt-5">
         <a-input
-          v-model:value="jobless_grandfather_name"
-          placeholder="please enter disability staus"
+          v-model:value="jobless_disability_status"
+          :rules="[
+            {
+              required: false,
+              message: 'Please select your disablity status!',
+            },
+          ]"
+          placeholder="please enter disability status"
           allow-clear
         />
         <a-input
-          v-model:value="jobless_grandfather_name"
+          v-model:value="jobless_reason_tocome"
+          :rules="[
+            { required: false, message: 'Please select your reason to come!' },
+          ]"
           placeholder="enter your reason to come"
           allow-clear
           class="ml-5"
@@ -234,34 +245,25 @@
             >If you and any certificate in specific profection</label
           >
           <a-form-item class="mt-4">
-            <a-form-item name="dragger" no-style>
-              <a-upload-dragger
-                v-model:fileList="formState.dragger"
-                name="files"
-                action="/upload.do"
-              >
-                <p class="ant-upload-drag-icon">
-                  <InboxOutlined />
-                </p>
-                <p class="ant-upload-text">
-                  Click or drag your profession cirtificate
-                </p>
-                <p class="ant-upload-hint">
-                  Support for a single or bulk upload.
-                </p>
-              </a-upload-dragger>
-            </a-form-item>
+            <a-upload-dragger
+              v-model:fileList="formState.jobless_profession_cirtificate"
+              name="files"
+              action="/upload.do"
+            >
+              <p class="ant-upload-drag-icon">
+                <InboxOutlined />
+              </p>
+              <p class="ant-upload-text">
+                Click or drag your profession cirtificate
+              </p>
+              <p class="ant-upload-hint">
+                Support for a single or bulk upload.
+              </p>
+            </a-upload-dragger>
           </a-form-item>
         </div>
         <div class="">
           <div class="">
-            <a-input
-              v-model:value="jobless_grandfather_name"
-              placeholder="please enter profession name"
-              allow-clear
-            />
-          </div>
-          <div class="mt-5">
             <label for="" class="text-lg text-gray-600"
               >Upload Jobless evidence card here</label
             >
