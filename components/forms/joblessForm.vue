@@ -107,7 +107,7 @@
           />
           <a-input
             type="email"
-            v-model:value="jobless_subcity"
+            v-model:value="jobless_email"
             placeholder="enter your email please"
             allow-clear
             class="mb-6"
@@ -192,7 +192,7 @@
             allow-clear
           />
         </div>
-        <a-form-item class="pl-8 pb-18 w-96">
+        <a-form-item class="pl-5 pr-2 pb-18">
           <a-upload-dragger
             v-model:fileList="formState.jobless_identification_card"
             :rules="[
@@ -247,7 +247,13 @@
           <a-form-item class="mt-4">
             <a-upload-dragger
               v-model:fileList="formState.jobless_profession_cirtificate"
-              name="files"
+              :rules="[
+                {
+                  required: false,
+                  message: 'Please select your profession cirtificate!',
+                },
+              ]"
+              name="formState.jobless_profession_cirtificate"
               action="/upload.do"
             >
               <p class="ant-upload-drag-icon">
@@ -263,30 +269,30 @@
           </a-form-item>
         </div>
         <div class="">
-          <div class="">
-            <label for="" class="text-lg text-gray-600"
-              >Upload Jobless evidence card here</label
+          <label for="" class="text-lg text-gray-600"
+            >Upload Jobless evidence card here</label
+          >
+          <a-form-item class="mt-4">
+            <a-upload-dragger
+              v-model:fileList="formState.jobless_evidence_card"
+              :rules="[
+                {
+                  required: false,
+                  message: 'Please select your jobless evidence card!',
+                },
+              ]"
+              name="files"
+              action="/upload.do"
             >
-            <a-form-item class="mt-4">
-              <a-form-item name="dragger" no-style>
-                <a-upload-dragger
-                  v-model:fileList="formState.dragger"
-                  name="files"
-                  action="/upload.do"
-                >
-                  <p class="ant-upload-drag-icon">
-                    <InboxOutlined />
-                  </p>
-                  <p class="ant-upload-text">
-                    Click or drag your jobless evidence
-                  </p>
-                  <p class="ant-upload-hint">
-                    Support for a single or bulk upload.
-                  </p>
-                </a-upload-dragger>
-              </a-form-item>
-            </a-form-item>
-          </div>
+              <p class="ant-upload-drag-icon">
+                <InboxOutlined />
+              </p>
+              <p class="ant-upload-text">Click or drag your jobless evidence</p>
+              <p class="ant-upload-hint">
+                Support for a single or bulk upload.
+              </p>
+            </a-upload-dragger>
+          </a-form-item>
         </div>
       </div>
 
@@ -297,27 +303,27 @@
             >If you and any priority evidence</label
           >
         </div>
-        <div class="">
-          <a-form-item class="mt-4">
-            <a-form-item name="dragger" no-style>
-              <a-upload-dragger
-                v-model:fileList="formState.dragger"
-                name="files"
-                action="/upload.do"
-              >
-                <p class="ant-upload-drag-icon">
-                  <InboxOutlined />
-                </p>
-                <p class="ant-upload-text">
-                  Click or drag your priority cirtificate
-                </p>
-                <p class="ant-upload-hint">
-                  Support for a single or bulk upload.
-                </p>
-              </a-upload-dragger>
-            </a-form-item>
-          </a-form-item>
-        </div>
+        <a-form-item class="mt-4">
+          <a-upload-dragger
+            v-model:fileList="formState.jobless_priority_evidence"
+            :rules="[
+              {
+                required: false,
+                message: 'Please select your priority evidence!',
+              },
+            ]"
+            name="jobless_priority_evidence"
+            action="/upload.do"
+          >
+            <p class="ant-upload-drag-icon">
+              <InboxOutlined />
+            </p>
+            <p class="ant-upload-text">
+              Click or drag your priority cirtificate
+            </p>
+            <p class="ant-upload-hint">Support for a single or bulk upload.</p>
+          </a-upload-dragger>
+        </a-form-item>
       </div>
     </div>
   </a-form>
@@ -325,14 +331,7 @@
 
 <script setup>
 import { reactive } from "vue";
-const formItemLayout = {
-  labelCol: {
-    span: 6,
-  },
-  wrapperCol: {
-    span: 14,
-  },
-};
+
 const formState = reactive({
   "input-number": 3,
   "checkbox-group": ["A", "B"],

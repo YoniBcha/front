@@ -14,6 +14,7 @@
           width="1000px"
           title="New JoblessForm"
           @ok="handleOk"
+          okText="submit"
         >
           <formsJoblessForm />
         </a-modal>
@@ -34,10 +35,12 @@
 
 <script setup>
 import { ref } from "vue";
+
 const open = ref(false);
 const showModal = () => {
   open.value = true;
 };
+
 const handleOk = (e) => {
   console.log(e);
   open.value = false;
