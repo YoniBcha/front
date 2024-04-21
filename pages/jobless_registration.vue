@@ -1,26 +1,7 @@
 <template>
   <div>
-    <div class="flex justify-between">
-      <div class="font-bold text-2xl text-[#0a58a4]">Jobless Registration</div>
-      <div class="">
-        <button
-          class="bg-[#0a58a4] text-white px-4 py-1 rounded-sm mb-10 float-end text-[16px]"
-          @click="showModal"
-        >
-          new jobless
-        </button>
-        <a-modal
-          v-model:open="open"
-          width="1000px"
-          title="New JoblessForm"
-          @ok="handleOk"
-          okText="submit"
-        >
-          <formsJoblessForm />
-        </a-modal>
-      </div>
-    </div>
-    <div class="mt-5">
+    <div class="font-bold text-2xl text-[#0a58a4]">Jobless Registration</div>
+    <div class="mt-10">
       <a-input-search
         placeholder="search jobless person"
         @search="onSearch"

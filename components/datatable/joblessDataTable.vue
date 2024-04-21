@@ -1,10 +1,23 @@
 <template>
-  <!-- <button
-    class="bg-[#0a58a4] text-white px-4 py-1 rounded-sm mb-10 float-end text-[16px]"
-    @click="handleAdd"
-  >
-    New Jobless
-  </button> -->
+  <div class="flex justify-end">
+    <div class="">
+      <button
+        class="bg-[#0a58a4] text-white px-8 py-2 rounded-lg float-end text-[16px] -mt-28 mb-20"
+        @click="showModal"
+      >
+        new jobless
+      </button>
+      <a-modal
+        v-model:open="open"
+        width="1000px"
+        title="New JoblessForm"
+        @submit="handleForm"
+        okText="submit"
+      >
+        <formsJoblessForm />
+      </a-modal>
+    </div>
+  </div>
   <a-table
     :columns="columns"
     :data-source="dataSource"
@@ -88,6 +101,30 @@
 <script setup>
 import { computed, reactive, ref } from "vue";
 import { cloneDeep } from "lodash-es";
+
+const formState = ref({
+  jobless_fullname: "",
+});
+const handleForm = () => {
+  const newData = {
+    key: `${count.value}`,
+    name: `Edward King ${count.value}`,
+    age: 32,
+    address: `London, Park Lane no. ${count.value}`,
+  };
+  dataSource.value.push(newData);
+  open.value = false;
+};
+
+const open = ref(false);
+const showModal = () => {
+  open.value = true;
+};
+
+// const handelForm = (e) => {
+//   console.log(e);
+//   open.value = false;
+// };
 
 const onInput = (event, dataIndex) => {
   const key = event.target.dataset.key;
@@ -205,15 +242,6 @@ const save = (key) => {
 
 const onDelete = (key) => {
   dataSource.value = dataSource.value.filter((item) => item.key !== key);
-};
-const handleAdd = () => {
-  const newData = {
-    key: `${count.value}`,
-    name: `Edward King ${count.value}`,
-    age: 32,
-    address: `London, Park Lane no. ${count.value}`,
-  };
-  dataSource.value.push(newData);
 };
 </script>
 

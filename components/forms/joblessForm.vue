@@ -3,8 +3,6 @@
     :model="formState"
     name="validate_other"
     v-bind="formItemLayout"
-    @finishFailed="onFinishFailed"
-    @finish="onFinish"
   >
     <div class="">
       <!-- upload profile photo -->
@@ -33,7 +31,7 @@
         </div>
         <div class="flex flex-col">
           <a-input
-            v-model:value="jobless_fullname"
+            v-model:value="formState.jobless_fullname"
             :rules="[
               { required: false, message: 'Please input your fullname!' },
             ]"
@@ -329,7 +327,7 @@
   </a-form>
 </template>
 
-<script setup>
+<!-- <script setup>
 import { reactive } from "vue";
 
 const formState = reactive({
@@ -337,4 +335,21 @@ const formState = reactive({
   "checkbox-group": ["A", "B"],
   rate: 3.5,
 });
+</script> -->
+
+<script>
+export default {
+  props: {
+    // Define props if needed
+  },
+  data() {
+    return {
+      formState: {
+        // Initialize form state here
+      },
+      // Other data properties
+    };
+  },
+
+};
 </script>
