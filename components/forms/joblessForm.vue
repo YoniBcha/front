@@ -1,9 +1,5 @@
 <template>
-  <a-form
-    :model="formState"
-    name="validate_other"
-    v-bind="formItemLayout"
-  >
+  <a-form :model="formState" name="validate_other" v-bind="formItemLayout">
     <div class="">
       <!-- upload profile photo -->
       <div class="grid grid-cols-3 gap-4 h-48 m-5">
@@ -327,29 +323,12 @@
   </a-form>
 </template>
 
-<!-- <script setup>
-import { reactive } from "vue";
-
-const formState = reactive({
-  "input-number": 3,
-  "checkbox-group": ["A", "B"],
-  rate: 3.5,
-});
-</script> -->
-
 <script>
 export default {
-  props: {
-    // Define props if needed
-  },
   data() {
     return {
-      formState: {
-        // Initialize form state here
-      },
-      // Other data properties
+      formState: {},
     };
   },
-
 };
 </script>
