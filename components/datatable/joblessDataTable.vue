@@ -1,12 +1,17 @@
 <template>
   <div class="flex justify-end">
     <div class="">
-      <button
+      <!-- <button
         class="bg-[#0a58a4] text-white px-8 py-2 rounded-lg float-end text-[16px] -mt-28 mb-20"
         @click="showModal"
       >
+      </button> -->
+      <a-button
+        class="bg-[#0a58a4] text-white hover:bg-white"
+        @click="showModal"
+      >
         new jobless
-      </button>
+      </a-button>
       <a-modal
         v-model:open="open"
         width="1000px"
@@ -14,39 +19,32 @@
         @submit="handleForm"
         okText="submit"
       >
-        <a-form
-          :model="formState"
-          name="validate_other"
-          v-bind="formItemLayout"
-        >
+        <a-form :model="formState">
           <div class="">
             <!-- upload profile photo -->
-            <div class="grid grid-cols-3 gap-4 h-48 m-5">
+            <div class="grid grid-cols-3 gap-4">
+              <!-- upload jobless photo -->
               <div class="">
-                <a-form-item style="width: 100%">
-                  <a-form-item name="dragger" no-style>
-                    <a-upload-dragger
-                      v-model:fileList="formState.photo"
-                      name="photo"
-                      action="/upload.do"
-                      :rules="[
-                        {
-                          required: false,
-                          message: 'Please upload your photo!',
-                        },
-                      ]"
-                    >
-                      <p class="ant-upload-drag-icon">
-                        <InboxOutlined />
-                      </p>
-                      <p class="ant-upload-text">
-                        Click or drag your photo here
-                      </p>
-                      <p class="ant-upload-hint">
-                        Support for a single or bulk upload.
-                      </p>
-                    </a-upload-dragger>
-                  </a-form-item>
+                <a-form-item>
+                  <a-upload-dragger
+                    v-model:fileList="formState.photo"
+                    name="photo"
+                    action="/upload.do"
+                    :rules="[
+                      {
+                        required: false,
+                        message: 'Please upload your photo!',
+                      },
+                    ]"
+                  >
+                    <p class="ant-upload-drag-icon">
+                      <InboxOutlined />
+                    </p>
+                    <p class="ant-upload-text">Click or drag your photo here</p>
+                    <p class="ant-upload-hint">
+                      Support for a single or bulk upload.
+                    </p>
+                  </a-upload-dragger>
                 </a-form-item>
               </div>
               <div class="flex flex-col">
@@ -60,9 +58,9 @@
                   class="mb-6"
                 />
                 <a-select
-                  v-model:value="formState.sex"
+                  v-model:value="formState.jobless_gender"
                   :rules="[
-                    { required: false, message: 'Please select your sex!' },
+                    { required: false, message: 'Please select your gender!' },
                   ]"
                   placeholder="please enter your gender"
                   class="mb-6"
@@ -71,16 +69,16 @@
                   <a-select-option value="female">Female</a-select-option>
                 </a-select>
                 <a-input
-                  v-model:value="jobless_city"
+                  v-model:value="formState.jobless_city"
                   :rules="[
-                    { required: false, message: 'Please select your sex!' },
+                    { required: false, message: 'Please select your city!' },
                   ]"
                   placeholder="enter your city name"
                   allow-clear
                   class="mb-6"
                 />
                 <a-input
-                  v-model:value="jobless_phonenumber"
+                  v-model:value="formState.jobless_phonenumber"
                   :rules="[
                     {
                       required: false,
@@ -94,7 +92,7 @@
               </div>
               <div class="">
                 <a-input
-                  v-model:value="jobless_grandfather_name"
+                  v-model:value="formState.jobless_grandfather_name"
                   :rules="[
                     {
                       required: false,
@@ -108,7 +106,7 @@
                 <div class="flex">
                   <a-input
                     type="number"
-                    v-model:value="jobless_age"
+                    v-model:value="formState.jobless_age"
                     :rules="[
                       { required: false, message: 'Please select your age!' },
                     ]"
@@ -117,7 +115,7 @@
                     class="mb-6"
                   />
                   <a-input
-                    v-model:value="jobless_kebele"
+                    v-model:value="formState.jobless_kebele"
                     :rules="[
                       {
                         required: false,
@@ -130,14 +128,14 @@
                   />
                 </div>
                 <a-input
-                  v-model:value="jobless_subcity"
+                  v-model:value="formState.jobless_subcity"
                   placeholder="enter your Sub City name"
                   allow-clear
                   class="mb-6"
                 />
                 <a-input
                   type="email"
-                  v-model:value="jobless_email"
+                  v-model:value="formState.jobless_email"
                   placeholder="enter your email please"
                   allow-clear
                   class="mb-6"
@@ -147,7 +145,7 @@
 
             <div class="mx-5 mt-12">
               <a-input
-                v-model:value="jobless_profession"
+                v-model:value="formState.jobless_profession"
                 :rules="[
                   {
                     required: false,
@@ -160,11 +158,11 @@
               />
             </div>
 
-            <!-- upload identification card -->
+            <!-- upload house number and identification card -->
             <div class="grid grid-cols-3 gap-4 h-48 m-3">
               <div class="flex flex-col p-2">
                 <a-input
-                  v-model:value="jobless_housenumber"
+                  v-model:value="formState.jobless_housenumber"
                   :rules="[
                     {
                       required: false,
@@ -177,7 +175,7 @@
                 />
                 <a-input
                   type="number"
-                  v-model:value="jobless_familysize"
+                  v-model:value="formState.jobless_familysize"
                   :rules="[
                     {
                       required: false,
@@ -189,7 +187,7 @@
                   class="mb-6"
                 />
                 <a-input
-                  v-model:value="jobless_livingstatus"
+                  v-model:value="formState.jobless_livingstatus"
                   :rules="[
                     {
                       required: false,
@@ -202,7 +200,7 @@
               </div>
               <div class="pt-2 left-0">
                 <a-input
-                  v-model:value="jobless_birthplace"
+                  v-model:value="formState.jobless_birthplace"
                   :rules="[
                     {
                       required: false,
@@ -214,7 +212,7 @@
                   class="mb-6"
                 />
                 <a-input
-                  v-model:value="jobless_family_status"
+                  v-model:value="formState.jobless_family_status"
                   :rules="[
                     {
                       required: false,
@@ -226,7 +224,7 @@
                   class="mb-6"
                 />
                 <a-input
-                  v-model:value="jobless_martial_status"
+                  v-model:value="formState.jobless_martial_status"
                   :rules="[
                     {
                       required: false,
@@ -264,7 +262,7 @@
 
             <div class="flex mx-5 mt-5">
               <a-input
-                v-model:value="jobless_disability_status"
+                v-model:value="formState.jobless_disability_status"
                 :rules="[
                   {
                     required: false,
@@ -275,7 +273,7 @@
                 allow-clear
               />
               <a-input
-                v-model:value="jobless_reason_tocome"
+                v-model:value="formState.jobless_reason_tocome"
                 :rules="[
                   {
                     required: false,
@@ -296,14 +294,14 @@
                 >
                 <a-form-item class="mt-4">
                   <a-upload-dragger
-                    v-model:fileList="formState.jobless_profession_cirtificate"
+                    v-model:fileList="formState.jobless_training_cirtificate"
                     :rules="[
                       {
                         required: false,
-                        message: 'Please select your profession cirtificate!',
+                        message: 'Please select your training cirtificate!',
                       },
                     ]"
-                    name="formState.jobless_profession_cirtificate"
+                    name="formState.jobless_training_cirtificate"
                     action="/upload.do"
                   >
                     <p class="ant-upload-drag-icon">
@@ -468,9 +466,33 @@
 import { computed, reactive, ref } from "vue";
 import { cloneDeep } from "lodash-es";
 
-const formState = ref({
-  jobless_fullname: "",
+const formState = reactive({
+  jobless_registration_date: "",
+  jobless_photo: "",
+  jobless_full_name: "",
+  jobless_grandfather_name: "",
+  jobless_gender: "",
+  jobless_age: "",
+  jobless_kebele: "",
+  jobless_city: "",
+  jobless_subcity: "",
+  jobless_phonenumber: "",
+  jobless_email: "",
+  jobless_profession: "",
+  jobless_housenumber: "",
+  jobless_familysize: "",
+  jobless_livingstatus: "",
+  jobless_birthplace: "",
+  jobless_family_status: "",
+  jobless_martial_status: "",
+  jobless_identification_card: "",
+  jobless_disability_status: "",
+  jobless_reason_tocome: "",
+  jobless_training_cirtificate: "",
+  jobless_evidence_card: "",
+  jobless_priority_evidence: "",
 });
+
 const handleForm = () => {
   const newData = {
     key: `${count.value}`,
@@ -486,11 +508,6 @@ const open = ref(false);
 const showModal = () => {
   open.value = true;
 };
-
-// const handelForm = (e) => {
-//   console.log(e);
-//   open.value = false;
-// };
 
 const onInput = (event, dataIndex) => {
   const key = event.target.dataset.key;
