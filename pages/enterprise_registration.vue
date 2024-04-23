@@ -1,5 +1,6 @@
 <template>
   <div>
+    <!-- enterprise registration header and new enterprise button -->
     <div class="flex justify-between mb-10">
       <div class="text-2xl text-[#0a58a4] font-bold">
         Enterprise Registration
@@ -17,6 +18,7 @@
       @ok="handleOk"
       okText="submit"
     >
+      <!-- enterprise registration form -->
       <a-form :model="formState" name="validate_other">
         <div class="mt-5">
           <!-- enterprise manager name and registration date -->
@@ -179,6 +181,8 @@
     :data-source="dataSource"
     :scroll="{ x: 1300, y: 1000 }"
     :columns="columns"
+    :loading="loading"
+    @change="handleTableChange"
   >
     <template #bodyCell="{ column, text, record }">
       <template
@@ -241,6 +245,16 @@
 import { computed, reactive, ref } from "vue";
 import { cloneDeep } from "lodash-es";
 
+const handleTableChange = (pag, filters, sorter) => {
+  run({
+    results: pag.pageSize,
+    page: pag?.current,
+    sortField: sorter.field,
+    sortOrder: sorter.order,
+    ...filters,
+  });
+};
+
 const open = ref(false);
 const showModal = () => {
   open.value = true;
@@ -250,6 +264,7 @@ const columns = [
   {
     title: "Enterprise Name",
     dataIndex: "enterprise_name",
+    sorter: true,
     fixed: "left",
     width: "28%",
   },
@@ -338,7 +353,6 @@ const onDelete = (key) => {
 const formState = reactive({
   enterprise_manager_name: "",
   enterprise_registration_date: "",
-  //enterprise_logo: "",
   enterprise_name: "",
   enterprise_type: "",
   enterprise_sector: "",
