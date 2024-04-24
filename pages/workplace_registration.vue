@@ -1,5 +1,12 @@
 <template>
-  <a-table :data-source="data" :columns="columns">
+  <a-button
+    class="editable-add-btn"
+    style="margin-bottom: 8px"
+    @click="handleAdd"
+    >Add</a-button
+  >
+
+  <a-table bordered :data-source="dataSource" :columns="columns">
     <template #headerCell="{ column }">
       <template v-if="column.key === 'name'">
         <span style="color: #1890ff">Name</span>
@@ -46,7 +53,31 @@
     <template #customFilterIcon="{ filtered }">
       <search-outlined :style="{ color: filtered ? '#108ee9' : undefined }" />
     </template>
-    <template #bodyCell="{ text, column }">
+    <template #bodyCell="{ text, column, record }">
+      <template v-if="column.dataIndex === 'name' && state.searchText === ''">
+        <div class="editable-cell">
+          <div
+            v-if="editableData[record.key]"
+            class="editable-cell-input-wrapper"
+          >
+            <a-input
+              v-model:value="editableData[record.key].name"
+              @pressEnter="save(record.key)"
+            />
+            <check-outlined
+              class="editable-cell-icon-check"
+              @click="save(record.key)"
+            />
+          </div>
+          <div v-else class="editable-cell-text-wrapper">
+            {{ text || " " }}
+            <edit-outlined
+              class="editable-cell-icon"
+              @click="edit(record.key)"
+            />
+          </div>
+        </div>
+      </template>
       <span
         v-if="state.searchText && state.searchedColumn === column.dataIndex"
       >
@@ -73,9 +104,12 @@
     </template>
   </a-table>
 </template>
+
 <script setup>
-import { reactive, ref } from "vue";
-const data = [
+import { computed, reactive, ref } from "vue";
+import { cloneDeep } from "lodash-es";
+
+const dataSource = ref([
   {
     key: "1",
     name: "John Brown",
@@ -100,11 +134,13 @@ const data = [
     age: 32,
     address: "London No. 2 Lake Park",
   },
-];
+]);
+
 const state = reactive({
   searchText: "",
   searchedColumn: "",
 });
+
 const searchInput = ref();
 const columns = [
   {
@@ -154,10 +190,79 @@ const handleReset = (clearFilters) => {
   });
   state.searchText = "";
 };
+
+const count = computed(() => dataSource.value.length + 1);
+const editableData = reactive({});
+const edit = (key) => {
+  editableData[key] = cloneDeep(
+    dataSource.value.filter((item) => key === item.key)[0]
+  );
+};
+const save = (key) => {
+  Object.assign(
+    dataSource.value.filter((item) => key === item.key)[0],
+    editableData[key]
+  );
+  delete editableData[key];
+};
+const onDelete = (key) => {
+  dataSource.value = dataSource.value.filter((item) => item.key !== key);
+};
+
+const handleAdd = () => {
+  const newData = {
+    key: `${count.value}`,
+    name: `Edward King ${count.value}`,
+    age: 32,
+    address: `London, Park Lane no. ${count.value}`,
+  };
+  dataSource.value.push(newData);
+};
 </script>
-<style scoped>
+
+<style lang="less" scoped>
 .highlight {
   background-color: rgb(255, 192, 105);
   padding: 0px;
+}
+.editable-cell {
+  position: relative;
+  .editable-cell-input-wrapper,
+  .editable-cell-text-wrapper {
+    padding-right: 24px;
+  }
+
+  .editable-cell-text-wrapper {
+    padding: 5px 24px 5px 5px;
+  }
+
+  .editable-cell-icon,
+  .editable-cell-icon-check {
+    position: absolute;
+    right: 0;
+    width: 20px;
+    cursor: pointer;
+  }
+
+  .editable-cell-icon {
+    margin-top: 4px;
+    display: none;
+  }
+
+  .editable-cell-icon-check {
+    line-height: 28px;
+  }
+
+  .editable-cell-icon:hover,
+  .editable-cell-icon-check:hover {
+    color: #108ee9;
+  }
+
+  .editable-add-btn {
+    margin-bottom: 8px;
+  }
+}
+.editable-cell:hover .editable-cell-icon {
+  display: inline-block;
 }
 </style>
