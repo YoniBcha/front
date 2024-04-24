@@ -2,7 +2,9 @@
   <div class="">
     <div class="">
       <div class="flex justify-between mb-10">
-        <div class="text-2xl text-[#0a58a4] font-bold">Jobless Registration</div>
+        <div class="text-2xl text-[#0a58a4] font-bold">
+          Jobless Registration
+        </div>
         <a-button
           class="bg-[#0a58a4] text-white hover:bg-white"
           @click="showModal"
@@ -14,11 +16,11 @@
         v-model:open="open"
         width="1000px"
         title="New JoblessForm"
-        @submit="handleForm"
+        @ok="handleForm"
         okText="submit"
       >
         <a-form :model="formState">
-          <div class="">
+          <div class="mt-10">
             <!-- upload profile photo -->
             <div class="grid grid-cols-3 gap-4">
               <!-- upload jobless photo -->
@@ -47,7 +49,7 @@
               </div>
               <div class="flex flex-col">
                 <a-input
-                  v-model:value="formState.jobless_fullname"
+                  v-model:value="formState.jobless_full_name"
                   :rules="[
                     { required: false, message: 'Please input your fullname!' },
                   ]"
@@ -60,7 +62,7 @@
                   :rules="[
                     { required: false, message: 'Please select your gender!' },
                   ]"
-                  placeholder="please enter your gender"
+                  placeholder="select your gender "
                   class="mb-6"
                 >
                   <a-select-option value="male">Male</a-select-option>
@@ -486,10 +488,11 @@ const formState = reactive({
   //jobless_priority_evidence: "",
 });
 
-const handleForm = () => {
+const handleForm = (e) => {
   const newData = {
     key: `${count.value}`,
-    name: `Edward King ${count.value}`,
+    name: formState.jobless_full_name,
+    gender: formState.jobless_gender,
     age: 32,
     address: `London, Park Lane no. ${count.value}`,
   };
@@ -509,6 +512,11 @@ const onInput = (event, dataIndex) => {
     editableData[key][dataIndex] = value;
   }
 };
+const state = reactive({
+  searchText: "",
+  searchedColumn: "",
+});
+const searchInput = ref();
 
 const columns = [
   {
@@ -516,6 +524,17 @@ const columns = [
     dataIndex: "name",
     width: "16%",
     fixed: "left",
+    key: "name",
+    customFilterDropdown: true,
+    onFilter: (value, record) =>
+      record.name.toString().toLowerCase().includes(value.toLowerCase()),
+    onFilterDropdownOpenChange: (visible) => {
+      if (visible) {
+        setTimeout(() => {
+          searchInput.value.focus();
+        }, 100);
+      }
+    },
   },
   {
     title: "Sex",
@@ -556,6 +575,17 @@ const columns = [
     width: "10%",
   },
 ];
+const handleSearch = (selectedKeys, confirm, dataIndex) => {
+  confirm();
+  state.searchText = selectedKeys[0];
+  state.searchedColumn = dataIndex;
+};
+const handleReset = clearFilters => {
+  clearFilters({
+    confirm: true,
+  });
+  state.searchText = '';
+};
 const dataSource = ref([
   {
     key: "1",
