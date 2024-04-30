@@ -21,13 +21,13 @@
     <div
       class="grid grid-cols-12 fixed top-[115px] right-16 left-16 h-[600px] overflow-y-scroll custom-scrollbar"
     >
-      <div class="col-span-6 flex flex-col justify-center h-[550px] bg-[url('~assets/img/element.png')]">
-        <div class="text-4xl text-[#0a58a4] font-bold pb-5">
+      <div class="flex flex-col justify-center col-span-6 h-[550px]">
+        <div class="text-5xl text-[#0a58a4] font-bold pb-5">
           <p class="mb-2">Ldeta Subcity Enterprise</p>
           <p>Management System</p>
         </div>
-        <div class="text-2xl pb-3">for you and for us</div>
-        <div class="text-sm text-gray-500">
+        <div class="text-3xl font-semibold pb-3">for you and for us</div>
+        <div class="text-lg text-gray-500">
           Our enterprise management system will <br />facilitate the work speed
           and the customer <br />
           and employee satisfaction.
