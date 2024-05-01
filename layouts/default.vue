@@ -40,8 +40,11 @@
         <img src="~assets/illus/enterprise.png" alt="" />
       </div>
       <!-- our service -->
-      <div class="flex flex-col">
-        <div class="text-xl text-[#0a58a4]">Our Serviece</div>
+      <div class="flex flex-col h-[800px]">
+        <div class="flex justify-center text-[#0a58a4] text-3xl">Our serviece</div>
+        <div class="w-[1238px] h-[400px]">
+          <swiperGrid />
+        </div>
       </div>
     </div>
   </div>

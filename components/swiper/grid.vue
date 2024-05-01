@@ -1,37 +1,69 @@
 <template>
   <swiper
-    :slidesPerView="5"
-    :grid="{
-      rows: 3,
-      gap: 100,
+    :style="{
+      '--swiper-navigation-color': '#fff',
+      '--swiper-pagination-color': '#fff',
     }"
-    :spaceBetween="0"
+    :speed="600"
+    :parallax="true"
     :pagination="{
       clickable: true,
     }"
+    :navigation="true"
     :modules="modules"
     class="mySwiper"
   >
-    <swiper-slide v-for="grid_data in grid_datas" :key="grid_data.id">
-      <serviece-card>
-        <template v-slot:discount-percentage>
-          -{{ grid_data.discount_rate }}%
-        </template>
-        <template v-slot:image>
-          <img
-            :src="grid_data.image_url"
-            alt="Product Image"
-            class="w-[80%] !h-36 object-contain my-auto mx-auto relative mt-2"
-          />
-        </template>
-        <template v-slot:product-name>{{ grid_data.product_name }}</template>
-        <template v-slot:product-price>
-          ${{ grid_data.product_price }}
-        </template>
-        <template v-slot:previous-price>
-          <span>${{ grid_data.product_price }}</span>
-        </template>
-      </serviece-card>
+    <div
+      slot="container-start"
+      class="parallax-bg"
+      :style="{
+        'background-image':
+          'url(https://swiperjs.com/demos/images/nature-1.jpg)',
+      }"
+      data-swiper-parallax="-23%"
+    ></div>
+    <swiper-slide>
+      <div class="title" data-swiper-parallax="-300">Slide 1</div>
+      <div class="subtitle" data-swiper-parallax="-200">Subtitle</div>
+      <div class="text" data-swiper-parallax="-100">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
+          dictum mattis velit, sit amet faucibus felis iaculis nec. Nulla
+          laoreet justo vitae porttitor porttitor. Suspendisse in sem justo.
+          Integer laoreet magna nec elit suscipit, ac laoreet nibh euismod.
+          Aliquam hendrerit lorem at elit facilisis rutrum. Ut at ullamcorper
+          velit. Nulla ligula nisi, imperdiet ut lacinia nec, tincidunt ut
+          libero. Aenean feugiat non eros quis feugiat.
+        </p>
+      </div> </swiper-slide
+    ><swiper-slide>
+      <div class="title" data-swiper-parallax="-300">Slide 2</div>
+      <div class="subtitle" data-swiper-parallax="-200">Subtitle</div>
+      <div class="text" data-swiper-parallax="-100">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
+          dictum mattis velit, sit amet faucibus felis iaculis nec. Nulla
+          laoreet justo vitae porttitor porttitor. Suspendisse in sem justo.
+          Integer laoreet magna nec elit suscipit, ac laoreet nibh euismod.
+          Aliquam hendrerit lorem at elit facilisis rutrum. Ut at ullamcorper
+          velit. Nulla ligula nisi, imperdiet ut lacinia nec, tincidunt ut
+          libero. Aenean feugiat non eros quis feugiat.
+        </p>
+      </div> </swiper-slide
+    ><swiper-slide>
+      <div class="title" data-swiper-parallax="-300">Slide 3</div>
+      <div class="subtitle" data-swiper-parallax="-200">Subtitle</div>
+      <div class="text" data-swiper-parallax="-100">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
+          dictum mattis velit, sit amet faucibus felis iaculis nec. Nulla
+          laoreet justo vitae porttitor porttitor. Suspendisse in sem justo.
+          Integer laoreet magna nec elit suscipit, ac laoreet nibh euismod.
+          Aliquam hendrerit lorem at elit facilisis rutrum. Ut at ullamcorper
+          velit. Nulla ligula nisi, imperdiet ut lacinia nec, tincidunt ut
+          libero. Aenean feugiat non eros quis feugiat.
+        </p>
+      </div>
     </swiper-slide>
   </swiper>
 </template>
@@ -41,26 +73,23 @@ import { Swiper, SwiperSlide } from "swiper/vue";
 
 // Import Swiper styles
 import "swiper/css";
-import "swiper/css/grid";
-import "swiper/css/pagination";
 
-import "@/style/style.css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+
+import "./assets/css/style.css";
 
 // import required modules
-import { Grid, Pagination } from "swiper/modules";
-import { grid_datas } from "@/global/data/grid";
+import { Parallax, Pagination, Navigation } from "swiper/modules";
 
 export default {
-  name: "GridView",
   components: {
     Swiper,
     SwiperSlide,
-    CardView,
   },
-  data() {
+  setup() {
     return {
-      grid_datas: grid_datas,
-      modules: [Grid, Pagination],
+      modules: [Parallax, Pagination, Navigation],
     };
   },
 };
