@@ -1,12 +1,13 @@
 .swiper {
   width: 100%;
   height: 100%;
-  background: #000;
+  border-radius: 20px;
 }
 
 .swiper-slide {
   font-size: 18px;
-  color: #fff;
+  color: black;
+  font-style: bold;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   padding: 40px 60px;
@@ -18,6 +19,7 @@
   top: 0;
   width: 130%;
   height: 100%;
+  background-color: "rgba(0, 0, 0, 1)";
   -webkit-background-size: cover;
   background-size: cover;
   background-position: center;

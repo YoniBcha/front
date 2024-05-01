@@ -17,11 +17,10 @@
       slot="container-start"
       class="parallax-bg"
       :style="{
-        'background-image':
-          'url(https://swiperjs.com/demos/images/nature-1.jpg)',
+        'background-imageee': 'url()',
       }"
       data-swiper-parallax="-23%"
-    ></div>
+    ><img src="~assets/img/enterprise_photo.jpg" alt=""></div>
     <swiper-slide>
       <div class="title" data-swiper-parallax="-300">Slide 1</div>
       <div class="subtitle" data-swiper-parallax="-200">Subtitle</div>

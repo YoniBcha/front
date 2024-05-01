@@ -19,30 +19,36 @@
 
     <!-- home section -->
     <div
-      class="grid grid-cols-12 fixed top-[115px] right-16 left-16 h-[600px] overflow-y-scroll custom-scrollbar"
+      class="fixed top-[115px] right-16 left-16 h-[600px] overflow-y-scroll custom-scrollbar"
     >
-      <div class="flex flex-col justify-center col-span-6 h-[550px]">
-        <div class="font-bold text-gray-500 mb-5 text-3xl text-italic">
-          "Well Came To . . ."
+      <div class="grid grid-cols-12">
+        <div class="flex flex-col justify-center col-span-6">
+          <div class="font-bold text-gray-500 mb-5 text-3xl text-italic">
+            "Well Came To . . ."
+          </div>
+          <div class="text-5xl text-[#0a58a4] font-bold pb-5">
+            <p class="mb-2">Ldeta Subcity Enterprise</p>
+            <p>Management System</p>
+          </div>
+          <div class="text-3xl font-semibold pb-3">for you and for us</div>
+          <div class="text-sm text-gray-500">
+            Our enterprise management system will <br />facilitate the work
+            speed and the customer <br />
+            and employee satisfaction.
+          </div>
         </div>
-        <div class="text-5xl text-[#0a58a4] font-bold pb-5">
-          <p class="mb-2">Ldeta Subcity Enterprise</p>
-          <p>Management System</p>
+        <div class="col-span-6 flex items-center justify-center">
+          <img src="~assets/illus/enterprise.png" alt="" />
         </div>
-        <div class="text-3xl font-semibold pb-3">for you and for us</div>
-        <div class="text-sm text-gray-500">
-          Our enterprise management system will <br />facilitate the work speed
-          and the customer <br />
-          and employee satisfaction.
-        </div>
-      </div>
-      <div class="col-span-6 flex items-center justify-center w-[600px]">
-        <img src="~assets/illus/enterprise.png" alt="" />
       </div>
       <!-- our service -->
-      <div class="flex flex-col h-[800px]">
-        <div class="flex justify-center text-[#0a58a4] text-3xl">Our serviece</div>
-        <div class="w-[1238px] h-[400px]">
+      <div class="grid grid-cols-12 mt-20 w-[1238px]">
+        <div
+          class="col-span-12 flex justify-center text-[#0a58a4] text-3xl mb-10"
+        >
+          Our serviece
+        </div>
+        <div class="col-span-12 mb-5">
           <swiperGrid />
         </div>
       </div>
