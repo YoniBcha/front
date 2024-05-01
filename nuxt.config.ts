@@ -3,7 +3,7 @@ export default defineNuxtConfig({
   antd: {},
   css: ["~/assets/css/main.css"],
   devtools: { enabled: true },
-  modules: ["@ant-design-vue/nuxt"],
+  modules: ["@ant-design-vue/nuxt", "nuxt-swiper"],
   postcss: {
     plugins: {
       tailwindcss: {},
