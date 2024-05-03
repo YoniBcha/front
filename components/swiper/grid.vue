@@ -16,57 +16,16 @@
     <div
       slot="container-start"
       class="parallax-bg"
-      :style="{
-        'background-imageee': 'url()',
-      }"
       data-swiper-parallax="-23%"
-    ><img src="~assets/img/enterprise_photo.jpg" alt=""></div>
-    <swiper-slide>
-      <div class="title" data-swiper-parallax="-300">Slide 1</div>
-      <div class="subtitle" data-swiper-parallax="-200">Subtitle</div>
+    ></div>
+    <swiper-slide v-for="slide in slides" :key="slide.id">
+      <div class="title" data-swiper-parallax="-300">{{ slide.title }}</div>
       <div class="text" data-swiper-parallax="-100">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-          dictum mattis velit, sit amet faucibus felis iaculis nec. Nulla
-          laoreet justo vitae porttitor porttitor. Suspendisse in sem justo.
-          Integer laoreet magna nec elit suscipit, ac laoreet nibh euismod.
-          Aliquam hendrerit lorem at elit facilisis rutrum. Ut at ullamcorper
-          velit. Nulla ligula nisi, imperdiet ut lacinia nec, tincidunt ut
-          libero. Aenean feugiat non eros quis feugiat.
-        </p>
-      </div> </swiper-slide
-    ><swiper-slide>
-      <div class="title" data-swiper-parallax="-300">Slide 2</div>
-      <div class="subtitle" data-swiper-parallax="-200">Subtitle</div>
-      <div class="text" data-swiper-parallax="-100">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-          dictum mattis velit, sit amet faucibus felis iaculis nec. Nulla
-          laoreet justo vitae porttitor porttitor. Suspendisse in sem justo.
-          Integer laoreet magna nec elit suscipit, ac laoreet nibh euismod.
-          Aliquam hendrerit lorem at elit facilisis rutrum. Ut at ullamcorper
-          velit. Nulla ligula nisi, imperdiet ut lacinia nec, tincidunt ut
-          libero. Aenean feugiat non eros quis feugiat.
-        </p>
-      </div> </swiper-slide
-    ><swiper-slide>
-      <div class="title" data-swiper-parallax="-300">Slide 3</div>
-      <div class="subtitle" data-swiper-parallax="-200">Subtitle</div>
-      <div class="text" data-swiper-parallax="-100">
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam
-          dictum mattis velit, sit amet faucibus felis iaculis nec. Nulla
-          laoreet justo vitae porttitor porttitor. Suspendisse in sem justo.
-          Integer laoreet magna nec elit suscipit, ac laoreet nibh euismod.
-          Aliquam hendrerit lorem at elit facilisis rutrum. Ut at ullamcorper
-          velit. Nulla ligula nisi, imperdiet ut lacinia nec, tincidunt ut
-          libero. Aenean feugiat non eros quis feugiat.
-        </p>
+        <p>{{ slide.text }}</p>
       </div>
     </swiper-slide>
   </swiper>
 </template>
-
 <script>
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from "swiper/vue";
@@ -90,6 +49,35 @@ export default {
   setup() {
     return {
       modules: [Parallax, Pagination, Navigation],
+      slides: [
+        {
+          id: 1,
+          title: "Slide 1",
+          subtitle: "Subtitle",
+          text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
+          parallaxTitle: "-300",
+          parallaxSubtitle: "-200",
+          parallaxText: "-100",
+        },
+        {
+          id: 2,
+          title: "Slide 2",
+          subtitle: "Subtitle",
+          text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
+          parallaxTitle: "-300",
+          parallaxSubtitle: "-200",
+          parallaxText: "-100",
+        },
+        {
+          id: 3,
+          title: "Slide 3",
+          subtitle: "Subtitle",
+          text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit...",
+          parallaxTitle: "-300",
+          parallaxSubtitle: "-200",
+          parallaxText: "-100",
+        },
+      ],
     };
   },
 };
