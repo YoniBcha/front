@@ -5,7 +5,7 @@
       class="fixed top-10 left-16 z-0 overflow-hidden right-16 flex justify-between items-center h-16 rounded-md shadow-lg border-t border-gray-200 bg-gradient-to-r from-white to-gray-50"
     >
       <!-- logo -->
-      <div class="w-28 p-2">
+      <div class="w-20 p-2">
         <img src="~assets/img/addis.png" alt="" />
       </div>
       <!-- links in nav bar -->
@@ -19,7 +19,7 @@
 
     <!-- home section -->
     <div
-      class="fixed top-[115px] right-16 left-16 h-[600px] overflow-y-scroll custom-scrollbar"
+      class="fixed top-[115px] right-16 left-16 h-[100vh] pb-20 overflow-y-scroll custom-scrollbar"
     >
       <div class="grid grid-cols-12">
         <div class="flex flex-col justify-center col-span-6">
@@ -54,93 +54,64 @@
       </div>
 
       <div
-        class="mb-20 bg-gray-100 px-4 pt-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8"
+        class="mb-20 bg-[#0a58a4] text-white px-4 pt-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8"
       >
         <div class="grid gap-10 row-gap-6 mb-8 sm:grid-cols-2 lg:grid-cols-4">
           <div class="sm:col-span-2">
-            <a
-              href="/"
-              aria-label="Go home"
-              title="Company"
-              class="inline-flex items-center"
-            >
-              <svg
-                class="w-8 text-deep-purple-accent-400"
-                viewBox="0 0 24 24"
-                stroke-linejoin="round"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-miterlimit="10"
-                stroke="currentColor"
-                fill="none"
-              >
-                <rect x="3" y="1" width="7" height="12"></rect>
-                <rect x="3" y="17" width="7" height="6"></rect>
-                <rect x="14" y="1" width="7" height="6"></rect>
-                <rect x="14" y="11" width="7" height="12"></rect>
-              </svg>
-              <span
-                class="ml-2 text-xl font-bold tracking-wide text-gray-800 uppercase"
-                >Company</span
-              >
-            </a>
+            <div class="w-20">
+              <img src="~assets/img/addis.png" alt="" />
+            </div>
             <div class="mt-6 lg:max-w-sm">
-              <p class="text-sm text-gray-800">
-                Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                accusantium doloremque laudantium, totam rem aperiam.
+              <p class="text-sm text-gray-400 font-bold">
+                Ldeta Subcity Enterprise Management System.
               </p>
-              <p class="mt-4 text-sm text-gray-800">
-                Eaque ipsa quae ab illo inventore veritatis et quasi architecto
-                beatae vitae dicta sunt explicabo.
+              <p class="mt-4">
+                Make our workplace enviroment a better place for you and for us
               </p>
             </div>
           </div>
           <div class="space-y-2 text-sm">
-            <p class="text-base font-bold tracking-wide text-gray-900">
-              Contacts
-            </p>
+            <p class="text-base font-bold tracking-wide">Contacts</p>
             <div class="flex">
-              <p class="mr-1 text-gray-800">Phone:</p>
+              <p class="mr-1 font-semibold text-gray-300">Phone:</p>
               <a
-                href="tel:850-123-5021"
+                href="tel:0945604972"
                 aria-label="Our phone"
                 title="Our phone"
-                class="transition-colors duration-300 text-deep-purple-accent-400 hover:text-deep-purple-800"
-                >850-123-5021</a
+                class="transition-colors duration-300 text-gray-400 hover:text-deep-purple-800"
+                >(+251)945604972</a
               >
             </div>
             <div class="flex">
-              <p class="mr-1 text-gray-800">Email:</p>
+              <p class="mr-1 font-semibold text-gray-300">Email:</p>
               <a
-                href="mailto:info@lorem.mail"
+                href="mailto:yonasmillion29@gmail.com"
                 aria-label="Our email"
                 title="Our email"
-                class="transition-colors duration-300 text-deep-purple-accent-400 hover:text-deep-purple-800"
-                >info@lorem.mail</a
+                class="transition-colors duration-300 text-gray-400 hover:text-deep-purple-800"
+                >yonasmillion29@gmail.com</a
               >
             </div>
             <div class="flex">
-              <p class="mr-1 text-gray-800">Address:</p>
+              <p class="mr-1 font-semibold text-gray-300">Address:</p>
               <a
                 href="https://www.google.com/maps"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Our address"
                 title="Our address"
-                class="transition-colors duration-300 text-deep-purple-accent-400 hover:text-deep-purple-800"
+                class="transition-colors duration-300 text-gray-400 hover:text-deep-purple-800"
               >
                 312 Lovely Street, NY
               </a>
             </div>
           </div>
           <div>
-            <span class="text-base font-bold tracking-wide text-gray-900"
-              >Social</span
-            >
+            <span class="text-base font-bold tracking-wide">Social</span>
             <div class="flex items-center mt-1 space-x-3">
               <a
                 href="/"
-                class="text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-400"
+                class="text-gray-500 hover:text-white transition-colors duration-300"
               >
                 <svg viewBox="0 0 24 24" fill="currentColor" class="h-5">
                   <path
@@ -150,7 +121,7 @@
               </a>
               <a
                 href="/"
-                class="text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-400"
+                class="text-gray-500 transition-colors duration-300 hover:text-white"
               >
                 <svg viewBox="0 0 30 30" fill="currentColor" class="h-6">
                   <circle cx="15" cy="15" r="4"></circle>
@@ -161,7 +132,7 @@
               </a>
               <a
                 href="/"
-                class="text-gray-500 transition-colors duration-300 hover:text-deep-purple-accent-400"
+                class="text-gray-500 transition-colors duration-300 hover:text-white"
               >
                 <svg viewBox="0 0 24 24" fill="currentColor" class="h-5">
                   <path
@@ -170,17 +141,18 @@
                 </svg>
               </a>
             </div>
-            <p class="mt-4 text-sm text-gray-500">
-              Bacon ipsum dolor amet short ribs pig sausage prosciutto chicken
-              spare ribs salami.
+            <p class="mt-4 text-sm">
+              if you want to get us with other social media here is our link
+              contact us!
             </p>
           </div>
         </div>
         <div
-          class="flex flex-col-reverse justify-between pt-5 pb-10 border-t lg:flex-row"
+          class="flex flex-col-reverse justify-between pt-7 pb-10 border-t lg:flex-row"
         >
-          <p class="text-sm text-gray-600">
-            © Copyright 2020 Lorem Inc. All rights reserved.
+          <p class="text-sm font-bold">
+            © Copyright 2020 Ldeta subcity enterprise management system Inc. All
+            rights reserved.
           </p>
           <ul
             class="flex flex-col mb-3 space-y-2 lg:mb-0 sm:space-y-0 sm:space-x-5 sm:flex-row"
@@ -188,21 +160,21 @@
             <li>
               <a
                 href="/"
-                class="text-sm text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400"
+                class="text-sm text-gray-300 transition-colors duration-300 hover:text-deep-purple-accent-400"
                 >F.A.Q</a
               >
             </li>
             <li>
               <a
                 href="/"
-                class="text-sm text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400"
+                class="text-sm text-gray-300 transition-colors duration-300 hover:text-deep-purple-accent-400"
                 >Privacy Policy</a
               >
             </li>
             <li>
               <a
                 href="/"
-                class="text-sm text-gray-600 transition-colors duration-300 hover:text-deep-purple-accent-400"
+                class="text-sm text-gray-300 transition-colors duration-300 hover:text-deep-purple-accent-400"
                 >Terms &amp; Conditions</a
               >
             </li>
