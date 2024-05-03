@@ -2,7 +2,7 @@
   <div class="mx-16">
     <!-- header -->
     <div
-      class="fixed top-10 left-16 z-0 overflow-hidden right-16 flex justify-between items-center h-16 rounded-md shadow-lg border-t border-gray-200 bg-gradient-to-r from-white to-gray-50"
+      class="fixed top-8 left-16 z-0 overflow-hidden right-16 flex justify-between items-center h-16 rounded-md shadow-lg border-t border-gray-200 bg-gradient-to-r from-white to-gray-50"
     >
       <!-- logo -->
       <div class="w-20 p-2">
@@ -22,7 +22,7 @@
       class="fixed top-[115px] right-16 left-16 h-[100vh] pb-20 overflow-y-scroll custom-scrollbar"
     >
       <div class="grid grid-cols-12">
-        <div class="flex flex-col justify-center col-span-6">
+        <div class="hero-background flex flex-col justify-center col-span-6">
           <div class="font-bold text-gray-500 mb-5 text-3xl text-italic">
             "Well Came To . . ."
           </div>
@@ -30,29 +30,24 @@
             <p class="mb-2">Ldeta Subcity Enterprise</p>
             <p>Management System</p>
           </div>
-          <div class="text-3xl font-semibold pb-3">for you and for us</div>
-          <div class="text-sm text-gray-500">
-            Our enterprise management system will <br />facilitate the work
-            speed and the customer <br />
-            and employee satisfaction.
-          </div>
+          <div class="text-xl font-semibold pb-3">for you and for us</div>
         </div>
         <div class="col-span-6 flex items-center justify-center">
           <img src="~assets/illus/enterprise.png" alt="" />
         </div>
       </div>
       <!-- our service -->
-      <div class="grid grid-cols-12 mt-20 mb-10 w-[1238px]">
+      <div class="grid grid-cols-12 mt-10 mb-10 w-[1238px]">
         <div
-          class="col-span-12 flex justify-center text-[#0a58a4] text-4xl mb-12"
+          class="col-span-12 flex justify-center text-[#0a58a4] text-4xl font-semibold mb-10"
         >
-          Our Serviece
+          Our Servieces
         </div>
         <div class="col-span-12 mb-5 h-[400px]">
           <swiperGrid />
         </div>
       </div>
-
+      <!-- footer -->
       <div
         class="mb-20 bg-[#0a58a4] text-white px-4 pt-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8"
       >
@@ -186,6 +181,14 @@
 </template>
 
 <style>
+.hero-background {
+  position: relative;
+  height: 100vh; /* Adjust the height according to your design */
+  background-image: url("assets/img/element.png");
+  background-size: cover;
+  background-position: center;
+}
+
 /* Hide scrollbar for Chrome, Safari, and Opera */
 .custom-scrollbar::-webkit-scrollbar {
   display: none;

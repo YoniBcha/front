@@ -6,7 +6,7 @@
 
 .swiper-slide {
   font-size: 18px;
-  color: black;
+  color: white;
   font-style: bold;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
@@ -15,19 +15,20 @@
 
 .parallax-bg {
   position: absolute;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.3)),
+    url("assets/img/enterprise_photo.jpg");
   left: 0;
   top: 0;
   width: 130%;
-  height: 100%;
-  background-color: "rgba(0, 0, 0, 1)";
-  -webkit-background-size: cover;
+  height: 130%;
+  /* -webkit-background-size: cover; */
   background-size: cover;
   background-position: center;
 }
 
 .swiper-slide .title {
   font-size: 41px;
-  font-weight: 300;
+  font-weight: 600;
 }
 
 .swiper-slide .subtitle {

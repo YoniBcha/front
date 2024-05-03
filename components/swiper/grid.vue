@@ -66,6 +66,7 @@
     </swiper-slide>
   </swiper>
 </template>
+
 <script>
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from "swiper/vue";
