@@ -19,27 +19,30 @@
       data-swiper-parallax="-23%"
     ></div>
     <swiper-slide v-for="slide in slides" :key="slide.id">
-      <div class="title mb-5" data-swiper-parallax="-300">
+      <div class="title mb-5" :data-swiper-parallax="slide.parallaxTitle">
         {{ slide.title }}
       </div>
-      <div class="text" data-swiper-parallax="-100">
+      <div class="text" :data-swiper-parallax="slide.parallaxText">
         <p>{{ slide.text }}</p>
       </div>
     </swiper-slide>
   </swiper>
 </template>
+
 <script>
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from "swiper/vue";
 
 // Import Swiper styles
 import "swiper/css";
-
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
-// import required modules
+// Import required modules
 import { Parallax, Pagination, Navigation } from "swiper/modules";
+
+// Import slide data from external file
+import { servieceData } from "../global/data/serviece_data.js";
 
 export default {
   components: {
@@ -49,44 +52,17 @@ export default {
   setup() {
     return {
       modules: [Parallax, Pagination, Navigation],
-      slides: [
-        {
-          id: 1,
-          title: "Jobless Registration Assigning Of Job",
-          subtitle: "Subtitle",
-          text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. ",
-          parallaxTitle: "-300",
-          parallaxSubtitle: "-200",
-          parallaxText: "-100",
-        },
-        {
-          id: 2,
-          title: "Workplace Building And Assign To Enterprises ",
-          subtitle: "Subtitle",
-          text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. ",
-          parallaxTitle: "-300",
-          parallaxSubtitle: "-200",
-          parallaxText: "-100",
-        },
-        {
-          id: 3,
-          title: "Organaize And Register Enterprise",
-          subtitle: "Subtitle",
-          text: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. ",
-          parallaxTitle: "-300",
-          parallaxSubtitle: "-200",
-          parallaxText: "-100",
-        },
-      ],
+      slides: servieceData, // Use imported slide data
     };
   },
 };
 </script>
+
 <style scoped>
 .swiper {
   width: 100%;
   height: 100%;
-  border-radius: 20px;
+  border-radius: 10px;
 }
 .swiper-slide {
   font-size: 18px;
@@ -99,7 +75,7 @@ export default {
 
 .parallax-bg {
   position: absolute;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2)),
+  background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)),
     url("assets/img/enterprise_photo.jpg");
   left: 0;
   top: 0;
