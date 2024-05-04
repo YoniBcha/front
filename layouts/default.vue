@@ -44,7 +44,7 @@
           Our Servieces
         </div>
         <div class="col-span-12 mb-5 h-[400px]">
-          <swiperGrid />
+          <swiperOurServices />
         </div>
       </div>
 

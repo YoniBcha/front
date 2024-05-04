@@ -1,3 +1,4 @@
+User
 <template>
   <swiper
     :style="{
@@ -18,42 +19,67 @@
       class="parallax-bg"
       data-swiper-parallax="-23%"
     ></div>
-    <swiper-slide v-for="slide in slides" :key="slide.id">
-      <div class="title mb-5" :data-swiper-parallax="slide.parallaxTitle">
-        {{ slide.title }}
+    <swiper-slide v-for="service in services.services" :key="service.id">
+      <div class="title mb-5" :data-swiper-parallax="service.parallaxTitle">
+        {{ service.service_title }}
       </div>
-      <div class="text" :data-swiper-parallax="slide.parallaxText">
-        <p>{{ slide.text }}</p>
+      <div class="text" :data-swiper-parallax="service.parallaxText">
+        <p>{{ service.service_definition }}</p>
       </div>
     </swiper-slide>
   </swiper>
-</template>
+  <div>
+    <div v-if="error">Error fetching data: {{ error }}</div>
+    <div v-else>
+      <div v-for="service in services" :key="service.id">
+        <div class="title mb-5">{{ service.service_title }}</div>
+        <div class="text">{{ service.service_definition }}</div>
+      </div>
+    </div>
+  </div></template>
 
 <script>
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from "swiper/vue";
+
+// Import required modules
+import { Parallax, Pagination, Navigation } from "swiper/modules";
 
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 
-// Import required modules
-import { Parallax, Pagination, Navigation } from "swiper/modules";
-
-// Import slide data from external file
-import { servieceData } from "../global/data/serviece_data.js";
+// Import serviece Data data from external file (optional)
+// import { servieceData } from "../global/data/serviece_data.js";
 
 export default {
   components: {
     Swiper,
     SwiperSlide,
   },
-  setup() {
+  data() {
     return {
-      modules: [Parallax, Pagination, Navigation],
-      slides: servieceData, // Use imported slide data
+      services: [], // Array to store API response data
+      error: null, // Store any error message
+      modules: [Parallax, Pagination, Navigation], // Swiper modules
     };
+  },
+  created() {
+    this.fetchData(); // Fetch data on component creation
+  },
+  methods: {
+    async fetchData() {
+      try {
+        const response = await fetch("http://127.0.0.1:8000/api/ourservices");
+        const data = await response.json();
+        this.services = data;
+        console.log(this.services.services);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        this.error = error.message; // Set error message
+      }
+    },
   },
 };
 </script>
