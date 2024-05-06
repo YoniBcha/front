@@ -9,13 +9,12 @@
         background: #0a58a4;
         overflow-y: visible;
         overflow-x: hidden;
-        scrollbar-width: thin;
-        scrollbar-color: transparent transparent;
+        scrollbar-width: none;
       "
-      class="h-[100vh]"
+      class="h-[100vh] mr-3"
     >
-      <div class="flex justify-center items-center h-[60px] text-white mt-3">
-        <img src="~assets/img/addis.png" class="w-28" />
+      <div class="flex justify-center items-center h-[40px] text-white mt-3">
+        <img src="~assets/img/addis.png" class="w-16" />
       </div>
       <a-divider
         style="background: white; margin-left: 12px; margin-right: 40px"
@@ -27,60 +26,136 @@
         class="mt-5"
         style="background: #0a58a4; color: white; margin-top: 20px"
       >
+        <!-- DASHBOARD -->
         <a-menu-item key="1" :style="sidebarMenuItemStyle">
           <router-link to="/">
             <AppstoreOutlined />
             <span> Dashboard </span>
           </router-link>
         </a-menu-item>
-        <a-menu-item key="2" :style="sidebarMenuItemStyle">
-          <router-link to="/jobless_registration">
-            <UserAddOutlined />
-            <span> Jobless Registration </span>
-          </router-link>
-        </a-menu-item>
-        <a-sub-menu key="3" :style="submenuStyle">
+        <!-- JOBLESS PAGE -->
+        <a-sub-menu key="2">
           <template #title>
             <span>
               <TeamOutlined />
-              <span> Enterprise Registration </span>
+              <span> JobLess Information</span>
+            </span>
+          </template>
+          <a-menu-item key="2.1">
+            <router-link to="/jobless/jobless-list">
+              <span>Jobless List</span>
+            </router-link>
+          </a-menu-item>
+          <a-menu-item key="2.2">
+            <router-link to="/jobless/jobless-registration">
+              <span>Jobless Registration</span>
+            </router-link>
+          </a-menu-item>
+        </a-sub-menu>
+        <!-- ENTERPRISE PAGE -->
+        <a-sub-menu key="3">
+          <template #title>
+            <span>
+              <TeamOutlined />
+              <span> Enterprise Information</span>
             </span>
           </template>
           <a-menu-item key="3.1">
-            <router-link to="/enterprise_registration">
+            <router-link to="/enterprise/enterprise-list">
               <span> Enterprise List </span>
             </router-link>
           </a-menu-item>
-          <a-menu-item key="3.2">Bill</a-menu-item>
+          <a-menu-item key="3.2">
+            <router-link to="/enterprise/enterprise-registration">
+              <span> Enterprise Registration </span>
+            </router-link>
+          </a-menu-item>
         </a-sub-menu>
-        <a-menu-item key="4" :style="sidebarMenuItemStyle">
-          <router-link to="/workplace_registration">
-            <HomeOutlined />
-            <span> Workplace Registration </span>
-          </router-link>
-        </a-menu-item>
-        <a-menu-item key="5" :style="sidebarMenuItemStyle">
-          <router-link to="/contract_document">
-            <ReconciliationOutlined />
-            <span> Contract Document </span>
-          </router-link>
-        </a-menu-item>
-        <a-menu-item key="6" :style="sidebarMenuItemStyle">
-          <router-link to="/complain_document">
-            <CommentOutlined />
-            <span> Complain Document </span>
-          </router-link>
-        </a-menu-item>
-
+        <!-- WORKPLACE REGISTRATION -->
+        <a-sub-menu key="4">
+          <template #title>
+            <span>
+              <TeamOutlined />
+              <span> Workplace Information</span>
+            </span>
+          </template>
+          <a-menu-item key="4.1">
+            <router-link to="/workplace/workplace-list">
+              <span> Workplace List </span>
+            </router-link>
+          </a-menu-item>
+          <a-menu-item key="4.2">
+            <router-link to="/workplace/workplace-registration">
+              <span> Workplace Registration </span>
+            </router-link>
+          </a-menu-item>
+        </a-sub-menu>
+        <!-- CONTRACT DOCUMENT -->
+        <a-sub-menu key="5">
+          <template #title>
+            <span>
+              <TeamOutlined />
+              <span> Contract Document</span>
+            </span>
+          </template>
+          <a-menu-item key="5.1">
+            <router-link to="/contract/contract-list">
+              <span> Contract List </span>
+            </router-link>
+          </a-menu-item>
+          <a-menu-item key="5.2">
+            <router-link to="/contract/make-agreement">
+              <span> Make Agreement </span>
+            </router-link>
+          </a-menu-item>
+        </a-sub-menu>
+        <!-- COMPLAIN DOCUMENT -->
+        <a-sub-menu key="6">
+          <template #title>
+            <span>
+              <TeamOutlined />
+              <span> Complain Document</span>
+            </span>
+          </template>
+          <a-menu-item key="6.1">
+            <router-link to="/complain/complain-list">
+              <span> Complain List </span>
+            </router-link>
+          </a-menu-item>
+          <a-menu-item key="6.2">
+            <router-link to="/complain/accept-complain">
+              <span> Accept Complain </span>
+            </router-link>
+          </a-menu-item>
+        </a-sub-menu>
         <a-divider
           style="background: white; margin-left: 12px; margin-right: 40px"
         />
-        <a-menu-item key="7" :style="sidebarMenuItemStyle">
-          <router-link to="/help">
-            <PlusCircleOutlined />
-            <span> Help </span>
-          </router-link>
-        </a-menu-item>
+        <!-- LANDING PAGE -->
+        <a-sub-menu key="7">
+          <template #title>
+            <span>
+              <TeamOutlined />
+              <span>LandingPage</span>
+            </span>
+          </template>
+          <a-menu-item key="7.1">
+            <router-link to="/landing-page/our-services">
+              <span> Our Services </span>
+            </router-link>
+          </a-menu-item>
+          <a-menu-item key="7.2">
+            <router-link to="/landing-page/news">
+              <span> News Page</span>
+            </router-link>
+          </a-menu-item>
+          <a-menu-item key="7.3">
+            <router-link to="/landing-page/contact-us">
+              <span> Contact Us</span>
+            </router-link>
+          </a-menu-item>
+        </a-sub-menu>
+        <!-- SETTING PAGE -->
         <a-menu-item key="9" :style="sidebarMenuItemStyle">
           <router-link to="/setting">
             <SettingOutlined />
@@ -89,6 +164,8 @@
         </a-menu-item>
       </a-menu>
     </a-layout-sider>
+
+    <!-- HEADER PART -->
     <a-layout>
       <a-layout-header
         style="background: #fff; padding: 0"

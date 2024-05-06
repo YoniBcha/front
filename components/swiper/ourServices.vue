@@ -20,38 +20,32 @@ User
       data-swiper-parallax="-23%"
     ></div>
     <swiper-slide v-for="service in services.services" :key="service.id">
-      <div class="title mb-5" :data-swiper-parallax="service.parallaxTitle">
-        {{ service.service_title }}
-      </div>
-      <div class="text" :data-swiper-parallax="service.parallaxText">
-        <p>{{ service.service_definition }}</p>
+      <div class="flex flex-col h-[250px]">
+        <div
+          class="font-bold text-4xl mb-10"
+          :data-swiper-parallax="service.parallaxTitle"
+        >
+          {{ service.service_title }}
+        </div>
+        <div
+          class="max-w-[700px] text-gray-300"
+          :data-swiper-parallax="service.parallaxText"
+        >
+          <p>{{ service.service_definition }}</p>
+        </div>
       </div>
     </swiper-slide>
   </swiper>
-  <div>
-    <div v-if="error">Error fetching data: {{ error }}</div>
-    <div v-else>
-      <div v-for="service in services" :key="service.id">
-        <div class="title mb-5">{{ service.service_title }}</div>
-        <div class="text">{{ service.service_definition }}</div>
-      </div>
-    </div>
-  </div></template>
+</template>
 
 <script>
-// Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from "swiper/vue";
-
-// Import required modules
 import { Parallax, Pagination, Navigation } from "swiper/modules";
 
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-
-// Import serviece Data data from external file (optional)
-// import { servieceData } from "../global/data/serviece_data.js";
 
 export default {
   components: {
@@ -110,20 +104,5 @@ export default {
   -webkit-background-size: cover;
   background-size: cover;
   background-position: center;
-}
-
-.swiper-slide .title {
-  font-size: 41px;
-  font-weight: 600;
-}
-
-.swiper-slide .subtitle {
-  font-size: 21px;
-}
-
-.swiper-slide .text {
-  font-size: 14px;
-  max-width: 400px;
-  line-height: 1.3;
 }
 </style>
