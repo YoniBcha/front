@@ -155,8 +155,15 @@
             </router-link>
           </a-menu-item>
         </a-sub-menu>
-        <!-- SETTING PAGE -->
         <a-menu-item key="9" :style="sidebarMenuItemStyle">
+          <router-link to="/city-registration/register-city">
+            <SettingOutlined />
+            <span> City Registration </span>
+          </router-link>
+        </a-menu-item>
+
+        <!-- SETTING PAGE -->
+        <a-menu-item key="10" :style="sidebarMenuItemStyle">
           <router-link to="/setting">
             <SettingOutlined />
             <span> Setting </span>

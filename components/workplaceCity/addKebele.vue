@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="">
     <a-button type="primary" @click="visible = true">New Kebele</a-button>
     <a-modal
       v-model:open="visible"
