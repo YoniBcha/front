@@ -36,8 +36,6 @@
 </template>
 
 <script setup>
-import { reactive } from "vue";
-import axios from "axios";
 
 const formState = reactive({
   service_title: "",
