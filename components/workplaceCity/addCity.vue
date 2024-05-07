@@ -59,7 +59,6 @@ const onOk = async () => {
   }
 
   visible.value = false;
-  formRef.value.resetFields();
 };
 </script>
 

@@ -47,7 +47,6 @@ const fetchCities = async () => {
     const response = await fetch("http://127.0.0.1:8000/api/cities");
     const data = await response.json();
     cities.value = data;
-    alert("Cities fetched successfully!");
   } catch (error) {
     console.error("Error fetching data:", error);
     this.error = error.message; // Set error message
@@ -73,9 +72,7 @@ const onOk = async () => {
   } catch (error) {
     console.error("Error:", error);
   }
-
   visible.value = false;
-  formRef.value.resetFields();
 };
 
 fetchCities(); // Fetch cities when component is initialized

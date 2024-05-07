@@ -3,24 +3,30 @@
     <a-button type="primary" @click="visible = true">New Woreda</a-button>
     <a-modal
       v-model:open="visible"
-      title="Register New City"
+      title="Register New Woreda"
       ok-text="Create"
       cancel-text="Cancel"
       @ok.prevent="onOk"
     >
-      <a-form
-        ref="formRef"
-        :model="formState"
-        layout="vertical"
-        name="form_in_modal"
-      >
-        <a-form-item
-          name="name"
-          :rules="[{ required: true, message: 'Please input your city name!' }]"
-        >
+      <a-form :model="formState" layout="vertical" name="form_in_modal">
+        <a-form-item name="city_id" has-feedback>
+          <a-select
+            v-model:value="formState.subcity_id"
+            placeholder="Please select the subcity"
+          >
+            <a-select-option
+              v-for="subcity in subcities"
+              :key="subcity.id"
+              :value="subcity.id"
+            >
+              {{ subcity.name }}
+            </a-select-option>
+          </a-select>
+        </a-form-item>
+        <a-form-item name="name">
           <a-input
             v-model:value="formState.name"
-            placeholder="enter city name"
+            placeholder="Enter woreda name"
           />
         </a-form-item>
       </a-form>
@@ -29,43 +35,46 @@
 </template>
 
 <script setup>
-
-const formRef = ref(null); // Changed to null initially
 const visible = ref(false);
 const formState = reactive({
+  subcity_id: null,
   name: "",
 });
+const subcities = ref([]);
+
+const fetchCities = async () => {
+  try {
+    const response = await fetch("http://127.0.0.1:8000/api/subcities");
+    const data = await response.json();
+    subcities.value = data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    this.error = error.message; // Set error message
+  }
+};
 
 const onOk = async () => {
-  // Made onOk async
-  await formRef.value.validateFields(); // Await after validation
-
   try {
-    // Assuming ohmyfetch handles CSRF token automatically
-    const response = await useFetch("http://127.0.0.1:8000/api/cities", {
+    const response = await useFetch("http://127.0.0.1:8000/api/woredas", {
       method: "POST",
-      body: formState,
+      body: {
+        subcity_id: formState.subcity_id,
+        name: formState.name,
+      },
     });
 
     if (response.ok) {
-      alert("City name saved successfully!");
-      console.log("City name saved successfully:", response.data);
+      formState.subcity_id = null;
       formState.name = "";
     } else {
-      console.error("Error saving city name:", response.statusText);
+      console.error("Error saving subcity:", response.statusText);
     }
   } catch (error) {
-    alert("City name is not saved!");
     console.error("Error:", error);
   }
 
   visible.value = false;
-  formRef.value.resetFields();
 };
-</script>
 
-<style scoped>
-.collection-create-form_last-form-item {
-  margin-bottom: 0;
-}
-</style>
+fetchCities();
+</script>
