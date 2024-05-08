@@ -3,6 +3,7 @@
     <DataTableDaynamicDataTable
       :data-source="dataSourceFromParent"
       :columns="columns"
+      @delete="onDelete"
     />
   </div>
 </template>
@@ -139,4 +140,7 @@ const dataSourceFromParent = ref([
     email: "test44@gmail.djghjcom",
   },
 ]);
+const onDelete = (key) => {
+  dataSource.value = dataSource.value.filter((item) => item.key !== key);
+};
 </script>

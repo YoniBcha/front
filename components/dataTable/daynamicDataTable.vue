@@ -7,11 +7,12 @@
       :columns="columns"
       :scroll="{ x: 1300, y: 1000 }"
     >
+      <!-- Header cell template -->
       <template #headerCell="{ column }">
-        <template v-if="column.key === 'name'">
-          <span style="color: #1890ff">Name</span>
-        </template>
+        <span v-if="column.key === 'name'" style="color: #1890ff">Name</span>
       </template>
+
+      <!-- Custom filter dropdown template -->
       <template
         #customFilterDropdown="{
           setSelectedKeys,
@@ -50,18 +51,31 @@
           </a-button>
         </div>
       </template>
+
+      <!-- Custom filter icon template -->
       <template #customFilterIcon="{ filtered }">
         <search-outlined :style="{ color: filtered ? '#108ee9' : undefined }" />
       </template>
+
+      <!-- Body cell template -->
       <template #bodyCell="{ text, column, record }">
-        <template v-if="column.dataIndex === 'name'">
+        <template
+          v-if="
+            column.dataIndex === 'name' ||
+            column.dataIndex === 'sex' ||
+            column.dataIndex === 'age' ||
+            column.dataIndex === 'phonenumber' ||
+            column.dataIndex === 'address' ||
+            column.dataIndex === 'email'
+          "
+        >
           <div class="editable-cell">
             <div
               v-if="editableData[record.key]"
               class="editable-cell-input-wrapper"
             >
               <a-input
-                v-model:value="editableData[record.key].name"
+                v-model:value="editableData[record.key][column.dataIndex]"
                 @pressEnter="save(record.key)"
               />
               <check-outlined
@@ -78,128 +92,6 @@
             </div>
           </div>
         </template>
-        <template v-if="column.dataIndex === 'sex'">
-          <div class="editable-cell">
-            <div
-              v-if="editableData[record.key]"
-              class="editable-cell-input-wrapper"
-            >
-              <a-input
-                v-model:value="editableData[record.key].sex"
-                @pressEnter="save(record.key)"
-              />
-              <check-outlined
-                class="editable-cell-icon-check"
-                @click="save(record.key)"
-              />
-            </div>
-            <div v-else class="editable-cell-text-wrapper">
-              {{ text || " " }}
-              <edit-outlined
-                class="editable-cell-icon"
-                @click="edit(record.key)"
-              />
-            </div>
-          </div>
-        </template>
-        <template v-if="column.dataIndex === 'age'">
-          <div class="editable-cell">
-            <div
-              v-if="editableData[record.key]"
-              class="editable-cell-input-wrapper"
-            >
-              <a-input
-                v-model:value="editableData[record.key].age"
-                @pressEnter="save(record.key)"
-              />
-              <check-outlined
-                class="editable-cell-icon-check"
-                @click="save(record.key)"
-              />
-            </div>
-            <div v-else class="editable-cell-text-wrapper">
-              {{ text || " " }}
-              <edit-outlined
-                class="editable-cell-icon"
-                @click="edit(record.key)"
-              />
-            </div>
-          </div>
-        </template>
-        <template v-if="column.dataIndex === 'phonenumber'">
-          <div class="editable-cell">
-            <div
-              v-if="editableData[record.key]"
-              class="editable-cell-input-wrapper"
-            >
-              <a-input
-                v-model:value="editableData[record.key].phonenumber"
-                @pressEnter="save(record.key)"
-              />
-              <check-outlined
-                class="editable-cell-icon-check"
-                @click="save(record.key)"
-              />
-            </div>
-            <div v-else class="editable-cell-text-wrapper">
-              {{ text || " " }}
-              <edit-outlined
-                class="editable-cell-icon"
-                @click="edit(record.key)"
-              />
-            </div>
-          </div>
-        </template>
-
-        <template v-if="column.dataIndex === 'address'">
-          <div class="editable-cell">
-            <div
-              v-if="editableData[record.key]"
-              class="editable-cell-input-wrapper"
-            >
-              <a-input
-                v-model:value="editableData[record.key].address"
-                @pressEnter="save(record.key)"
-              />
-              <check-outlined
-                class="editable-cell-icon-check"
-                @click="save(record.key)"
-              />
-            </div>
-            <div v-else class="editable-cell-text-wrapper">
-              {{ text || " " }}
-              <edit-outlined
-                class="editable-cell-icon"
-                @click="edit(record.key)"
-              />
-            </div>
-          </div>
-        </template>
-        <template v-if="column.dataIndex === 'email'">
-          <div class="editable-cell">
-            <div
-              v-if="editableData[record.key]"
-              class="editable-cell-input-wrapper"
-            >
-              <a-input
-                v-model:value="editableData[record.key].email"
-                @pressEnter="save(record.key)"
-              />
-              <check-outlined
-                class="editable-cell-icon-check"
-                @click="save(record.key)"
-              />
-            </div>
-            <div v-else class="editable-cell-text-wrapper">
-              {{ text || " " }}
-              <edit-outlined
-                class="editable-cell-icon"
-                @click="edit(record.key)"
-              />
-            </div>
-          </div>
-        </template>
-
         <template v-else-if="column.dataIndex === 'status'">
           <span>
             <a-tag
@@ -217,7 +109,6 @@
             </a-tag>
           </span>
         </template>
-
         <template v-else-if="column.dataIndex === 'operation'">
           <a-popconfirm
             v-if="dataSource.length"
@@ -256,7 +147,7 @@
 </template>
 
 <script setup>
-import { computed, reactive, ref } from "vue";
+import { defineProps, defineEmits, reactive, ref } from "vue";
 import { cloneDeep } from "lodash-es";
 
 const props = defineProps({
@@ -288,7 +179,7 @@ const handleReset = (clearFilters) => {
   });
   state.searchText = "";
 };
-const count = computed(() => props.dataSource.length + 1);
+
 const editableData = reactive({});
 
 const edit = (key) => {

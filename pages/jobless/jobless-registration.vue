@@ -641,7 +641,7 @@ const showModal = () => {
 
 const formState = reactive({
   jobless_registration_date: "",
-  //jobless_photo: "",
+  jobless_photo: "",
   jobless_full_name: "",
   jobless_grandfather_name: "",
   jobless_sex: "",
@@ -658,12 +658,12 @@ const formState = reactive({
   jobless_birthplace: "",
   jobless_family_status: "",
   jobless_martial_status: "",
-  // jobless_identification_card: "",
+  jobless_identification_card: "",
   jobless_disability_status: "",
   jobless_reason_tocome: "",
-  //jobless_training_cirtificate: "",
-  //jobless_evidence_card: "",
-  //jobless_priority_evidence: "",
+  jobless_training_cirtificate: "",
+  jobless_evidence_card: "",
+  jobless_priority_evidence: "",
 });
 
 const handleForm = (e) => {
