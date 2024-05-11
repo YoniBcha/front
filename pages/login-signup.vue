@@ -3,7 +3,7 @@
     <div class="forms-container1">
       <div class="signin-signup">
         <form
-          class="sign-in-form shadow-2xl mx-auto px-5 rounded-lg bg-gray-50"
+          class="sign-in-form shadow-2xl mx-auto rounded-lg bg-gray-50"
         >
           <h2 class="title text-black">Sign in</h2>
           <!-- <login /> -->
