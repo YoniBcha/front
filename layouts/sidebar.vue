@@ -12,6 +12,7 @@
         scrollbar-width: none;
       "
       class="h-[100vh] mr-3"
+      s
     >
       <div class="flex justify-center items-center h-[40px] text-white mt-3">
         <img src="~assets/img/addis.png" class="w-16" />

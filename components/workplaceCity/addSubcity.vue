@@ -11,7 +11,7 @@
       <a-form :model="formState" layout="vertical" name="form_in_modal">
         <a-form-item name="city_id" has-feedback>
           <a-select
-            v-model:value="formState.city_id"
+            v-model:value="formState"
             placeholder="Please select the city"
           >
             <a-select-option

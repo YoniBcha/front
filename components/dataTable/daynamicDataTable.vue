@@ -9,7 +9,11 @@
     >
       <!-- Header cell template -->
       <template #headerCell="{ column }">
-        <span v-if="column.key === 'name'" style="color: #1890ff">Name</span>
+        <span
+          v-if="column.key === 'name' || column.key === 'workplace'"
+          style="color: #1890ff"
+          >{{ column.title }}</span
+        >
       </template>
 
       <!-- Custom filter dropdown template -->
@@ -62,11 +66,16 @@
         <template
           v-if="
             column.dataIndex === 'name' ||
+            column.dataIndex === 'wokplacename' ||
             column.dataIndex === 'sex' ||
             column.dataIndex === 'age' ||
             column.dataIndex === 'phonenumber' ||
             column.dataIndex === 'address' ||
-            column.dataIndex === 'email'
+            column.dataIndex === 'email' ||
+            column.dataIndex === 'workplacecity' ||
+            column.dataIndex === 'workplacetype' ||
+            column.dataIndex === 'workplacesubcity' ||
+            column.dataIndex === 'workplacesize'
           "
         >
           <div class="editable-cell">
@@ -196,7 +205,7 @@ const save = (key) => {
   delete editableData[key];
 };
 const onDelete = (key) => {
-  props.dataSource = props.dataSource.filter((item) => item.key !== key);
+  props.dataSource.value = props.dataSource.filter((item) => item.key !== key);
 };
 </script>
 

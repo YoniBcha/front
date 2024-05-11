@@ -49,6 +49,10 @@
         </div>
       </div>
 
+      <div class="h-[800px]">
+        <login-signup />
+      </div>
+
       <!-- footer -->
       <div
         class="mb-20 bg-[#0a58a4] text-white px-4 pt-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen md:px-24 lg:px-8"
@@ -182,21 +186,4 @@
   </div>
 </template>
 
-<style>
-.hero-background {
-  position: relative;
-  height: 100vh; /* Adjust the height according to your design */
-  background-image: url("assets/img/element.png");
-  background-size: cover;
-  background-position: center;
-}
 
-/* Hide scrollbar for Chrome, Safari, and Opera */
-.custom-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-/* Hide scrollbar for Firefox */
-.custom-scrollbar {
-  scrollbar-width: none;
-}
-</style>
