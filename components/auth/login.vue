@@ -37,7 +37,7 @@
 <script setup>
 import { reactive, watch } from "vue";
 import * as yup from "yup";
-import { useAuthStore } from '@/stores/auth';
+import { useAuthStore } from "@/stores/auth";
 
 // Reactive state for form data, errors, and touch states
 const formState = reactive({
@@ -107,6 +107,7 @@ const handleSubmit = async () => {
     await schema.validate(formState, { abortEarly: false });
     console.log("Form is valid:", formState);
     await authStore.login(formState);
+    router.push("/");
   } catch (error) {
     console.error("Error:", error.message);
   }

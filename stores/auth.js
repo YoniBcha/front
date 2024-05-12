@@ -2,6 +2,7 @@ import { defineStore } from "pinia";
 
 export const useAuthStore = defineStore("auth", {
   state: () => ({
+    isLoggedIn: false, // Initial login state
     user: null,
     token: null,
   }),
@@ -9,7 +10,7 @@ export const useAuthStore = defineStore("auth", {
     async login(credentials) {
       try {
         // Replace with your API call to login (consider using `useFetch` from `nuxt/app`)
-        const response = await useFetch("http://127.0.0.1:8000/api/login", {
+        const response = await fetch("http://127.0.0.1:8000/api/login", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(credentials),
@@ -18,9 +19,9 @@ export const useAuthStore = defineStore("auth", {
         if (!response.ok) {
           throw new Error("Login failed");
         }
-
         const data = await response.json();
-        this.user = data.user; // Assuming API response structure
+        this.isLoggedIn = true;
+        this.user = data.user;
         this.token = data.token; // Assuming API provides a token
       } catch (error) {
         console.error(error);
@@ -34,8 +35,8 @@ export const useAuthStore = defineStore("auth", {
     },
   },
   getters: {
-    isLoggedIn() {
-      return !!this.user; // Check if user is present
+    isAuthenticated() {
+      return this.isLoggedIn; // Getter returning the authentication state
     },
   },
 });
