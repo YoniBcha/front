@@ -103,6 +103,7 @@ const schema = yup.object({
   username: yup
     .string()
     .required("Username is required")
+    .min(3, "Username must be at least 3 characters long")
     .matches(
       /^[a-zA-Z0-9_]+$/,
       "Username must contain only letters, numbers, or underscores"
@@ -110,6 +111,7 @@ const schema = yup.object({
   name: yup
     .string()
     .required("Name is required")
+    .min(3, "name must be at least 3 characters long")
     .matches(/^[a-zA-Z]+$/, "Name must contain only letters"),
   email: yup
     .string()
@@ -125,7 +127,11 @@ const schema = yup.object({
   verifyPassword: yup
     .string()
     .required("Please verify your password")
-    .oneOf([yup.ref("password"), null], "Passwords must match"),
+    .when("password", {
+      is: (val) => val !== undefined && val !== null && val !== "",
+      then: yup.string().oneOf([yup.ref("password")], "Passwords must match"),
+      otherwise: yup.string().nullable(),
+    }),
 });
 
 watch(
@@ -147,6 +153,15 @@ const validateField = async (field) => {
   try {
     await schema.fields[field].validate(formState[field]);
     errors[field] = null;
+
+    if (field === "verifyPassword") {
+      if (formState.password === formState.verifyPassword) {
+        errors.verifyPassword = null; // Clear error message
+      } else {
+        // If passwords don't match, display error message
+        throw new Error("Passwords must match");
+      }
+    }
   } catch (error) {
     errors[field] = error.message;
   }

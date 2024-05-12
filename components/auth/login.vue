@@ -105,15 +105,29 @@ const handleSubmit = async () => {
   try {
     await schema.validate(formState, { abortEarly: false });
     console.log("Form is valid:", formState);
-    // Proceed with form submission (e.g., API call)
-  } catch (error) {
-    if (error.inner) {
-      error.inner.forEach((err) => {
-        errors[err.path] = err.message;
-      });
+    const data = JSON.stringify(formState);
+
+    const response = await useFetch("http://127.0.0.1:8000/api/login", {
+      method: "POST",
+      body: data,
+    });
+
+    if (!response.ok) {
+      throw new Error(`API request failed with status ${response.status}`);
+    } else {
+      alert("registered");
     }
+
+    const responseData = await response.json();
+    // alert("API response:", responseData);
+
+    // Handle successful form submission (e.g., display success message)
+  } catch (error) {
+    console.error("Error:", error.message);
+    // Handle errors (e.g., display error message)
   }
 };
+
 
 // Function to handle blur event on input fields
 const handleBlur = (field) => {
