@@ -9,7 +9,11 @@ export default defineNuxtConfig({
   antd: {},
   css: ["~/assets/css/main.css"],
   devtools: { enabled: true },
-  modules: ["@ant-design-vue/nuxt"],
+  modules: [
+    "@ant-design-vue/nuxt",
+    "@pinia/nuxt",
+    "@pinia-plugin-persistedstate/nuxt",
+  ],
   postcss: {
     plugins: {
       tailwindcss: {},

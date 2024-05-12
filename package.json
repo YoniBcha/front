@@ -10,8 +10,10 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@pinia/nuxt": "^0.5.1",
     "axios": "^1.6.8",
     "nuxt": "^3.11.2",
+    "pinia": "^2.1.7",
     "swiper": "^11.1.1",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0",
@@ -19,6 +21,7 @@
   },
   "devDependencies": {
     "@ant-design-vue/nuxt": "^1.4.1",
+    "@pinia-plugin-persistedstate/nuxt": "^1.2.0",
     "autoprefixer": "^10.4.19",
     "less": "^4.2.0",
     "postcss": "^8.4.38",

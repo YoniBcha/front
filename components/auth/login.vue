@@ -37,6 +37,7 @@
 <script setup>
 import { reactive, watch } from "vue";
 import * as yup from "yup";
+import { useAuthStore } from '@/stores/auth';
 
 // Reactive state for form data, errors, and touch states
 const formState = reactive({
@@ -99,35 +100,17 @@ const validateField = async (field) => {
     errors[field] = error.message;
   }
 };
-
+const authStore = useAuthStore();
 // Function to handle form submission
 const handleSubmit = async () => {
   try {
     await schema.validate(formState, { abortEarly: false });
     console.log("Form is valid:", formState);
-    const data = JSON.stringify(formState);
-
-    const response = await useFetch("http://127.0.0.1:8000/api/login", {
-      method: "POST",
-      body: data,
-    });
-
-    if (!response.ok) {
-      throw new Error(`API request failed with status ${response.status}`);
-    } else {
-      alert("registered");
-    }
-
-    const responseData = await response.json();
-    // alert("API response:", responseData);
-
-    // Handle successful form submission (e.g., display success message)
+    await authStore.login(formState);
   } catch (error) {
     console.error("Error:", error.message);
-    // Handle errors (e.g., display error message)
   }
 };
-
 
 // Function to handle blur event on input fields
 const handleBlur = (field) => {
