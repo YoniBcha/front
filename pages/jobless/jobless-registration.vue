@@ -15,7 +15,7 @@
       v-model:open="open"
       width="1000px"
       title="New JoblessForm"
-      @ok="handleForm"
+      @ok.prevent="submitForm"
       okText="submit"
     >
       <a-form :model="formState">
@@ -53,6 +53,42 @@
                   { required: false, message: 'Please input your fullname!' },
                 ]"
                 placeholder="enter your full name"
+                allow-clear
+                class="mb-6"
+              />
+              <a-input
+                v-model:value="formState.jobless_username"
+                :rules="[
+                  { required: false, message: 'Please input your username!' },
+                ]"
+                placeholder="enter your username"
+                allow-clear
+                class="mb-6"
+              />
+              <a-input
+                v-model:value="formState.jobless_role"
+                :rules="[
+                  { required: false, message: 'Please input your username!' },
+                ]"
+                placeholder="enter your role"
+                allow-clear
+                class="mb-6"
+              />
+              <a-input
+                v-model:value="formState.jobless_password"
+                :rules="[
+                  { required: false, message: 'Please input your username!' },
+                ]"
+                placeholder="enter your password"
+                allow-clear
+                class="mb-6"
+              />
+              <a-input
+                v-model:value="formState.jobless_woreda"
+                :rules="[
+                  { required: false, message: 'Please input your username!' },
+                ]"
+                placeholder="enter your password"
                 allow-clear
                 class="mb-6"
               />
@@ -640,8 +676,10 @@ const showModal = () => {
 };
 
 const formState = reactive({
-  jobless_registration_date: "",
   jobless_photo: null,
+  jobless_username: "",
+  jobless_woreda: "",
+  jobless_password: "",
   jobless_full_name: "",
   jobless_grandfather_name: "",
   jobless_sex: "",
@@ -650,6 +688,7 @@ const formState = reactive({
   jobless_city: "",
   jobless_subcity: "",
   jobless_phonenumber: "",
+  jobless_role: "",
   jobless_email: "",
   jobless_profession: "",
   jobless_housenumber: "",
@@ -659,26 +698,40 @@ const formState = reactive({
   jobless_family_status: "",
   jobless_martial_status: "",
   jobless_identification_card: null,
-  jobless_disability_status: null,
+  jobless_disability_status: "",
   jobless_reason_tocome: "",
   jobless_training_cirtificate: null,
   jobless_evidence_card: null,
   jobless_priority_evidence: null,
 });
 
-const handleForm = (e) => {
-  const newData = {
-    key: `${count.value}`,
-    name: formState.jobless_full_name,
-    sex: formState.jobless_sex,
-    age: formState.jobless_age,
-    address: formState.jobless_city,
-    email: formState.jobless_email,
-    phonenumber: formState.jobless_phonenumber,
-  };
-  dataSource.value.push(newData);
-  open.value = false;
+const submitForm = async () => {
+  try {
+    const response = await fetch("http://127.0.0.1:8000/api/jobless", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(credentials),
+    });
+
+    alert("Service saved successfully!");
+  } catch (error) {
+    console.error("Failed to save service:", error);
+  }
 };
+
+// const handleFormee = (e) => {
+//   const newData = {
+//     key: `${count.value}`,
+//     name: formState.jobless_full_name,
+//     sex: formState.jobless_sex,
+//     age: formState.jobless_age,
+//     address: formState.jobless_city,
+//     email: formState.jobless_email,
+//     phonenumber: formState.jobless_phonenumber,
+//   };
+//   dataSource.value.push(newData);
+//   open.value = false;
+// };
 
 const dataSource = ref([
   {

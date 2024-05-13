@@ -14,6 +14,7 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
     "@pinia-plugin-persistedstate/nuxt",
   ],
+  plugins: ["~/plugins/vue-apexcharts.js"],
   postcss: {
     plugins: {
       tailwindcss: {},
