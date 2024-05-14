@@ -10,7 +10,7 @@
       <!-- Header cell template -->
       <template #headerCell="{ column }">
         <span
-          v-if="column.key === 'name' || column.key === 'workplace'"
+          v-if="column.key === 'name' || column.key === 'name'"
           style="color: #1890ff"
           >{{ column.title }}</span
         >
@@ -205,7 +205,7 @@ const save = (key) => {
   delete editableData[key];
 };
 const onDelete = (key) => {
-  props.dataSource.value = props.dataSource.filter((item) => item.key !== key);
+  dataSource.value = dataSource.value.filter((item) => item.key !== key);
 };
 </script>
 

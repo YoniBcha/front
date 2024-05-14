@@ -14,12 +14,12 @@
 const columns = [
   {
     title: "Workplace Name",
-    dataIndex: "wokplacename",
-    key: "workplace",
+    dataIndex: "name",
+    key: "name",
     fixed: "left",
     customFilterDropdown: true,
     onFilter: (value, record) =>
-      record.wokplacename
+      record.name
         .toString()
         .toLowerCase()
         .includes(value.toLowerCase()),
@@ -57,7 +57,7 @@ const columns = [
     key: "workplacecity",
     customFilterDropdown: true,
     onFilter: (value, record) =>
-      record.phonenumber.toString().toLowerCase().includes(value.toLowerCase()),
+      record.workplacecity.toString().toLowerCase().includes(value.toLowerCase()),
     onFilterDropdownOpenChange: (visible) => {
       if (visible) {
         setTimeout(() => {
@@ -70,10 +70,10 @@ const columns = [
   {
     title: "Workplace Subcity",
     dataIndex: "workplacesubcity",
-    key: "address",
+    key: "workplacesubcity",
     customFilterDropdown: true,
     onFilter: (value, record) =>
-      record.address.toString().toLowerCase().includes(value.toLowerCase()),
+      record.workplacesubcity.toString().toLowerCase().includes(value.toLowerCase()),
     onFilterDropdownOpenChange: (visible) => {
       if (visible) {
         setTimeout(() => {
@@ -104,7 +104,7 @@ const columns = [
 const dataSourceFromParent = ref([
   {
     key: "1",
-    wokplacename: "Yonas Million",
+    name: "Yonas Million",
     workplacesize: "34m2",
     workplacecity: "New York No. 1 Lake Park",
     status: ["pass"],
@@ -114,7 +114,7 @@ const dataSourceFromParent = ref([
   },
   {
     key: "2",
-    wokplacename: "Joe Black",
+    name: "Joe Black",
     workplacecity: "London No. 1 Lake Park",
     workplacesize: "34m2",
     status: ["loser"],
@@ -124,7 +124,7 @@ const dataSourceFromParent = ref([
   },
   {
     key: "3",
-    wokplacename: "Jim Green",
+    name: "Jim Green",
     workplacecity: "Sidney No. 1 Lake Park",
     status: ["pass"],
     workplacesize: "34m2",
@@ -134,7 +134,7 @@ const dataSourceFromParent = ref([
   },
   {
     key: "4",
-    wokplacename: "Jim Red",
+    name: "Jim Red",
     workplacecity: "London No. 2 Lake Park",
     status: ["pending"],
     workplacesize: "34m2",

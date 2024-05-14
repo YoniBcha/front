@@ -20,7 +20,7 @@ User
       data-swiper-parallax="-23%"
     ></div>
     <swiper-slide v-for="service in services.services" :key="service.id">
-      <div class="flex flex-col h-[250px]">
+      <div class="flex flex-col">
         <div
           class="font-bold text-4xl mb-10"
           :data-swiper-parallax="service.parallaxTitle"

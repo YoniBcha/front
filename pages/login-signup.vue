@@ -1,5 +1,9 @@
 <template>
-  <div class="container1 w-full" :class="{ 'sign-up-mode': isSignUpMode }">
+  <div
+    v-show="!authStore.isAuthenticated"
+    class="container1 w-full"
+    :class="{ 'sign-up-mode': isSignUpMode }"
+  >
     <div class="forms-container1">
       <div class="signin-signup">
         <form class="sign-in-form shadow-2xl mx-auto rounded-lg bg-gray-50">
@@ -65,3 +69,38 @@ export default {
   },
 };
 </script>
+
+
+<!-- 
+  <script setup>
+import "~/assets/css/login_signup.css";
+import { useAuthStore } from "@/stores/auth"; // Import the auth store
+
+const authStore = useAuthStore();
+
+const isSignUpMode = ref(false);
+
+const switchToSignUpMode = () => {
+  isSignUpMode.value = true;
+};
+
+const switchToSignInMode = () => {
+  isSignUpMode.value = false;
+};
+
+const selectedKeys = ref(["1"]);
+const collapsed = ref(false);
+const layoutPosition = "fixed";
+const siderWidth = "260px";
+
+const sidebarMenuItemStyle = reactive({
+  height: "48px",
+});
+
+const showDropdown = ref(false);
+
+function toggleDropdown() {
+  showDropdown.value = !showDropdown.value;
+}
+</script>
+ -->

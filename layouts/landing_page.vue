@@ -20,7 +20,7 @@
 
     <!-- home section -->
     <div
-      class="fixed top-[66px] right-16 left-16 h-[100vh] pb-20 overflow-y-scroll custom-scrollbar"
+      class="fixed top-[66px] right-16 left-16 h-[100vh] pb-20 overflow-y-auto cusscrollbar"
     >
       <div class="grid grid-cols-12">
         <div class="hero-background flex flex-col justify-center col-span-6">
@@ -44,13 +44,9 @@
         >
           Our Servieces
         </div>
-        <div class="col-span-12">
+        <div class="h-[290px] col-span-12">
           <swiperOurServices />
         </div>
-      </div>
-
-      <div class="h-[800px]">
-        <login-signup />
       </div>
 
       <!-- footer -->
@@ -186,4 +182,9 @@
   </div>
 </template>
 
-
+<style lang="less" scoped>
+.custom-scrollbar::-webkit-scrollbar {
+  display: none;
+  scrollbar-width: none;
+}
+</style>

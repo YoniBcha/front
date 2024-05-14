@@ -1,11 +1,12 @@
 <template>
-  <div class="mt-20 ml-5">
+  <div class="">
     <div class="grid grid-cols-3 gap-3 mr-3">
       <div class="grid gird-col-3 bg-[#f5f5f5] mt-5 rounded-md">
+
         <div class="flex flex-col justify-between py-4 pl-3">
-          <div class="text-xl">Total Enterprise</div>
+          <div class="text-lg">Total Enterprise</div>
           <div class="">
-            <p class="font-bold text-5xl mb-1">12,123</p>
+            <p class="font-bold text-4xl mb-1">12,123</p>
             <p class="text-xs">1.23% increase from last month</p>
           </div>
         </div>
@@ -20,9 +21,9 @@
       </div>
       <div class="grid gird-col-3 bg-[#f5f5f5] mt-5 rounded-md">
         <div class="flex flex-col justify-between py-4 pl-3">
-          <div class="text-xl">Total Workplace</div>
+          <div class="text-lg">Total Workplace</div>
           <div class="">
-            <p class="font-bold text-5xl mb-1">1,123</p>
+            <p class="font-bold text-4xl mb-1">1,123</p>
             <p class="text-xs">1.23% increase from last month</p>
           </div>
         </div>
@@ -37,9 +38,9 @@
       </div>
       <div class="grid gird-col-3 bg-[#f5f5f5] mt-5 rounded-md">
         <div class="flex flex-col justify-between py-4 pl-3">
-          <div class="text-xl">Total Jobless</div>
+          <div class="text-lg">Total Jobless</div>
           <div class="">
-            <p class="font-bold text-5xl mb-1">22,123</p>
+            <p class="font-bold text-4xl mb-1">22,123</p>
             <p class="text-xs">1.23% increase from last month</p>
           </div>
         </div>
