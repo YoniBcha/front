@@ -1,16 +1,17 @@
 <template>
+  <div class="flex justify-between mt-5 mb-10">
+    <div class="text-2xl text-[#0a58a4] font-bold">Jobless List</div>
+    <div class="text-sm text-gray-400 font-bold">The jobless that fullfill the reqirement will appear here</div>
+  </div>
   <div>
-    <DataTableDaynamicDataTable
-      :data-source="dataSourceFromParent"
-      :columns="columns"
-    />
+    <DataTableListTable :data="dataSourceFromParent" :columns="columns" />
   </div>
 </template>
 
 <script setup>
 const columns = [
   {
-    title: "Name",
+    title: "Jobelss Name",
     dataIndex: "name",
     key: "name",
     fixed: "left",
@@ -69,6 +70,7 @@ const columns = [
   },
   {
     title: "Email",
+    fixed: "right",
     dataIndex: "email",
     key: "email",
     customFilterDropdown: true,
@@ -82,26 +84,12 @@ const columns = [
       }
     },
   },
-
-  {
-    title: "Status",
-    dataIndex: "status",
-    fixed: "right",
-    width: "6%",
-  },
-  {
-    title: "operation",
-    dataIndex: "operation",
-    fixed: "right",
-    width: "8%",
-  },
 ];
-
 const dataSourceFromParent = ref([
   {
     key: "1",
     sex: "M",
-    name: "Yonas Million",
+    name: "John Brown",
     age: 32,
     address: "New York No. 1 Lake Park",
     status: ["pass"],
