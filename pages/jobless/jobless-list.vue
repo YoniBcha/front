@@ -1,7 +1,9 @@
 <template>
   <div class="flex justify-between mt-5 mb-10">
     <div class="text-2xl text-[#0a58a4] font-bold">Jobless List</div>
-    <div class="text-sm text-gray-400 font-bold">The jobless that fullfill the reqirement will appear here</div>
+    <div class="text-sm text-gray-400 font-bold">
+      The jobless that fullfill the reqirement will appear here
+    </div>
   </div>
   <div>
     <DataTableListTable :data="dataSourceFromParent" :columns="columns" />
@@ -83,6 +85,12 @@ const columns = [
         }, 100);
       }
     },
+  },
+  {
+    title: "operation",
+    dataIndex: "operation",
+    fixed: "right",
+    width: "8%",
   },
 ];
 const dataSourceFromParent = ref([

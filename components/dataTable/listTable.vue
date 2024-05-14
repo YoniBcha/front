@@ -1,8 +1,10 @@
 <template>
   <a-table
+    bordered
     :scroll="{ x: 1300, y: 1000 }"
     :data-source="data"
     :columns="columns"
+    @row-click="handleRowClick"
   >
     <template #headerCell="{ column }">
       <template v-if="column.key === 'name'">
@@ -74,9 +76,19 @@
           <template v-else>{{ fragment }}</template>
         </template>
       </span>
+      <template v-else-if="column.dataIndex === 'operation'">
+        <a-popconfirm
+          v-if="data.length"
+          title="Sure to delete?"
+          @confirm="onDelete(record.key)"
+        >
+          <a>Delete</a>
+        </a-popconfirm>
+      </template>
     </template>
   </a-table>
 </template>
+
 <script setup>
 const props = defineProps({
   data: Array,
@@ -99,6 +111,10 @@ const handleReset = (clearFilters) => {
     confirm: true,
   });
   state.searchText = "";
+};
+
+const handleRowClick = () => {
+  emits("row-clicked");
 };
 </script>
 
