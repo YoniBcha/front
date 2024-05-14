@@ -21,6 +21,7 @@
           <a-input
             v-model:value="formState.name"
             placeholder="enter city name"
+            class="w-full"
           />
         </a-form-item>
       </a-form>

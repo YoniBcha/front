@@ -17,7 +17,7 @@
       v-model:open="open"
       width="1000px"
       title="New JoblessForm"
-      @ok="handleForm"
+      @ok="submitForm"
       okText="submit"
     >
       <a-form :model="formState" name="validate_other">
@@ -187,5 +187,62 @@ const open = ref(false);
 const showModal = () => {
   open.value = true;
 };
-const formState = reactive({});
+const formState = reactive({
+  city_id: "",
+  subcity_id: "",
+  woreda_id: "",
+  jobless_id: "",
+  kebele_id: "",
+  jobless_id: "",
+  enterprise_name: "",
+  enterprise_role: "",
+  enterprise_status: "",
+  enterprise_type: "",
+  enterprise_manager_name: "",
+  enterprise_sector: "",
+  enterprise_phone_number: "",
+  enterprise_email: "",
+});
+
+const submitForm = async () => {
+  try {
+    const response = await useFetch("http://127.0.0.1:8000/api/enterprise", {
+      method: "POST",
+      body: formState,
+    });
+
+    alert("enteprise information created successfully");
+  } catch (error) {
+    console.error("Error submitting form:");
+    alert("not saved");
+  }
+};
 </script>
+
+<!-- 'city_id',
+'subcity_id',
+'woreda_id',
+'jobless_id',
+'kebele_id',
+'enterprise_name',
+'enterprise_role'
+'enterprise_status',
+'enterprise_type',
+'enterprise_manager_name'
+'enterprise_sector',
+'enterprise_phone_number',
+'enterprise_email',
+
+
+'enterprise_stock_price',
+'enterprise_taxpayer_identification_card',
+'enterprise_taxpayer_identification_number',
+'enterprise_approved_trade_name',
+'enterprise_professional_qualification_certification',
+'enterprise_business_plan',
+'enterprise_ownership_ofbusiness_adress_and_approved_lease',
+'enterprise_Price_per_share',
+'enterprise_Approved_bylaws_of_establishment',
+'enterprise_Business_license',
+'enterprise_Bylaws_of_shares',
+'enterprise_priority_evidence', -->
