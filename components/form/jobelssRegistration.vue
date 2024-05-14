@@ -15,18 +15,16 @@
       v-model:open="open"
       width="1000px"
       title="New JoblessForm"
-      @ok="handleForm"
+      @ok.prevent="submitForm"
       okText="submit"
     >
       <a-form :model="formState">
         <div class="mt-10">
-          <!-- upload profile photo -->
           <div class="grid grid-cols-3 gap-4">
-            <!-- upload jobless photo -->
             <div class="">
               <a-form-item>
                 <a-upload-dragger
-                  v-model:fileList="formState.photo"
+                  v-model:fileList="formState.jobless_photo"
                   name="photo"
                   action="/upload.do"
                   :rules="[
@@ -54,40 +52,43 @@
                 ]"
                 placeholder="enter your full name"
                 allow-clear
-                class="mb-6"
+                class="mb-2"
               />
+              <label class="ml-1 text-gray-400">select your gender</label>
               <a-select
+                placeholder="select your gender"
                 v-model:value="formState.jobless_sex"
                 :rules="[
                   { required: false, message: 'Please select your gender!' },
                 ]"
-                placeholder="select your gender"
-                class="mb-6"
+                class="mb-2"
               >
-                <a-select-option value="M">Male</a-select-option>
-                <a-select-option value="F">Female</a-select-option>
+                <a-select-option value="Male">Male</a-select-option>
+                <a-select-option value="Female">Female</a-select-option>
               </a-select>
-              <a-input
+
+              <label class="ml-1 text-gray-400">select your city</label>
+              <a-select
+                placeholder="enter your city name"
                 v-model:value="formState.jobless_city"
                 :rules="[
                   { required: false, message: 'Please select your city!' },
                 ]"
-                placeholder="enter your city name"
-                allow-clear
-                class="mb-6"
-              />
-              <a-input
-                v-model:value="formState.jobless_phonenumber"
+                class="mb-2"
+              >
+                <a-select-option value="M">city</a-select-option>
+              </a-select>
+
+              <label class="ml-1 text-gray-400">select your woreda</label>
+              <a-select
+                placeholder="enter your woreda name"
+                v-model:value="formState.jobless_woreda"
                 :rules="[
-                  {
-                    required: false,
-                    message: 'Please select your phone number!',
-                  },
+                  { required: false, message: 'Please select your woreda!' },
                 ]"
-                placeholder="enter your phone number"
-                allow-clear
-                class="mb-6"
-              />
+              >
+                <a-select-option value="M">woreda</a-select-option>
+              </a-select>
             </div>
             <div class="">
               <a-input
@@ -100,48 +101,64 @@
                 ]"
                 placeholder="please enter your grandfather name"
                 allow-clear
-                class="mb-6"
+                class="mb-7"
               />
-              <div class="flex">
-                <a-input
-                  type="number"
-                  v-model:value="formState.jobless_age"
-                  :rules="[
-                    { required: false, message: 'Please select your age!' },
-                  ]"
-                  placeholder="your age"
-                  allow-clear
-                  class="mb-6"
-                />
-                <a-input
+              <a-input
+                type="number"
+                v-model:value="formState.jobless_age"
+                :rules="[
+                  { required: false, message: 'Please select your age!' },
+                ]"
+                placeholder="your age"
+                allow-clear
+                class="mb-3"
+              />
+              <div>
+                <p class="ml-1 text-gray-400">select your kebele</p>
+                <a-select
+                  placeholder="enter your kebele name"
                   v-model:value="formState.jobless_kebele"
                   :rules="[
-                    {
-                      required: false,
-                      message: 'Please select your kebele!',
-                    },
+                    { required: false, message: 'Please select your kebele!' },
                   ]"
-                  placeholder="your kebele"
-                  allow-clear
-                  class="mb-6 ml-2"
-                />
+                  class="mb-2 w-full"
+                >
+                  <a-select-option value="M">kebele</a-select-option>
+                </a-select>
               </div>
-              <a-input
+
+              <p class="ml-1 text-gray-400">select your subcity</p>
+              <a-select
+                placeholder="enter your subcity name"
                 v-model:value="formState.jobless_subcity"
-                placeholder="enter your Sub City name"
-                allow-clear
-                class="mb-6"
-              />
-              <a-input
-                type="email"
-                v-model:value="formState.jobless_email"
-                placeholder="enter your email please"
-                allow-clear
-                class="mb-6"
-              />
+                :rules="[
+                  { required: false, message: 'Please select your subcity!' },
+                ]"
+                class="mb-6 w-full"
+              >
+                <a-select-option value="M">subcity</a-select-option>
+              </a-select>
             </div>
           </div>
-          <div class="mt-5">
+
+          <div class="grid grid-cols-3 gap-4 my-6">
+            <a-input
+              v-model:value="formState.jobless_phonenumber"
+              :rules="[
+                {
+                  required: false,
+                  message: 'Please select your phone number!',
+                },
+              ]"
+              placeholder="enter your phone number"
+              allow-clear
+            />
+            <a-input
+              type="email"
+              v-model:value="formState.jobless_email"
+              placeholder="enter your email please"
+              allow-clear
+            />
             <a-input
               v-model:value="formState.jobless_profession"
               :rules="[
@@ -152,7 +169,39 @@
               ]"
               placeholder="please enter your profession to tran and work with"
               allow-clear
-              class="mb-6"
+            />
+          </div>
+
+          <div class="grid grid-cols-3 gap-4 my-6">
+            <a-input
+              v-model:value="formState.jobless_username"
+              :rules="[
+                {
+                  required: false,
+                  message: 'Please select your username!',
+                },
+              ]"
+              placeholder="enter your username"
+              allow-clear
+            />
+
+            <a-input
+              type="password"
+              v-model:value="formState.jobless_password"
+              placeholder="enter your password"
+              allow-clear
+            />
+            <a-input
+              type="password"
+              v-model:value="formState.jobless_confirm_password"
+              :rules="[
+                {
+                  required: false,
+                  message: 'Please confirm your password!',
+                },
+              ]"
+              placeholder="confirm your password"
+              allow-clear
             />
           </div>
           <!-- upload house number and identification card -->
@@ -375,23 +424,22 @@
   </div>
 </template>
 
-
 <script setup>
-import { computed, reactive, ref } from "vue";
-import { cloneDeep } from "lodash-es";
-
 const open = ref(false);
 const showModal = () => {
   open.value = true;
 };
 
 const formState = reactive({
-  jobless_registration_date: "",
   //jobless_photo: "",
   jobless_full_name: "",
+  jobless_username: "",
+  jobless_password: "",
   jobless_grandfather_name: "",
   jobless_sex: "",
   jobless_age: "",
+  jobless_role: "jobless",
+  jobless_woreda: "",
   jobless_kebele: "",
   jobless_city: "",
   jobless_subcity: "",
@@ -412,20 +460,17 @@ const formState = reactive({
   //jobless_priority_evidence: "",
 });
 
-const handleForm = (e) => {
-  const newData = {
-    key: `${count.value}`,
-    name: formState.jobless_full_name,
-    sex: formState.jobless_sex,
-    age: formState.jobless_age,
-    address: formState.jobless_city,
-    email: formState.jobless_email,
-    phonenumber: formState.jobless_phonenumber,
-  };
-  dataSource.value.push(newData);
-  open.value = false;
+const submitForm = async () => {
+  try {
+    const response = await useFetch("http://127.0.0.1:8000/api/jobless", {
+      method: "POST",
+      body: formState,
+    });
+
+    alert("Jobless information created successfully");
+  } catch (error) {
+    console.error("Error submitting form:");
+    alert("not saved");
+  }
 };
-
 </script>
-
-
