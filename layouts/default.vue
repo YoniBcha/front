@@ -1,266 +1,359 @@
 <template>
-  <a-layout style="position: fixed; background: #0a58a4; width: 100%">
-    <a-layout-sider
-      v-model:collapsed="collapsed"
-      :trigger="null"
-      collapsible
-      :width="siderWidth"
-      style="
-        background: #0a58a4;
-        overflow-y: visible;
-        overflow-x: hidden;
-        scrollbar-width: none;
-      "
-      class="h-[100vh] mr-3"
-      s
-    >
-      <div class="flex justify-center items-center h-[40px] text-white mt-3">
-        <img src="~assets/img/addis.png" class="w-16" />
-      </div>
-      <a-divider
-        style="background: white; margin-left: 12px; margin-right: 40px"
-      />
-      <a-menu
-        v-model:selectedKeys="selectedKeys"
-        theme="light"
-        mode="inline"
-        class="mt-5"
-        style="background: #0a58a4; color: white; margin-top: 20px"
+  <!-- sidebar -->
+  <div v-show="authStore.isAuthenticated">
+    <a-layout style="position: fixed; background: #0a58a4; width: 100%">
+      <a-layout-sider
+        v-model:collapsed="collapsed"
+        :trigger="null"
+        collapsible
+        :width="siderWidth"
+        style="
+          background: #0a58a4;
+          overflow-y: visible;
+          overflow-x: hidden;
+          scrollbar-width: none;
+        "
+        class="h-[100vh] mr-3"
+        s
       >
-        <!-- DASHBOARD -->
-        <a-menu-item key="1" :style="sidebarMenuItemStyle">
-          <router-link to="/">
-            <AppstoreOutlined />
-            <span> Dashboard </span>
-          </router-link>
-        </a-menu-item>
-        <!-- JOBLESS PAGE -->
-        <a-sub-menu key="2">
-          <template #title>
-            <span>
-              <TeamOutlined />
-              <span> JobLess Information</span>
-            </span>
-          </template>
-          <a-menu-item key="2.1">
-            <router-link to="/jobless/jobless-list">
-              <span>Jobless List</span>
-            </router-link>
-          </a-menu-item>
-          <a-menu-item key="2.2">
-            <router-link to="/jobless/jobless-registration">
-              <span>Jobless Registration</span>
-            </router-link>
-          </a-menu-item>
-        </a-sub-menu>
-        <!-- ENTERPRISE PAGE -->
-        <a-sub-menu key="3">
-          <template #title>
-            <span>
-              <TeamOutlined />
-              <span> Enterprise Information</span>
-            </span>
-          </template>
-          <a-menu-item key="3.1">
-            <router-link to="/enterprise/enterprise-list">
-              <span> Enterprise List </span>
-            </router-link>
-          </a-menu-item>
-          <a-menu-item key="3.2">
-            <router-link to="/enterprise/enterprise-registration">
-              <span> Enterprise Registration </span>
-            </router-link>
-          </a-menu-item>
-        </a-sub-menu>
-        <!-- WORKPLACE REGISTRATION -->
-        <a-sub-menu key="4">
-          <template #title>
-            <span>
-              <TeamOutlined />
-              <span> Workplace Information</span>
-            </span>
-          </template>
-          <a-menu-item key="4.1">
-            <router-link to="/workplace/workplace-list">
-              <span> Workplace List </span>
-            </router-link>
-          </a-menu-item>
-          <a-menu-item key="4.2">
-            <router-link to="/workplace/workplace-registration">
-              <span> Workplace Registration </span>
-            </router-link>
-          </a-menu-item>
-        </a-sub-menu>
-        <!-- CONTRACT DOCUMENT -->
-        <a-sub-menu key="5">
-          <template #title>
-            <span>
-              <TeamOutlined />
-              <span> Contract Document</span>
-            </span>
-          </template>
-          <a-menu-item key="5.1">
-            <router-link to="/contract/contract-list">
-              <span> Contract List </span>
-            </router-link>
-          </a-menu-item>
-          <a-menu-item key="5.2">
-            <router-link to="/contract/make-agreement">
-              <span> Make Agreement </span>
-            </router-link>
-          </a-menu-item>
-        </a-sub-menu>
-        <!-- COMPLAIN DOCUMENT -->
-        <a-sub-menu key="6">
-          <template #title>
-            <span>
-              <TeamOutlined />
-              <span> Complain Document</span>
-            </span>
-          </template>
-          <a-menu-item key="6.1">
-            <router-link to="/complain/complain-list">
-              <span> Complain List </span>
-            </router-link>
-          </a-menu-item>
-          <a-menu-item key="6.2">
-            <router-link to="/complain/accept-complain">
-              <span> Accept Complain </span>
-            </router-link>
-          </a-menu-item>
-        </a-sub-menu>
+        <div class="flex justify-center items-center h-[40px] text-white mt-3">
+          <img src="~assets/img/addis.png" class="w-16" />
+        </div>
         <a-divider
           style="background: white; margin-left: 12px; margin-right: 40px"
         />
-        <!-- LANDING PAGE -->
-        <a-sub-menu key="7">
-          <template #title>
-            <span>
-              <TeamOutlined />
-              <span>LandingPage</span>
-            </span>
-          </template>
-          <a-menu-item key="7.1">
-            <router-link to="/landing-page/our-services">
-              <span> Our Services </span>
+        <a-menu
+          v-model:selectedKeys="selectedKeys"
+          theme="light"
+          mode="inline"
+          class="mt-5"
+          style="background: #0a58a4; color: white; margin-top: 20px"
+        >
+          <!-- DASHBOARD -->
+          <a-menu-item key="1" :style="sidebarMenuItemStyle">
+            <router-link to="/">
+              <AppstoreOutlined />
+              <span> Dashboard </span>
             </router-link>
           </a-menu-item>
-          <a-menu-item key="7.2">
-            <router-link to="/landing-page/news">
-              <span> News Page</span>
-            </router-link>
-          </a-menu-item>
-          <a-menu-item key="7.3">
-            <router-link to="/landing-page/contact-us">
-              <span> Contact Us</span>
-            </router-link>
-          </a-menu-item>
-        </a-sub-menu>
-        <a-menu-item key="9" :style="sidebarMenuItemStyle">
-          <router-link to="/city-registration/register-city">
-            <SettingOutlined />
-            <span> City Registration </span>
-          </router-link>
-        </a-menu-item>
-
-        <!-- SETTING PAGE -->
-        <a-menu-item key="10" :style="sidebarMenuItemStyle">
-          <router-link to="/setting">
-            <SettingOutlined />
-            <span> Setting </span>
-          </router-link>
-        </a-menu-item>
-      </a-menu>
-    </a-layout-sider>
-
-    <!-- HEADER PART -->
-    <a-layout>
-      <a-layout-header
-        style="background: #fff; padding: 0"
-        class="flex h-full z-10 justify-between items-center"
-      >
-        <div class="flex items-center h-full px-5 border-b">
-          <menu-unfold-outlined
-            v-if="collapsed"
-            class="text-3xl"
-            @click="() => (collapsed = !collapsed)"
+          <!-- JOBLESS PAGE -->
+          <a-sub-menu key="2">
+            <template #title>
+              <span>
+                <TeamOutlined />
+                <span> JobLess Information</span>
+              </span>
+            </template>
+            <a-menu-item key="2.1">
+              <router-link to="/jobless/jobless-list">
+                <span>Jobless List</span>
+              </router-link>
+            </a-menu-item>
+            <a-menu-item key="2.2">
+              <router-link to="/jobless/jobless-registration">
+                <span>Jobless Registration</span>
+              </router-link>
+            </a-menu-item>
+          </a-sub-menu>
+          <!-- ENTERPRISE PAGE -->
+          <a-sub-menu key="3">
+            <template #title>
+              <span>
+                <TeamOutlined />
+                <span> Enterprise Information</span>
+              </span>
+            </template>
+            <a-menu-item key="3.1">
+              <router-link to="/enterprise/enterprise-list">
+                <span> Enterprise List </span>
+              </router-link>
+            </a-menu-item>
+            <a-menu-item key="3.2">
+              <router-link to="/enterprise/enterprise-registration">
+                <span> Enterprise Registration </span>
+              </router-link>
+            </a-menu-item>
+          </a-sub-menu>
+          <!-- WORKPLACE REGISTRATION -->
+          <a-sub-menu key="4">
+            <template #title>
+              <span>
+                <TeamOutlined />
+                <span> Workplace Information</span>
+              </span>
+            </template>
+            <a-menu-item key="4.1">
+              <router-link to="/workplace/workplace-list">
+                <span> Workplace List </span>
+              </router-link>
+            </a-menu-item>
+            <a-menu-item key="4.2">
+              <router-link to="/workplace/workplace-registration">
+                <span> Workplace Registration </span>
+              </router-link>
+            </a-menu-item>
+          </a-sub-menu>
+          <!-- CONTRACT DOCUMENT -->
+          <a-sub-menu key="5">
+            <template #title>
+              <span>
+                <TeamOutlined />
+                <span> Contract Document</span>
+              </span>
+            </template>
+            <a-menu-item key="5.1">
+              <router-link to="/contract/contract-list">
+                <span> Contract List </span>
+              </router-link>
+            </a-menu-item>
+            <a-menu-item key="5.2">
+              <router-link to="/contract/make-agreement">
+                <span> Make Agreement </span>
+              </router-link>
+            </a-menu-item>
+          </a-sub-menu>
+          <!-- COMPLAIN DOCUMENT -->
+          <a-sub-menu key="6">
+            <template #title>
+              <span>
+                <TeamOutlined />
+                <span> Complain Document</span>
+              </span>
+            </template>
+            <a-menu-item key="6.1">
+              <router-link to="/complain/complain-list">
+                <span> Complain List </span>
+              </router-link>
+            </a-menu-item>
+            <a-menu-item key="6.2">
+              <router-link to="/complain/accept-complain">
+                <span> Accept Complain </span>
+              </router-link>
+            </a-menu-item>
+          </a-sub-menu>
+          <a-divider
+            style="background: white; margin-left: 12px; margin-right: 40px"
           />
-          <menu-fold-outlined
-            v-else
-            class="text-3xl"
-            @click="() => (collapsed = !collapsed)"
-          />
-          <div
-            class="flex justify-center h-full items-center text-center font-semibold text-lg ml-7 w-[700px]"
-          >
-            ADDIS ABEBA CITY ADMINISTRATION ENTERPRISE AND INDUSTRY <br />
-            DEVELOPMENT OFFICE
-          </div>
-        </div>
-        <div class="flex relative gap-3 items-center h-full pr-5">
-          <div class="flex flex-col justify-center h-full">
-            <div class="text-xl">Yonas</div>
-            <div class="text-sm text-gray-400">Admin, enterprise manager</div>
-          </div>
-          <div class="">
-            <img
-              @click="toggleDropdown"
-              class="object-cover w-12 h-12 rounded-full ring ring-gray-300 dark:ring-gray-600"
-              src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=4&w=880&h=880&q=100"
-              alt=""
+          <!-- LANDING PAGE -->
+          <a-sub-menu key="7">
+            <template #title>
+              <span>
+                <TeamOutlined />
+                <span>LandingPage</span>
+              </span>
+            </template>
+            <a-menu-item key="7.1">
+              <router-link to="/landing-page/our-services">
+                <span> Our Services </span>
+              </router-link>
+            </a-menu-item>
+            <a-menu-item key="7.2">
+              <router-link to="/landing-page/news">
+                <span> News Page</span>
+              </router-link>
+            </a-menu-item>
+            <a-menu-item key="7.3">
+              <router-link to="/landing-page/contact-us">
+                <span> Contact Us</span>
+              </router-link>
+            </a-menu-item>
+          </a-sub-menu>
+          <a-menu-item key="9" :style="sidebarMenuItemStyle">
+            <router-link to="/city-registration/register-city">
+              <SettingOutlined />
+              <span> City Registration </span>
+            </router-link>
+          </a-menu-item>
+
+          <!-- SETTING PAGE -->
+          <a-menu-item key="10" :style="sidebarMenuItemStyle">
+            <router-link to="/setting">
+              <SettingOutlined />
+              <span> Setting </span>
+            </router-link>
+          </a-menu-item>
+        </a-menu>
+      </a-layout-sider>
+
+      <!-- HEADER PART -->
+      <a-layout>
+        <a-layout-header
+          style="background: #fff; padding: 0"
+          class="flex h-full z-10 justify-between items-center"
+        >
+          <div class="flex items-center h-full px-5 border-b">
+            <menu-unfold-outlined
+              v-if="collapsed"
+              class="text-3xl"
+              @click="() => (collapsed = !collapsed)"
             />
-            <ul
-              v-if="showDropdown"
-              class="absolute p-4 w-56 right-8 bg-white border-2 border-gray-200 rounded-md shadow-xl mt-3"
+            <menu-fold-outlined
+              v-else
+              class="text-3xl"
+              @click="() => (collapsed = !collapsed)"
+            />
+            <div
+              class="flex justify-center h-full items-center text-center font-semibold text-lg ml-7 w-[700px]"
             >
-              <li class="flex justify-between text-sm">
-                <div class="">Profile</div>
-                <div class="text-black pr-3">
-                  <LogoutOutlined />
-                </div>
-              </li>
-              <a-divider />
-              <li class="flex justify-between text-sm mt-2">
-                <div class="">Setting</div>
-                <div class="text-black pr-3">
-                  <SettingOutlined />
-                </div>
-              </li>
-            </ul>
+              ADDIS ABEBA CITY ADMINISTRATION ENTERPRISE AND INDUSTRY <br />
+              DEVELOPMENT OFFICE
+            </div>
           </div>
-        </div>
-      </a-layout-header>
-      <a-layout-content
-        style="
-          background: white;
-          height: 100vh;
-          margin: 24px 16px;
-          padding: 24px;
-          overflow-y: auto;
-          scrollbar-width: thin;
-          scrollbar-color: transparent transparent;
-        "
-        ><router-view></router-view>
-      </a-layout-content>
+          <div class="flex relative gap-3 items-center h-full pr-5">
+            <div class="flex flex-col justify-center h-full">
+              <div class="text-xl">Yonas</div>
+              <div class="text-sm text-gray-400">Admin, enterprise manager</div>
+            </div>
+            <div class="">
+              <img
+                @click="toggleDropdown"
+                class="object-cover w-12 h-12 rounded-full ring ring-gray-300 dark:ring-gray-600"
+                src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=4&w=880&h=880&q=100"
+                alt=""
+              />
+              <ul
+                v-if="showDropdown"
+                class="absolute p-4 w-56 right-8 bg-white border-2 border-gray-200 rounded-md shadow-xl mt-3"
+              >
+                <li class="flex justify-between text-sm">
+                  <div class="">Profile</div>
+                  <div class="text-black pr-3">
+                    <LogoutOutlined />
+                  </div>
+                </li>
+                <a-divider />
+                <li class="flex justify-between text-sm mt-2">
+                  <div class="">Setting</div>
+                  <div class="text-black pr-3">
+                    <SettingOutlined />
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </a-layout-header>
+        <a-layout-content
+          style="
+            background: white;
+            height: 100vh;
+            margin: 24px 16px;
+            padding: 24px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: transparent transparent;
+          "
+          ><router-view></router-view>
+        </a-layout-content>
+      </a-layout>
     </a-layout>
-  </a-layout>
+  </div>
+
+  <!-- enterprise page -->
+  <div
+    v-show="!authStore.isAuthenticated"
+    class="container1 w-full"
+    :class="{ 'sign-up-mode': isSignUpMode }"
+  >
+    <div class="forms-container1">
+      <div class="signin-signup">
+        <form class="sign-in-form shadow-2xl mx-auto rounded-lg bg-gray-50">
+          <h2 class="title text-black">Sign in</h2>
+          <authLogin />
+        </form>
+
+        <form
+          class="sign-up-form shadow-2xl mx-auto px-2 rounded-lg bg-gray-50"
+        >
+          <h2 class="title text-black">Sign up</h2>
+          <authSignup />
+        </form>
+      </div>
+    </div>
+
+    <div class="panels-container1">
+      <div class="panel left-panel">
+        <div class="content">
+          <h3>New here ?</h3>
+          <p>
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis,
+            ex ratione. Aliquid!
+          </p>
+          <button class="btn transparent" @click="switchToSignUpMode">
+            Sign up
+          </button>
+        </div>
+        <img src="../assets/illus/Sign up-pana.png" class="image" alt="" />
+      </div>
+      <div class="panel right-panel">
+        <div class="content">
+          <h3>One of us ?</h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
+            laboriosam ad deleniti.
+          </p>
+          <button class="btn transparent" @click="switchToSignInMode">
+            Sign in
+          </button>
+        </div>
+        <img src="../assets/illus/Sign in-pana.png" class="image" alt="" />
+      </div>
+    </div>
+  </div>
 </template>
 
-<script setup>
-import { ref, reactive } from "vue";
+<script>
+import "~/assets/css/login_signup.css";
+import { useAuthStore } from "@/stores/auth"; // Import the auth store
+import { computed, ref, reactive } from "vue";
 
-const selectedKeys = ref(["1"]);
-const collapsed = ref(false);
-const layoutPosition = "fixed";
-const siderWidth = "260px";
-
-const sidebarMenuItemStyle = reactive({
-  height: "48px",
-});
-
-const showDropdown = ref(false);
-
-function toggleDropdown() {
-  showDropdown.value = !showDropdown.value;
+export default {
+  computed: {
+    authStore() {
+      return useAuthStore();
+    }
+  },
+  data() {
+    return {
+      isSignUpMode: false,
+      selectedKeys: ["1"],
+      collapsed: false,
+      layoutPosition: "fixed",
+      siderWidth: "260px",
+      sidebarMenuItemStyle: {
+        height: "48px",
+      },
+      showDropdown: false,
+    };
+  },
+  methods: {
+    toggleDropdown() {
+      this.showDropdown = !this.showDropdown;
+    },
+    switchToSignUpMode() {
+      this.isSignUpMode = true;
+    },
+    switchToSignInMode() {
+      this.isSignUpMode = false;
+    }
+  }
 }
 </script>
+
+<style>
+.hero-background {
+  position: relative;
+  height: 100vh; /* Adjust the height according to your design */
+  background-image: url("assets/img/element.png");
+  background-size: cover;
+  background-position: center;
+}
+
+/* Hide scrollbar for Chrome, Safari, and Opera */
+.custom-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+/* Hide scrollbar for Firefox */
+.custom-scrollbar {
+  scrollbar-width: none;
+}
+</style>
