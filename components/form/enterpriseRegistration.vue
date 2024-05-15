@@ -17,7 +17,7 @@
       v-model:open="open"
       width="1000px"
       title="New JoblessForm"
-      @ok="submitForm"
+      @ok.prevent="submitForm"
       okText="submit"
     >
       <a-form :model="formState" name="validate_other">
@@ -26,7 +26,7 @@
           <div class="grid grid-cols-12">
             <div class="col-start-1 col-end-4">
               <a-input
-                v-model:value="formState.enterprise_manager_name"
+                v-model:value="formState.manager_id"
                 :rules="[
                   {
                     required: false,
@@ -37,20 +37,43 @@
                 allow-clear
                 class="mb-6"
               />
-            </div>
-            <div class="col-start-10 col-end-13">
               <a-input
-                v-model:value="formState.enterprise_registration_date"
+                v-model:value="formState.enterprise_username"
                 :rules="[
                   {
                     required: false,
-                    message: 'Please enter enterprise registration date!',
+                    message: 'Please enter enterprise user name!',
                   },
                 ]"
-                placeholder="enter registration date"
+                placeholder="enter enterprise username"
                 allow-clear
                 class="mb-6"
               />
+            </div>
+            <div class="col-start-10 col-end-13">
+              <a-form-item
+                :rules="[
+                  { required: true, message: 'Please input your password!' },
+                ]"
+              >
+                <a-input-password
+                  placeholder="enter enterprise password"
+                  v-model:value="formState.enterprise_password"
+                />
+              </a-form-item>
+              <a-form-item
+                :rules="[
+                  {
+                    required: true,
+                    message: 'Please input enterpise password!',
+                  },
+                ]"
+              >
+                <a-input-password
+                  placeholder="confirm enterprise password"
+                  v-model:value="formState.confirm_enterprise_password"
+                />
+              </a-form-item>
             </div>
           </div>
 
@@ -89,16 +112,21 @@
               />
             </div>
             <div class="flex col-span-2 gap-3 row-span-1">
-              <a-input
+              <p class="text-gray-400">enterprise type</p>
+              <a-select
+                placeholder="select your enterprise type"
                 v-model:value="formState.enterprise_type"
                 :rules="[
-                  { required: false, message: 'Please enter enterprise type!' },
+                  { required: false, message: 'Please select your type!' },
                 ]"
-                placeholder="enter enterprise type please"
-                allow-clear
-                class="mb-6"
-              />
-              <a-input
+                class="mb-4 w-full"
+              >
+                <a-select-option value="enterprise type">enterprise type</a-select-option>
+              </a-select>
+
+              <p class="text-gray-400">enterprise sector</p>
+              <a-select
+                placeholder="enter enterprise sector please"
                 v-model:value="formState.enterprise_sector"
                 :rules="[
                   {
@@ -106,49 +134,68 @@
                     message: 'Please enter enterprise sector!',
                   },
                 ]"
-                placeholder="enter enterprise sector please"
-                allow-clear
-                class="mb-6"
-              />
+                class="mb-6 w-full"
+              >
+                <a-select-option value="Male"
+                  >enterprise sector</a-select-option
+                >
+              </a-select>
             </div>
             <div class="flex col-span-2 gap-3 row-span-1">
-              <a-input
-                v-model:value="formState.enterprise_city"
+              <a-select
+              label="enterprise city"
+                placeholder="enter enterprise city"
+                v-model:value="formState.enterprise_city_id"
                 :rules="[
                   { required: false, message: 'Please enter enterprise city!' },
                 ]"
-                placeholder="enter enterprise city"
-                allow-clear
-                class="mb-6"
-              />
-              <a-input
-                v-model:value="formState.enterprise_subcity"
-                :rules="[
-                  {
-                    required: false,
-                    message: 'Please enter enterprise subcity!',
-                  },
-                ]"
+                class="mb-6 w-full"
+              >
+                <a-select-option value="Male">Addis</a-select-option>
+              </a-select>
+
+              <a-select
                 placeholder="enter enterprise subcity"
-                allow-clear
-                class="mb-6"
-              />
-              <a-input
-                v-model:value="formState.enterprise_kebele"
+                v-model:value="formState.enterprise_subcity_id"
+                :rules="[
+                  { required: false, message: 'Please enter enterprise city!' },
+                ]"
+                class="mb-6 w-full"
+              >
+                <a-select-option value="ldeat">ldeta</a-select-option>
+              </a-select>
+
+              <a-select
+                placeholder="enter enterprise kebele"
+                v-model:value="formState.enterprise_kebele_id"
                 :rules="[
                   {
                     required: false,
                     message: 'Please enter enterprise kebele!',
                   },
                 ]"
-                placeholder="enter enterprise kebele"
-                allow-clear
-                class="mb-6"
-              />
+                class="mb-6 w-full"
+              >
+                <a-select-option value="ldeat">02</a-select-option>
+              </a-select>
             </div>
-            <div class="flex col-span-2 gap-3 row-span-1">
+
+            <div class="flex col-span-3 gap-3 row-span-1">
+              <a-select
+                placeholder="enter enterprise woreda"
+                v-model:value="formState.enterprise_woreda_id"
+                :rules="[
+                  {
+                    required: false,
+                    message: 'Please enter enterprise woreda!',
+                  },
+                ]"
+                class="mb-6 w-full"
+              >
+                <a-select-option value="ldeat">wo 02</a-select-option>
+              </a-select>
               <a-input
-                v-model:value="formState.enterprise_phonenumber"
+                v-model:value="formState.enterprise_phone_number"
                 :rules="[
                   {
                     required: false,
@@ -188,17 +235,18 @@ const showModal = () => {
   open.value = true;
 };
 const formState = reactive({
-  city_id: "",
-  subcity_id: "",
-  woreda_id: "",
-  jobless_id: "",
-  kebele_id: "",
-  jobless_id: "",
   enterprise_name: "",
-  enterprise_role: "",
-  enterprise_status: "",
+  enterprise_username: "",
+  enterprise_password: "",
+  enterprise_city_id: "",
+  enterprise_subcity_id: "",
+  enterprise_woreda_id: "",
+  enterprise_kebele_id: "",
+  manager_id: "",
+  enterprise_role: "enterprise",
+  enterprise_status: "pass",
   enterprise_type: "",
-  enterprise_manager_name: "",
+  manager_id: "",
   enterprise_sector: "",
   enterprise_phone_number: "",
   enterprise_email: "",
@@ -206,7 +254,7 @@ const formState = reactive({
 
 const submitForm = async () => {
   try {
-    const response = await useFetch("http://127.0.0.1:8000/api/enterprise", {
+    const response = await useFetch("http://127.0.0.1:8000/api/enterprises", {
       method: "POST",
       body: formState,
     });
