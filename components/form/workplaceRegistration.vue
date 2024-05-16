@@ -1,4 +1,3 @@
-Nati Class, [5/16/2024 4:13 PM]
 <template>
   <div class="">
     <!-- WORKPLACE REGISTRATION TEXT AND ADDING NEW WORKPLACE BUTTON  -->
@@ -22,82 +21,98 @@ Nati Class, [5/16/2024 4:13 PM]
       okText="submit"
     >
       <a-form :model="formState">
-        <div class="grid grid-cols-3 grid-rows-3 gap-4">
-          <div class="col-span-1 row-span-3">
-            <a-form-item>
-              <a-upload-dragger
-                v-model:fileList="formState.workplace_photo"
-                name="photo"
-                action="/upload.do"
+        <div class="grid grid-cols-3 grid-rows-3 gap-4 w-full mt-10">
+          <a-form-item class="row-span-3">
+            <a-upload-dragger
+              v-model:fileList="formState.workplace_photo"
+              name="photo"
+              action="/upload.do"
+              :rules="[
+                {
+                  required: false,
+                  message: 'Please upload workplace photo',
+                },
+              ]"
+            >
+              <p class="ant-upload-drag-icon">
+                <InboxOutlined />
+              </p>
+              <p class="ant-upload-text">Click or drag workplace photo</p>
+              <p class="ant-upload-hint">
+                Support for a single or bulk upload.
+              </p>
+            </a-upload-dragger>
+          </a-form-item>
+          <div class="row-span-1">
+            <a-input
+              v-model:value="formState.workplace_name"
+              :rules="[
+                { required: false, message: 'Please input workplace name!' },
+              ]"
+              placeholder="enter workplace name"
+              allow-clear
+              class="mb-2"
+            />
+            <a-form-item class="-pt-5">
+              <lable class="ml-2 text-gray-400">enter workplace city</lable>
+              <a-select
+                placeholder="Please select workplace city"
+                v-model:value="formState.workplace_city"
                 :rules="[
                   {
                     required: false,
-                    message: 'Please upload workplace photo',
+                    message: 'Please select workplace city!',
                   },
                 ]"
               >
-                <p class="ant-upload-drag-icon">
-                  <InboxOutlined />
-                </p>
-                <p class="ant-upload-text">Click or drag workplace photo</p>
-                <p class="ant-upload-hint">
-                  Support for a single or bulk upload.
-                </p>
-              </a-upload-dragger>
+                <a-select-option value="condominium"
+                  >Condominium</a-select-option
+                >
+              </a-select>
+            </a-form-item>
+
+            <a-form-item class="row-start-3">
+              <lable class="ml-2 text-gray-400">enter workplace sub city</lable>
+              <a-select
+                placeholder="Please select workplace city"
+                v-model:value="formState.workplace_subcity"
+                :rules="[
+                  {
+                    required: false,
+                    message: 'Please select workplace city!',
+                  },
+                ]"
+              >
+                <a-select-option value="condominium"
+                  >Condominium</a-select-option
+                >
+                <a-select-option value="shade">Shade</a-select-option>
+                <a-select-option value="container">Container</a-select-option>
+              </a-select>
             </a-form-item>
           </div>
+          <div class=""></div>
+        </div>
+
+        <div class="grid grid-cols-3 grid-rows-3 gap-4">
           <div class="col-span-1 row-span-3">
-            <div class="">
-              <a-input
-                v-model:value="formState.workplace_name"
+            <a-form-item>
+              <a-select
                 :rules="[
-                  { required: false, message: 'Please input workplace name!' },
+                  {
+                    required: false,
+                    message: 'Please select workplace subcity!',
+                  },
                 ]"
-                placeholder="enter workplace name"
-                allow-clear
-                class="mb-6"
-              />
-            </div>
-            <div class="">
-              <a-form-item>
-                <a-select
-                  v-model:value="formState.workplace_city"
-                  :rules="[
-                    {
-                      required: false,
-                      message: 'Please select workplace city!',
-                    },
-                  ]"
-                  placeholder="Please select workplace city"
+                placeholder="Please select workplace subcity"
+              >
+                <a-select-option value="condominium"
+                  >Condominium</a-select-option
                 >
-                  <a-select-option value="condominium"
-                    >Condominium</a-select-option
-                  >
-                  <a-select-option value="shade">Shade</a-select-option>
-                  <a-select-option value="container">Container</a-select-option>
-                </a-select>
-              </a-form-item>
-            </div>
-            <div class="">
-              <a-form-item>
-                <a-select
-                  v-model:value="formState.workplace_subcity"
-                  :rules="[
-                    {
-                      required: false,
-                      message: 'Please select workplace subcity!',
-                    },
-                  ]"
-                  placeholder="Please select workplace subcity"
-                >
-                  <a-select-option value="condominium"
-                    >Condominium</a-select-option
-                  >
-                  <a-select-option value="shade">Shade</a-select-option>
-                  <a-select-option value="container">Container</a-select-option>
-                </a-select>
-              </a-form-item>
-            </div>
+                <a-select-option value="shade">Shade</a-select-option>
+                <a-select-option value="container">Container</a-select-option>
+              </a-select>
+            </a-form-item>
           </div>
           <div class="col-span-1 row-span-3">
             <div class="">
@@ -115,7 +130,6 @@ Nati Class, [5/16/2024 4:13 PM]
                   <a-select-option value="condominium"
                     >Condominium</a-select-option
                   >
-
                   <a-select-option value="shade">Shade</a-select-option>
                   <a-select-option value="container">Container</a-select-option>
                 </a-select>

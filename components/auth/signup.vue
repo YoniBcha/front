@@ -17,6 +17,16 @@
           {{ errors.name }}
         </div>
         <a-input
+          v-model:value="formState.username"
+          placeholder="Enter your username"
+          :status="errors.username && touched.username ? 'error' : ''"
+          @blur="() => handleBlur('username')"
+          class="mt-5"
+        />
+        <div v-if="errors.username && touched.username" class="text-red-500">
+          {{ errors.username }}
+        </div>
+        <a-input
           v-model:value="formState.email"
           placeholder="Enter your email"
           :status="errors.email && touched.email ? 'error' : ''"
@@ -65,6 +75,7 @@ import { reactive, watch } from "vue";
 import * as yup from "yup";
 
 const formState = reactive({
+  username: "",
   name: "",
   email: "",
   password: "",
@@ -73,6 +84,7 @@ const formState = reactive({
 });
 
 const errors = reactive({
+  username: null,
   name: null,
   email: null,
   password: null,
@@ -80,6 +92,7 @@ const errors = reactive({
 });
 
 const touched = reactive({
+  username: false,
   name: false,
   email: false,
   password: false,
@@ -87,6 +100,14 @@ const touched = reactive({
 });
 
 const schema = yup.object({
+  username: yup
+    .string()
+    .required("Username is required")
+    .min(3, "Username must be at least 3 characters long")
+    .matches(
+      /^[a-zA-Z0-9_]+$/,
+      "Username must contain only letters, numbers, or underscores"
+    ),
   name: yup
     .string()
     .required("Name is required")
@@ -116,6 +137,7 @@ const schema = yup.object({
 watch(
   formState,
   () => {
+    if (touched.username) validateField("username");
     if (touched.name) validateField("name");
     if (touched.email) validateField("email");
     if (touched.password) validateField("password");
@@ -131,6 +153,15 @@ const validateField = async (field) => {
   try {
     await schema.fields[field].validate(formState[field]);
     errors[field] = null;
+
+    if (field === "verifyPassword") {
+      if (formState.password === formState.verifyPassword) {
+        errors.verifyPassword = null; // Clear error message
+      } else {
+        // If passwords don't match, display error message
+        throw new Error("Passwords must match");
+      }
+    }
   } catch (error) {
     errors[field] = error.message;
   }
@@ -142,20 +173,21 @@ const handleSubmit = async () => {
     console.log("Form is valid:", formState);
     const data = JSON.stringify(formState);
 
-    const response = await useFetch(
-      "http://127.0.0.1:8000/api/register-employee",
-      {
-        method: "POST",
-        body: data,
-      }
-    );
+    const response = await useFetch("http://127.0.0.1:8000/api/register", {
+      method: "POST",
+      body: data,
+    });
 
     if (!response.ok) {
       throw new Error(`API request failed with status ${response.status}`);
     } else {
       alert("registered");
     }
+
     const responseData = await response.json();
+    // alert("API response:", responseData);
+
+    // Handle successful form submission (e.g., display success message)
   } catch (error) {
     console.error("Error:", error.message);
     // Handle errors (e.g., display error message)

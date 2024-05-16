@@ -17,6 +17,7 @@
         <nuxt-link to="/">Register</nuxt-link>
       </div>
     </div>
+    
 
     <!-- home section -->
     <div

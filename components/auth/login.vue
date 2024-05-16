@@ -7,16 +7,14 @@
     >
       <div class="flex flex-col mx-10 mb-8 w-64">
         <a-input
-          v-model:value="formState.email"
-          placeholder="Enter your email"
-          :status="errors.email && touched.email ? 'error' : ''"
-          @blur="() => handleBlur('email')"
-          class="mt-5"
+          v-model:value="formState.username"
+          placeholder="Enter username please"
+          :status="errors.username && touched.username ? 'error' : ''"
+          @blur="() => handleBlur('username')"
         />
-        <div v-if="errors.email && touched.email" class="text-red-500">
-          {{ errors.email }}
+        <div v-if="errors.username && touched.username" class="text-red-500">
+          {{ errors.username }}
         </div>
-
         <a-input-password
           v-model:value="formState.password"
           placeholder="Enter password please"
@@ -27,21 +25,11 @@
         <div v-if="errors.password && touched.password" class="text-red-500">
           {{ errors.password }}
         </div>
-
         <a-checkbox class="mt-6 mb-5" v-model:checked="formState.remember">
           Remember me
         </a-checkbox>
         <a-button type="primary" html-type="submit">Submit</a-button>
       </div>
-      <a-space direction="vertical" style="width: 100%">
-        <a-alert
-          v-if="authStore.errorMessage"
-          message="Error"
-          :description="authStore.errorMessage"
-          type="error"
-          show-icon
-        />
-      </a-space>
     </a-form>
   </div>
 </template>
@@ -49,70 +37,83 @@
 <script setup>
 import { reactive, watch } from "vue";
 import * as yup from "yup";
-import { useRouter } from "vue-router";
 import { useAuthStore } from "@/stores/auth";
 
-const router = useRouter();
-const authStore = useAuthStore();
-
+// Reactive state for form data, errors, and touch states
 const formState = reactive({
-  email: "",
+  username: "",
   password: "",
   remember: true,
 });
 
 const errors = reactive({
-  email: null,
+  username: null,
   password: null,
 });
 
 const touched = reactive({
-  email: false,
+  username: false,
   password: false,
 });
 
+// yup schema for form validation
 const schema = yup.object({
-  email: yup
+  username: yup
     .string()
-    .required("Email is required")
-    .email("Invalid email format"),
-  password: yup.string().required("Password is required"),
+    .required("Username is required")
+    .min(3, "Username must be at least 3 characters long")
+    .matches(
+      /^[a-zA-Z]*$/,
+      "Username must not contain numbers or special characters"
+    ),
+  password: yup
+    .string()
+    .required("Password is required")
+    .min(6, "Password must be at least 6 characters long")
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
+      "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character"
+    ),
 });
 
+// Watch the formState for changes and validate fields
 watch(
   formState,
   () => {
-    if (touched.email) validateField("email");
+    if (touched.username) validateField("username");
     if (touched.password) validateField("password");
   },
   { deep: true }
 );
 
+// Function to validate a single field
 const validateField = async (field) => {
   if (!touched[field]) {
-    touched[field] = true;
+    touched[field] = true; // Mark the field as touched when validated
   }
   try {
-    await schema.validateAt(field, formState);
-    errors[field] = null;
+    if (schema.fields[field]) {
+      await schema.validateAt(field, formState);
+      errors[field] = null;
+    }
   } catch (error) {
     errors[field] = error.message;
   }
 };
-
+const authStore = useAuthStore();
+// Function to handle form submission
 const handleSubmit = async () => {
   try {
     await schema.validate(formState, { abortEarly: false });
     console.log("Form is valid:", formState);
     await authStore.login(formState);
-    if (!authStore.errorMessage) {
-      router.push("/dashboard");
-    }
+    router.push("/");
   } catch (error) {
     console.error("Error:", error.message);
   }
 };
 
+// Function to handle blur event on input fields
 const handleBlur = (field) => {
   touched[field] = true;
   validateField(field);
