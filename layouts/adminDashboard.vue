@@ -13,7 +13,7 @@
       "
       class="h-[100vh] mr-3"
     >
-      <div class="flex justify-center items-center h-[40px] text-white mt-3">
+      <div class="flex justify-center items-center h-[70px] text-white mt-3">
         <img src="~assets/img/addis.png" class="w-16" />
       </div>
       <a-divider
