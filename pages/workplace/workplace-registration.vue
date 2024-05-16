@@ -11,6 +11,11 @@
 </template>
 
 <script setup>
+
+definePageMeta({
+  layout: "admin-dashboard",
+});
+
 const columns = [
   {
     title: "Workplace Name",

@@ -9,13 +9,11 @@ export const useAuthStore = defineStore("auth", {
   actions: {
     async login(credentials) {
       try {
-        // Replace with your API call to login (consider using `useFetch` from `nuxt/app`)
         const response = await fetch("http://127.0.0.1:8000/api/login", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(credentials),
         });
-
         if (!response.ok) {
           throw new Error("Login failed");
         }
@@ -31,7 +29,6 @@ export const useAuthStore = defineStore("auth", {
     logout() {
       this.user = null;
       this.token = null;
-      // Handle logout logic (e.g., remove tokens, redirect)
     },
   },
   getters: {

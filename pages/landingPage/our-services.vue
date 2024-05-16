@@ -36,7 +36,9 @@
 </template>
 
 <script setup>
-
+definePageMeta({
+  layout: "admin-dashboard",
+});
 const formState = reactive({
   service_title: "",
   service_definition: "",
@@ -44,19 +46,10 @@ const formState = reactive({
 
 const submitForm = async () => {
   try {
-    const csrfToken = document.head.querySelector(
-      'meta[name="csrf-token"]'
-    ).content; // Assuming you're using `nuxt.config.js`
-
-    const response = await axios.post(
-      "http://127.0.0.1:8000/api/ourservices",
-      formState,
-      {
-        headers: {
-          "X-CSRF-TOKEN": csrfToken,
-        },
-      }
-    );
+    const response = await useFetch("http://127.0.0.1:8000/api/ourservices", {
+      method: "POST",
+      body: formState,
+    });
     alert("Service saved successfully!");
   } catch (error) {
     console.error("Failed to save service:", error);

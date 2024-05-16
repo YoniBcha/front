@@ -1,119 +1,30 @@
 <template>
-  <div class="">
-    <div class="grid grid-cols-3 gap-3 mr-3">
-      <div class="grid gird-col-3 bg-[#f5f5f5] mt-5 rounded-md">
-
-        <div class="flex flex-col justify-between py-4 pl-3">
-          <div class="text-lg">Total Enterprise</div>
-          <div class="">
-            <p class="font-bold text-4xl mb-1">12,123</p>
-            <p class="text-xs">1.23% increase from last month</p>
-          </div>
-        </div>
-        <div class="col-start-2 col-span-2 -ml-2">
-          <apexchart
-            :options="chartOptions"
-            :series="seriesData"
-            type="line"
-            height="160"
-          />
-        </div>
+  <div class="grid grid-cols-12 h-[100vh]">
+    <div class="hero-background flex flex-col justify-center col-span-6">
+      <div class="font-bold text-gray-500 mb-5 text-3xl text-italic">
+        "Well Came To . . ."
       </div>
-      <div class="grid gird-col-3 bg-[#f5f5f5] mt-5 rounded-md">
-        <div class="flex flex-col justify-between py-4 pl-3">
-          <div class="text-lg">Total Workplace</div>
-          <div class="">
-            <p class="font-bold text-4xl mb-1">1,123</p>
-            <p class="text-xs">1.23% increase from last month</p>
-          </div>
-        </div>
-        <div class="col-start-2 col-span-2 -ml-2">
-          <apexchart
-            :options="chartOptions"
-            :series="seriesData"
-            type="line"
-            height="160"
-          />
-        </div>
+      <div class="text-5xl text-[#0a58a4] font-bold pb-5">
+        <p class="mb-2">Ldeta Subcity Enterprise</p>
+        <p>Management System</p>
       </div>
-      <div class="grid gird-col-3 bg-[#f5f5f5] mt-5 rounded-md">
-        <div class="flex flex-col justify-between py-4 pl-3">
-          <div class="text-lg">Total Jobless</div>
-          <div class="">
-            <p class="font-bold text-4xl mb-1">22,123</p>
-            <p class="text-xs">1.23% increase from last month</p>
-          </div>
-        </div>
-        <div class="col-start-2 col-span-2 -ml-2">
-          <apexchart
-            :options="chartOptions"
-            :series="seriesData"
-            type="line"
-            height="160"
-          />
-        </div>
-      </div>
+      <div class="text-xl font-semibold pb-3">for you and for us</div>
     </div>
-    <div class="grid gap-3 sm:grid-cols-1 xl:grid-cols-2 mr-3 mt-20">
-      <div class="">
-        <linegraph />
-      </div>
-      <div>
-        <pichart class="mr-10" />
-      </div>
+    <div class="flex justify-center items-center col-span-6">
+      <img src="~assets/illus/enterprise.png" width="550"/>
+    </div>
+  </div>
+  <!-- our service -->
+  <div class="grid grid-cols-12 mt-10 mb-10 w-full">
+    <div
+      class="col-span-12 flex justify-center text-[#0a58a4] text-4xl font-semibold mb-10"
+    >
+      Our Servieces
+    </div>
+    <div class="h-[400px] col-span-12">
+      <swiperOurServices />
     </div>
   </div>
 </template>
 
-<script>
-import apexchart from "vue3-apexcharts";
 
-export default {
-  name: "DashboardPage",
-  components: { apexchart },
-  data() {
-    return {
-      chartOptions: {
-        tooltip: {
-          enabled: true,
-        },
-        chart: {
-          id: "line-chart",
-          toolbar: {
-            show: false,
-          },
-        },
-        stroke: {
-          curve: "smooth",
-        },
-
-        xaxis: {
-          labels: {
-            show: false,
-          },
-          axisBorder: {
-            show: false,
-          },
-        },
-        yaxis: {
-          labels: {
-            show: false,
-          },
-          axisBorder: {
-            show: false,
-          },
-        },
-        grid: {
-          show: false,
-        },
-      },
-      seriesData: [
-        {
-          name: "serios 1",
-          data: [5, 10, 30, 40, 25, 40],
-        },
-      ],
-    };
-  },
-};
-</script>

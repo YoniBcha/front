@@ -12,7 +12,6 @@
         scrollbar-width: none;
       "
       class="h-[100vh] mr-3"
-      s
     >
       <div class="flex justify-center items-center h-[40px] text-white mt-3">
         <img src="~assets/img/addis.png" class="w-16" />
@@ -29,7 +28,7 @@
       >
         <!-- DASHBOARD -->
         <a-menu-item key="1" :style="sidebarMenuItemStyle">
-          <router-link to="/">
+          <router-link to="/dashboard/index">
             <AppstoreOutlined />
             <span> Dashboard </span>
           </router-link>
@@ -141,17 +140,17 @@
             </span>
           </template>
           <a-menu-item key="7.1">
-            <router-link to="/landing-page/our-services">
+            <router-link to="/landingPage/our-services">
               <span> Our Services </span>
             </router-link>
           </a-menu-item>
           <a-menu-item key="7.2">
-            <router-link to="/landing-page/news">
+            <router-link to="/landingPage/news">
               <span> News Page</span>
             </router-link>
           </a-menu-item>
           <a-menu-item key="7.3">
-            <router-link to="/landing-page/contact-us">
+            <router-link to="/landingPage/contact-us">
               <span> Contact Us</span>
             </router-link>
           </a-menu-item>
@@ -246,21 +245,31 @@
   </a-layout>
 </template>
 
-<script setup>
-import { ref, reactive } from "vue";
-
-const selectedKeys = ref(["1"]);
-const collapsed = ref(false);
-const layoutPosition = "fixed";
-const siderWidth = "260px";
-
-const sidebarMenuItemStyle = reactive({
-  height: "48px",
-});
-
-const showDropdown = ref(false);
-
-function toggleDropdown() {
-  showDropdown.value = !showDropdown.value;
-}
+<script>
+export default {
+  data() {
+    return {
+      isSignUpMode: false,
+      selectedKeys: ["1"],
+      collapsed: false,
+      layoutPosition: "fixed",
+      siderWidth: "260px",
+      sidebarMenuItemStyle: {
+        height: "48px",
+      },
+      showDropdown: false,
+    };
+  },
+  methods: {
+    toggleDropdown() {
+      this.showDropdown = !this.showDropdown;
+    },
+    switchToSignUpMode() {
+      this.isSignUpMode = true;
+    },
+    switchToSignInMode() {
+      this.isSignUpMode = false;
+    },
+  },
+};
 </script>
