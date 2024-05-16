@@ -50,57 +50,55 @@
   </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      pdfFiles: [
-        {
-          name: "Enterprise_Aderejajet_Zerf",
-          description: "የኢንተርፔራይዜ አዯረጃጀት መመሪያ ቁጥር 115/2014",
-          path: "/Enterprise_Aderejajet_Zerf.pdf",
-          img: "/addis.png",
-        },
-        {
-          name: "የመስሪያ ቦታ አስተዳደር መመሪያ 2014",
-          description: "የመስሪያ ቦታ አሰጣጥ፣ አጠቃቀም እና አስተዳደር መመሪያ",
-          path: "/የመስሪያ ቦታ አስተዳደር መመሪያ 2014.pdf",
-          img: "/addis.png",
-        },
-        {
-          name: "የመስሪያ_ቦታዎች_ማስተላለፍ_እና_አስተዳደር",
-          description: "የመሰረታዊ የስራ ሂደት ለውጥ ማሻሻያ የጥናት ሰነድ",
-          path: "/የመስሪያ_ቦታዎች_ማስተላለፍ_እና_አስተዳደር_ዳይሬክቶሬት_Copy.pdf",
-          img: "/addis.png",
-        },
-        {
-          name: "Public Work Manual",
-          description: "የከተሞች የምግብ ዋስትና ፕሮግራም የህብረተሰብ ተሳትፎ ማስፈጸሚያ ማንዋል ",
-          path: "/public work manual.docx",
-          img: "/addis.png",
-        },
-        {
-          name: "File 5",
-          description: "Description of file 5",
-          path: "/file5.pdf",
-          img: "/addis.png",
-        },
-      ],
-      searchQuery: "",
-    };
+<script setup>
+import { ref, computed } from 'vue';
+
+definePageMeta({
+  layout: "admin-dashboard",
+});
+
+const pdfFiles = ref([
+  {
+    name: "Enterprise_Aderejajet_Zerf",
+    description: "የኢንተርፔራይዜ አዯረጃጀት መመሪያ ቁጥር 115/2014",
+    path: "/Enterprise_Aderejajet_Zerf.pdf",
+    img: "/addis.png",
   },
-  computed: {
-    filteredPdfFiles() {
-      return this.pdfFiles.filter(
-        (file) =>
-          file.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-          file.description
-            .toLowerCase()
-            .includes(this.searchQuery.toLowerCase())
-      );
-    },
+  {
+    name: "የመስሪያ ቦታ አስተዳደር መመሪያ 2014",
+    description: "የመስሪያ ቦታ አሰጣጥ፣ አጠቃቀም እና አስተዳደር መመሪያ",
+    path: "/የመስሪያ ቦታ አስተዳደር መመሪያ 2014.pdf",
+    img: "/addis.png",
   },
-};
+  {
+    name: "የመስሪያ_ቦታዎች_ማስተላለፍ_እና_አስተዳደር",
+    description: "የመሰረታዊ የስራ ሂደት ለውጥ ማሻሻያ የጥናት ሰነድ",
+    path: "/የመስሪያ_ቦታዎች_ማስተላለፍ_እና_አስተዳደር_ዳይሬክቶሬት_Copy.pdf",
+    img: "/addis.png",
+  },
+  {
+    name: "Public Work Manual",
+    description: "የከተሞች የምግብ ዋስትና ፕሮግራም የህብረተሰብ ተሳትፎ ማስፈጸሚያ ማንዋል ",
+    path: "/public work manual.docx",
+    img: "/addis.png",
+  },
+  {
+    name: "File 5",
+    description: "Description of file 5",
+    path: "/file5.pdf",
+    img: "/addis.png",
+  },
+]);
+
+const searchQuery = ref("");
+
+const filteredPdfFiles = computed(() => {
+  return pdfFiles.value.filter(
+    (file) =>
+      file.name.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+      file.description.toLowerCase().includes(searchQuery.value.toLowerCase())
+  );
+});
 </script>
 
 <style>

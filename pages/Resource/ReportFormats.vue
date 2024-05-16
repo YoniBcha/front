@@ -48,39 +48,38 @@
     </div>
   </template>
   
-  <script>
-  export default {
-    data() {
-      return {
-        pdfFiles: [
-          
-        ],
-        xlsxFiles: [
-            { name: "Report 2015 ድጋፍና ክትትል", description: "Description of Excel file", path: "/Report 2015 ድጋፍና ክትትል.xlsx", img: "/addis.png" },
-            { name: "Report 2015 አስተዳደር", description: "Description of Excel file", path: "/Report 2015 አስተዳደር.xlsx", img: "/addis.png" },
-            { name: "Report 2015 ማስተላለፍ", description: "Description of Excel file", path: "/Report 2015 ማስተላለፍ.xlsx", img: "/addis.png" },
-            { name: "LH report format", description: "Description of Excel file", path: "/LH report format.docx", img: "/addis.png" },
-            // Add more XLSX files as needed
-        ],
-        searchQuery: '',
-      };
-    },
-    computed: {
-      filteredPdfFiles() {
-        return this.pdfFiles.filter(file =>
-          file.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-          file.description.toLowerCase().includes(this.searchQuery.toLowerCase())
-        );
-      },
-      filteredXlsxFiles() {
-        return this.xlsxFiles.filter(file =>
-          file.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-          file.description.toLowerCase().includes(this.searchQuery.toLowerCase())
-        );
-      },
-    },
-  };
-  </script>
+  <script setup>
+  
+  definePageMeta({
+  layout: "admin-dashboard",
+});
+const pdfFiles = [
+  // Add PDF files here if needed
+];
+
+const xlsxFiles = [
+  { name: "Report 2015 ድጋፍና ክትትል", description: "Description of Excel file", path: "/Report 2015 ድጋፍና ክትትል.xlsx", img: "/addis.png" },
+  { name: "Report 2015 አስተዳደር", description: "Description of Excel file", path: "/Report 2015 አስተዳደር.xlsx", img: "/addis.png" },
+  { name: "Report 2015 ማስተላለፍ", description: "Description of Excel file", path: "/Report 2015 ማስተላለፍ.xlsx", img: "/addis.png" },
+  { name: "LH report format", description: "Description of Excel file", path: "/LH report format.docx", img: "/addis.png" },
+  // Add more XLSX files as needed
+];
+
+const searchQuery = '';
+
+const filteredPdfFiles = pdfFiles.filter(file =>
+  file.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+  file.description.toLowerCase().includes(searchQuery.toLowerCase())
+);
+
+const filteredXlsxFiles = xlsxFiles.filter(file =>
+  file.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+  file.description.toLowerCase().includes(searchQuery.toLowerCase())
+);
+
+const filteredFiles = [...filteredPdfFiles, ...filteredXlsxFiles];
+</script>
+
   
   <style>
   /* Add any custom styles here if needed */
