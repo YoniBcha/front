@@ -52,11 +52,12 @@
             </router-link>
           </a-menu-item>
         </a-sub-menu>
+
         <!-- ENTERPRISE PAGE -->
         <a-sub-menu key="3">
           <template #title>
             <span>
-              <TeamOutlined />
+            <BankOutlined />
               <span> Enterprise Information</span>
             </span>
           </template>
@@ -75,7 +76,7 @@
         <a-sub-menu key="4">
           <template #title>
             <span>
-              <TeamOutlined />
+              <HomeOutlined />
               <span> Workplace Information</span>
             </span>
           </template>
@@ -94,7 +95,7 @@
         <a-sub-menu key="5">
           <template #title>
             <span>
-              <TeamOutlined />
+              <FileProtectOutlined />
               <span> Contract Document</span>
             </span>
           </template>
@@ -113,7 +114,7 @@
         <a-sub-menu key="6">
           <template #title>
             <span>
-              <TeamOutlined />
+              <FileTextOutlined />
               <span> Complain Document</span>
             </span>
           </template>
