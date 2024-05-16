@@ -210,13 +210,13 @@
             class="text-3xl"
             @click="() => (collapsed = !collapsed)"
           />
-          <div
-            class="flex justify-center h-full items-center text-center font-semibold text-lg ml-7 w-[700px]"
+        </div>
+        <div
+            class="text-center font-semibold text-lg mx-auto"
           >
             ADDIS ABEBA CITY ADMINISTRATION ENTERPRISE AND INDUSTRY <br />
             DEVELOPMENT OFFICE
           </div>
-        </div>
         <div class="flex relative gap-3 items-center h-full pr-5">
           <div class="flex flex-col justify-center h-full">
             <div class="text-xl">Yonas</div>
