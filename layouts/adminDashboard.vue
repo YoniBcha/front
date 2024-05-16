@@ -128,6 +128,26 @@
             </router-link>
           </a-menu-item>
         </a-sub-menu>
+
+         <!--Resource page-->
+         <a-sub-menu key="8" :style="submenuStyle">
+          <template #title>
+            <span>
+              <FolderOpenOutlined />
+              <span> Resourses </span>
+            </span>
+          </template>
+          <a-menu-item key="8.1">
+            <router-link to="/Resource/ManualsAndGuidelines">
+              <span> Manuals and Guidelines </span>
+            </router-link>
+          </a-menu-item>
+          <a-menu-item key="8.2">
+            <router-link to="/Resource/ReportFormats">
+           <span>Report Formats</span> 
+          </router-link>
+          </a-menu-item>
+        </a-sub-menu>
         <a-divider
           style="background: white; margin-left: 12px; margin-right: 40px"
         />
