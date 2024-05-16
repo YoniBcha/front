@@ -156,8 +156,7 @@
         <a-sub-menu key="7">
           <template #title>
             <span>
-              <TeamOutlined />
-              <span>LandingPage</span>
+              <GlobalOutlined />              <span>LandingPage</span>
             </span>
           </template>
           <a-menu-item key="7.1">
@@ -178,7 +177,7 @@
         </a-sub-menu>
         <a-menu-item key="9" :style="sidebarMenuItemStyle">
           <router-link to="/city-registration/register-city">
-            <SettingOutlined />
+            <PlusSquareOutlined />
             <span> City Registration </span>
           </router-link>
         </a-menu-item>
