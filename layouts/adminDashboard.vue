@@ -178,57 +178,89 @@
         style="background: #fff; padding: 0"
         class="flex h-full z-10 justify-between items-center"
       >
-        <div class="flex items-center h-full px-5 border-b">
-          <menu-unfold-outlined
-            v-if="collapsed"
-            class="text-3xl"
-            @click="() => (collapsed = !collapsed)"
-          />
-          <menu-fold-outlined
-            v-else
-            class="text-3xl"
-            @click="() => (collapsed = !collapsed)"
-          />
-          <div
-            class="flex justify-center h-full items-center text-center font-semibold text-lg ml-7 w-[700px]"
-          >
-            ADDIS ABEBA CITY ADMINISTRATION ENTERPRISE AND INDUSTRY <br />
-            DEVELOPMENT OFFICE
-          </div>
-        </div>
-        <div class="flex relative gap-3 items-center h-full pr-5">
-          <div class="flex flex-col justify-center h-full">
-            <div class="text-xl">Yonas</div>
-            <div class="text-sm text-gray-400">Admin, enterprise manager</div>
-          </div>
-          <div class="">
-            <img
-              @click="toggleDropdown"
-              class="object-cover w-12 h-12 rounded-full ring ring-gray-300 dark:ring-gray-600"
-              src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=4&w=880&h=880&q=100"
-              alt=""
+        <div class="flex justify-between w-full mr-10">
+          <div class="flex items-center h-full px-5 border-b">
+            <menu-unfold-outlined
+              v-if="collapsed"
+              class="text-3xl"
+              @click="() => (collapsed = !collapsed)"
             />
-            <ul
-              v-if="showDropdown"
-              class="absolute p-4 w-56 right-8 bg-white border-2 border-gray-200 rounded-md shadow-xl mt-3"
+            <menu-fold-outlined
+              v-else
+              class="text-3xl"
+              @click="() => (collapsed = !collapsed)"
+            />
+          </div>
+
+          <div
+            class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse"
+          >
+            <button
+              type="button"
+              class="fixed flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+              id="user-menu-button"
+              aria-expanded="false"
+              data-dropdown-toggle="user-dropdown"
+              data-dropdown-placement="bottom"
+              @click="toggleDropdown"
             >
-              <li class="flex justify-between text-sm">
-                <div class="">Profile</div>
-                <div class="text-black pr-3">
-                  <LogoutOutlined />
-                </div>
-              </li>
-              <a-divider />
-              <li class="flex justify-between text-sm mt-2">
-                <div class="">Setting</div>
-                <div class="text-black pr-3">
-                  <SettingOutlined />
-                </div>
-              </li>
-            </ul>
+              <span class="sr-only">Open user menu</span>
+              <img
+                class="w-8 rounded-full"
+                src="~assets/img/pinia.png"
+                alt="user photo"
+              />
+            </button>
+            <!-- Dropdown menu -->
+            <div
+              class="fixed right-4 top-10 z-50 mt-7 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
+              id="user-dropdown"
+              v-show="isDropdownVisible"
+            >
+              <div class="px-4 py-3">
+                <span class="block text-sm text-gray-900 dark:text-white"
+                  >Bonnie Green</span
+                >
+                <span
+                  class="block text-sm text-gray-500 truncate dark:text-gray-400"
+                  >name@flowbite.com</span
+                >
+              </div>
+              <ul class="py-2" aria-labelledby="user-menu-button">
+                <li>
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    >Dashboard</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    >Settings</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    >Earnings</a
+                  >
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+                    >Sign out</a
+                  >
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </a-layout-header>
+
       <a-layout-content
         style="
           background: white;
@@ -245,31 +277,32 @@
   </a-layout>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      isSignUpMode: false,
-      selectedKeys: ["1"],
-      collapsed: false,
-      layoutPosition: "fixed",
-      siderWidth: "260px",
-      sidebarMenuItemStyle: {
-        height: "48px",
-      },
-      showDropdown: false,
-    };
-  },
-  methods: {
-    toggleDropdown() {
-      this.showDropdown = !this.showDropdown;
-    },
-    switchToSignUpMode() {
-      this.isSignUpMode = true;
-    },
-    switchToSignInMode() {
-      this.isSignUpMode = false;
-    },
-  },
+<script setup>
+import { ref } from "vue";
+
+// State to manage dropdown visibility
+const isDropdownVisible = ref(false);
+
+// State variables
+const isSignUpMode = ref(false);
+const selectedKeys = ref(["1"]);
+const collapsed = ref(false);
+const layoutPosition = ref("fixed");
+const siderWidth = ref("260px");
+const sidebarMenuItemStyle = ref({
+  height: "48px",
+});
+
+// Methods
+const toggleDropdown = () => {
+  isDropdownVisible.value = !isDropdownVisible.value;
+};
+
+const switchToSignUpMode = () => {
+  isSignUpMode.value = true;
+};
+
+const switchToSignInMode = () => {
+  isSignUpMode.value = false;
 };
 </script>
