@@ -64,62 +64,56 @@
   </div>
 </template>
 
-<script>
-import "~/assets/css/login_signup.css";
+<script setup>
+import "@/assets/css/login_signup.css"; // Correct the path if necessary
 import { useAuthStore } from "@/stores/auth";
+import { ref, computed } from "vue";
 import apexchart from "vue3-apexcharts";
 
-export default {
-  name: "DashboardPage",
-  computed: {
-    authStore() {
-      return useAuthStore();
+definePageMeta({
+  layout: "admin-dashboard",
+});
+
+const authStore = useAuthStore();
+
+const chartOptions = ref({
+  tooltip: {
+    enabled: true,
+  },
+  chart: {
+    id: "line-chart",
+    toolbar: {
+      show: false,
     },
   },
-  components: { apexchart },
-  data() {
-    return {
-      chartOptions: {
-        tooltip: {
-          enabled: true,
-        },
-        chart: {
-          id: "line-chart",
-          toolbar: {
-            show: false,
-          },
-        },
-        stroke: {
-          curve: "smooth",
-        },
-
-        xaxis: {
-          labels: {
-            show: false,
-          },
-          axisBorder: {
-            show: false,
-          },
-        },
-        yaxis: {
-          labels: {
-            show: false,
-          },
-          axisBorder: {
-            show: false,
-          },
-        },
-        grid: {
-          show: false,
-        },
-      },
-      seriesData: [
-        {
-          name: "serios 1",
-          data: [5, 10, 30, 40, 25, 40],
-        },
-      ],
-    };
+  stroke: {
+    curve: "smooth",
   },
-};
+  xaxis: {
+    labels: {
+      show: false,
+    },
+    axisBorder: {
+      show: false,
+    },
+  },
+  yaxis: {
+    labels: {
+      show: false,
+    },
+    axisBorder: {
+      show: false,
+    },
+  },
+  grid: {
+    show: false,
+  },
+});
+
+const seriesData = ref([
+  {
+    name: "series 1",
+    data: [5, 10, 30, 40, 25, 40],
+  },
+]);
 </script>
