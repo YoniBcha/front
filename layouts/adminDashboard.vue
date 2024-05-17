@@ -192,6 +192,10 @@
             />
           </div>
 
+          <div class="font-bold text-3xl text-[#0a58a4]">
+            Ldeta Subcity Enterprise Management System
+          </div>
+
           <div
             class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse"
           >
@@ -216,6 +220,7 @@
               class="fixed right-4 top-10 z-50 mt-7 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
               id="user-dropdown"
               v-show="isDropdownVisible"
+              ref="dropdownMenu"
             >
               <div class="px-4 py-3">
                 <span class="block text-sm text-gray-900 dark:text-white"
