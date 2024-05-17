@@ -28,7 +28,7 @@
       >
         <!-- DASHBOARD -->
         <a-menu-item key="1" :style="sidebarMenuItemStyle">
-          <router-link to="/dashboard/index">
+          <router-link to="/dashboard">
             <AppstoreOutlined />
             <span> Dashboard </span>
           </router-link>
