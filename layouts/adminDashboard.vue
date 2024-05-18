@@ -236,7 +236,14 @@
                   <a
                     href="#"
                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-400 dark:hover:bg-blue-600 dark:text-gray-200 dark:hover:text-white"
-                    >Dashboard</a
+                    >Earnings</a
+                  >
+                </li>
+                <li>
+                  <nuxt-link
+                    to="/profile/userProfile"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-400 dark:hover:bg-blue-600 dark:text-gray-200 dark:hover:text-white"
+                    >Dashboard</nuxt-link
                   >
                 </li>
                 <li>
@@ -246,13 +253,7 @@
                     >Settings</a
                   >
                 </li>
-                <li>
-                  <a
-                    href="#"
-                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-400 dark:hover:bg-blue-600 dark:text-gray-200 dark:hover:text-white"
-                    >Earnings</a
-                  >
-                </li>
+
                 <li>
                   <a
                     href="#"
