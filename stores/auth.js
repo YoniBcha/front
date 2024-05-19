@@ -1,39 +1,57 @@
 import { defineStore } from "pinia";
+import { ref } from "vue";
+import axios from "axios";
 
-export const useAuthStore = defineStore("auth", {
-  state: () => ({
-    isLoggedIn: false, // Initial login state
-    user: null,
-    token: null,
-  }),
-  actions: {
-    async login(credentials) {
-      try {
-        const response = await fetch("http://127.0.0.1:8000/api/login", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(credentials),
-        });
-        if (!response.ok) {
-          throw new Error("Login failed");
-        }
-        const data = await response.json();
-        this.isLoggedIn = true;
-        this.user = data.user;
-        this.token = data.token; // Assuming API provides a token
-      } catch (error) {
-        console.error(error);
-        throw error; // Re-throw for handling in component
-      }
-    },
-    logout() {
-      this.user = null;
-      this.token = null;
-    },
-  },
-  getters: {
-    isAuthenticated() {
-      return this.isLoggedIn; // Getter returning the authentication state
-    },
-  },
+export const useAuthStore = defineStore("auth", () => {
+  const token = ref(localStorage.getItem("token") || "");
+  const user = ref(null);
+  const error = ref(null);
+
+  const setToken = (newToken) => {
+    token.value = newToken;
+    localStorage.setItem("token", newToken);
+  };
+
+  const login = async (formState) => {
+    try {
+      const response = await axios.post(
+        "http://127.0.0.1:8000/api/login",
+        formState
+      );
+      setToken(response.data.access_token);
+      user.value = response.data.user;
+      error.value = null;
+    } catch (err) {
+      error.value = err.response.data.error || "Login failed";
+    }
+  };
+
+  const register = async (formState) => {
+    try {
+      const response = await axios.post(
+        "http://127.0.0.1:8000/api/register-employee",
+        formState
+      );
+      setToken(response.data.token);
+      user.value = response.data.user;
+      error.value = null;
+    } catch (err) {
+      error.value = err.response.data.error || "Registration failed";
+    }
+  };
+
+  const logout = () => {
+    token.value = "";
+    user.value = null;
+    localStorage.removeItem("token");
+  };
+
+  return {
+    token,
+    user,
+    error,
+    login,
+    register,
+    logout,
+  };
 });
