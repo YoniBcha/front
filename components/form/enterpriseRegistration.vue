@@ -121,7 +121,9 @@
                 ]"
                 class="mb-4 w-full"
               >
-                <a-select-option value="enterprise type">enterprise type</a-select-option>
+                <a-select-option value="enterprise type"
+                  >enterprise type</a-select-option
+                >
               </a-select>
 
               <p class="text-gray-400">enterprise sector</p>
@@ -143,7 +145,7 @@
             </div>
             <div class="flex col-span-2 gap-3 row-span-1">
               <a-select
-              label="enterprise city"
+                label="enterprise city"
                 placeholder="enter enterprise city"
                 v-model:value="formState.enterprise_city_id"
                 :rules="[
@@ -235,21 +237,29 @@ const showModal = () => {
   open.value = true;
 };
 const formState = reactive({
+  city_id: "",
+  subcity_id: "",
+  woreda_id: "",
+  jobless_id: "",
+  kebele_id: "",
   enterprise_name: "",
-  enterprise_username: "",
-  enterprise_password: "",
-  enterprise_city_id: "",
-  enterprise_subcity_id: "",
-  enterprise_woreda_id: "",
-  enterprise_kebele_id: "",
-  manager_id: "",
-  enterprise_role: "enterprise",
-  enterprise_status: "pass",
+  enterprise_status: "",
   enterprise_type: "",
-  manager_id: "",
   enterprise_sector: "",
   enterprise_phone_number: "",
   enterprise_email: "",
+  enterprise_stock_price: "",
+  enterprise_taxpayer_identification_card: "",
+  enterprise_taxpayer_identification_number: "",
+  enterprise_approved_trade_name: "",
+  enterprise_professional_qualification_certification: "",
+  enterprise_business_plan: "",
+  enterprise_ownership_ofbusiness_adress_and_approved_lease: "",
+  enterprise_Price_per_share: "",
+  enterprise_Approved_bylaws_of_establishment: "",
+  enterprise_Business_license: "",
+  enterprise_Bylaws_of_shares: "",
+  enterprise_priority_evidence: "",
 });
 
 const submitForm = async () => {
@@ -267,30 +277,3 @@ const submitForm = async () => {
 };
 </script>
 
-<!-- 'city_id',
-'subcity_id',
-'woreda_id',
-'jobless_id',
-'kebele_id',
-'enterprise_name',
-'enterprise_role'
-'enterprise_status',
-'enterprise_type',
-'enterprise_manager_name'
-'enterprise_sector',
-'enterprise_phone_number',
-'enterprise_email',
-
-
-'enterprise_stock_price',
-'enterprise_taxpayer_identification_card',
-'enterprise_taxpayer_identification_number',
-'enterprise_approved_trade_name',
-'enterprise_professional_qualification_certification',
-'enterprise_business_plan',
-'enterprise_ownership_ofbusiness_adress_and_approved_lease',
-'enterprise_Price_per_share',
-'enterprise_Approved_bylaws_of_establishment',
-'enterprise_Business_license',
-'enterprise_Bylaws_of_shares',
-'enterprise_priority_evidence', -->

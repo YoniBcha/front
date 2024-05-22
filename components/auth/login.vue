@@ -72,10 +72,7 @@ const touched = reactive({
 });
 
 const schema = yup.object({
-  email: yup
-    .string()
-    .required("Email is required")
-    .email("Invalid email format"),
+  email: yup.string().required("Email is required"),
   password: yup.string().required("Password is required"),
 });
 

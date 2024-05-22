@@ -1,57 +1,52 @@
+// stores/auth.js
 import { defineStore } from "pinia";
 import { ref } from "vue";
-import axios from "axios";
 
 export const useAuthStore = defineStore("auth", () => {
   const token = ref(localStorage.getItem("token") || "");
   const user = ref(null);
-  const error = ref(null);
+  const errorMessage = ref("");
 
   const setToken = (newToken) => {
     token.value = newToken;
-    localStorage.setItem("token", newToken);
+    localStorage.setItem("token", newToken); // Store token in localStorage
   };
 
   const login = async (formState) => {
     try {
-      const response = await axios.post(
-        "http://127.0.0.1:8000/api/login",
-        formState
-      );
-      setToken(response.data.access_token);
-      user.value = response.data.user;
-      error.value = null;
-    } catch (err) {
-      error.value = err.response.data.error || "Login failed";
-    }
-  };
+      const response = await fetch("http://127.0.0.1:8000/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formState),
+      });
 
-  const register = async (formState) => {
-    try {
-      const response = await axios.post(
-        "http://127.0.0.1:8000/api/register-employee",
-        formState
-      );
-      setToken(response.data.token);
-      user.value = response.data.user;
-      error.value = null;
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Login failed");
+      }
+
+      setToken(data.access_token); // Set token after successful login
+      user.value = data.user;
+      errorMessage.value = "";
     } catch (err) {
-      error.value = err.response.data.error || "Registration failed";
+      errorMessage.value = err.message || "Login failed";
     }
   };
 
   const logout = () => {
     token.value = "";
     user.value = null;
-    localStorage.removeItem("token");
+    localStorage.removeItem("token"); // Remove token from localStorage on logout
   };
 
   return {
     token,
     user,
-    error,
+    errorMessage,
     login,
-    register,
     logout,
   };
 });
