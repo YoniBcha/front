@@ -106,6 +106,7 @@ const dataSourceFromParent = ref([
     status: ["pass"],
     phonenumber: "+(251)567-48-47",
     email: "test44@gmail.com",
+    member: "tonas"
   },
   {
     key: "2",
@@ -126,6 +127,7 @@ const dataSourceFromParent = ref([
     status: ["pass"],
     phonenumber: "+(251)567-5675-47",
     email: "test44@gmghail.com",
+    
   },
   {
     key: "4",

@@ -52,7 +52,7 @@
     <template #customFilterIcon="{ filtered }">
       <search-outlined :style="{ color: filtered ? '#108ee9' : undefined }" />
     </template>
-    <template #bodyCell="{ text, column }">
+    <template #bodyCell="{ text, column, record }">
       <span
         v-if="state.searchText && state.searchedColumn === column.dataIndex"
       >
@@ -77,16 +77,53 @@
         </template>
       </span>
       <template v-else-if="column.dataIndex === 'operation'">
-        <a-popconfirm
-          v-if="data.length"
-          title="Sure to delete?"
-          @confirm="onDelete(record.key)"
-        >
-          <a>Delete</a>
-        </a-popconfirm>
+        <a @click="showDeleteConfirm(record)">Show</a>
       </template>
     </template>
   </a-table>
+
+  <a-modal
+    v-model:visible="state.modalVisible"
+    title="Jobless Data Or Information"
+    ok-text="Yes"
+    width="1000px"
+    cancel-text="No"
+    @ok="confirmDelete"
+    @cancel="cancelDelete"
+  >
+    <div class="text-sm">
+      <div class="flex justify-end items-center gap-2">
+        Status:<button class="bg-[#0a58a4] px-4 py-1 text-white rounded">{{ state.recordToDelete?.member }}</button>
+      </div>
+      <div class="grid grid-cols-3 mt-5">
+        <div class="flex gap-5">
+          <div class="pt-5">Jobless Photo:</div>
+          <div class="h-44 w-44 bg-red-600">
+            {{ state.recordToDelete?.member }}
+          </div>
+        </div>
+        <div class="grid grid-row-3 p-5 bg-green-500">
+          <div class="">Full Name: {{ state.recordToDelete?.name }}</div>
+          <div class="">Grandfather Name: {{ state.recordToDelete?.name }}</div>
+          <div class="">Username: {{ state.recordToDelete?.name }}</div>
+        </div>
+        <div class="grid grid-row-3 p-5 bg-blue-500">
+          <div class="flex gap-8">
+            <div class="">Age: {{ state.recordToDelete?.name }}</div>
+            <div class="">Sex: {{ state.recordToDelete?.name }}</div>
+          </div>
+          <div class="flex gap-5">
+            <div class="">City: {{ state.recordToDelete?.name }}</div>
+            <div class="">Subcity: {{ state.recordToDelete?.name }}</div>
+          </div>
+          <div class="flex gap-5">
+            <div class="">Woreda: {{ state.recordToDelete?.name }}</div>
+            <div class="">Kebele: {{ state.recordToDelete?.name }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </a-modal>
 </template>
 
 <script setup>
@@ -94,11 +131,15 @@ const props = defineProps({
   data: Array,
   columns: Array,
 });
+const emits = defineEmits(["row-clicked"]);
 
 const state = reactive({
   searchText: "",
   searchedColumn: "",
+  modalVisible: false,
+  recordToDelete: null,
 });
+
 const searchInput = ref();
 
 const handleSearch = (selectedKeys, confirm, dataIndex) => {
@@ -106,6 +147,7 @@ const handleSearch = (selectedKeys, confirm, dataIndex) => {
   state.searchText = selectedKeys[0];
   state.searchedColumn = dataIndex;
 };
+
 const handleReset = (clearFilters) => {
   clearFilters({
     confirm: true,
@@ -115,6 +157,11 @@ const handleReset = (clearFilters) => {
 
 const handleRowClick = () => {
   emits("row-clicked");
+};
+
+const showDeleteConfirm = (record) => {
+  state.recordToDelete = record;
+  state.modalVisible = true;
 };
 </script>
 

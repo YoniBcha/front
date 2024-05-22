@@ -47,19 +47,19 @@
           {{ errors.password }}
         </div>
         <a-input-password
-          v-model:value="formState.verifyPassword"
-          placeholder="Verify password"
+          v-model:value="formState.confirm_password"
+          placeholder="confirm password"
           :status="
-            errors.verifyPassword && touched.verifyPassword ? 'error' : ''
+            errors.confirm_password && touched.confirm_password ? 'error' : ''
           "
-          @blur="() => handleBlur('verifyPassword')"
+          @blur="() => handleBlur('confirm_password')"
           class="mt-5"
         />
         <div
-          v-if="errors.verifyPassword && touched.verifyPassword"
+          v-if="errors.confirm_password && touched.confirm_password"
           class="text-red-500"
         >
-          {{ errors.verifyPassword }}
+          {{ errors.confirm_password }}
         </div>
 
         <a-button class="mt-5" type="primary" html-type="submit"
@@ -71,16 +71,19 @@
 </template>
 
 <script setup>
-import { reactive, watch } from "vue";
+import { reactive, watch, computed } from "vue";
+import { useAuthStore } from "@/stores/auth"; // Assuming store is in `src/stores/auth.js`
 import * as yup from "yup";
+
+// Pinia store
+const { register, error } = useAuthStore();
 
 const formState = reactive({
   username: "",
   name: "",
   email: "",
   password: "",
-  verifyPassword: "",
-  remember: true,
+  confirm_password: "",
 });
 
 const errors = reactive({
@@ -88,7 +91,7 @@ const errors = reactive({
   name: null,
   email: null,
   password: null,
-  verifyPassword: null,
+  confirm_password: null,
 });
 
 const touched = reactive({
@@ -96,7 +99,7 @@ const touched = reactive({
   name: false,
   email: false,
   password: false,
-  verifyPassword: false,
+  confirm_password: false,
 });
 
 const schema = yup.object({
@@ -111,7 +114,7 @@ const schema = yup.object({
   name: yup
     .string()
     .required("Name is required")
-    .min(3, "name must be at least 3 characters long")
+    .min(3, "Name must be at least 3 characters long")
     .matches(/^[a-zA-Z]+$/, "Name must contain only letters"),
   email: yup
     .string()
@@ -124,14 +127,10 @@ const schema = yup.object({
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]+$/,
       "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character"
     ),
-  verifyPassword: yup
+  confirm_password: yup
     .string()
-    .required("Please verify your password")
-    .when("password", {
-      is: (val) => val !== undefined && val !== null && val !== "",
-      then: yup.string().oneOf([yup.ref("password")], "Passwords must match"),
-      otherwise: yup.string().nullable(),
-    }),
+    .required("Password is required")
+    .oneOf([yup.ref("password")], "Passwords must match"),
 });
 
 watch(
@@ -147,11 +146,9 @@ watch(
 );
 
 const validateField = async (field) => {
-  if (!touched[field]) {
-    touched[field] = true;
-  }
+  if (!touched[field]) touched[field] = true;
   try {
-    await schema.fields[field].validate(formState[field]);
+    await schema.validateAt(field, formState);
     errors[field] = null;
 
     if (field === "verifyPassword") {
@@ -189,8 +186,7 @@ const handleSubmit = async () => {
 
     // Handle successful form submission (e.g., display success message)
   } catch (error) {
-    console.error("Error:", error.message);
-    // Handle errors (e.g., display error message)
+    console.error("Form validation error:", error.message);
   }
 };
 

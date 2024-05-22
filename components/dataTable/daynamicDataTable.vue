@@ -10,7 +10,7 @@
       <!-- Header cell template -->
       <template #headerCell="{ column }">
         <span
-          v-if="column.key === 'name' || column.key === 'name'"
+          v-if="column.key === 'name'"
           style="color: #1890ff"
           >{{ column.title }}</span
         >

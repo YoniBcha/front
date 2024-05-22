@@ -1,3 +1,65 @@
+<script setup>
+import { reactive } from "vue";
+import { useFetch } from "@vueuse/core";
+
+const open = ref(false);
+const showModal = () => {
+  open.value = true;
+};
+
+const formState = reactive({
+  jobless_photo: null,
+  jobless_full_name: "",
+  jobless_username: "",
+  jobless_password: "",
+  jobless_grandfather_name: "",
+  jobless_sex: "",
+  jobless_age: "",
+  jobless_woreda: "",
+  jobless_kebele: "",
+  jobless_city: "",
+  jobless_subcity: "",
+  jobless_phonenumber: "",
+  jobless_email: "",
+  jobless_profession: "",
+  jobless_housenumber: "",
+  jobless_familysize: "",
+  jobless_livingstatus: "",
+  jobless_birthplace: "",
+  jobless_family_status: "",
+  jobless_martial_status: "",
+  jobless_identification_card: null,
+  jobless_disability_status: "",
+  jobless_reason_tocome: "",
+  jobless_training_cirtificate: null,
+  jobless_evidence_card: null,
+  jobless_priority_evidence: null,
+});
+
+const submitForm = async () => {
+  try {
+    const formData = new FormData();
+    for (const key in formState) {
+      formData.append(key, formState[key]);
+    }
+
+    const response = await fetch("http://127.0.0.1:8000/api/jobless", {
+      method: "POST",
+      body: formData,
+    });
+
+    if (response.ok) {
+      alert("Jobless information created successfully");
+    } else {
+      alert("Failed to save jobless information");
+    }
+  } catch (error) {
+    console.error("Error submitting form:", error);
+    alert("Error submitting form");
+  }
+};
+</script>
+
 <template>
   <div class="">
     <!-- JOBLESS REGISTRATION TEXT AND ADDING NEW JOBLESS BUTTON  -->
@@ -423,54 +485,3 @@
     </a-modal>
   </div>
 </template>
-
-<script setup>
-const open = ref(false);
-const showModal = () => {
-  open.value = true;
-};
-
-const formState = reactive({
-  //jobless_photo: "",
-  jobless_full_name: "",
-  jobless_username: "",
-  jobless_password: "",
-  jobless_grandfather_name: "",
-  jobless_sex: "",
-  jobless_age: "",
-  jobless_role: "jobless",
-  jobless_woreda: "",
-  jobless_kebele: "",
-  jobless_city: "",
-  jobless_subcity: "",
-  jobless_phonenumber: "",
-  jobless_email: "",
-  jobless_profession: "",
-  jobless_housenumber: "",
-  jobless_familysize: "",
-  jobless_livingstatus: "",
-  jobless_birthplace: "",
-  jobless_family_status: "",
-  jobless_martial_status: "",
-  // jobless_identification_card: "",
-  jobless_disability_status: "",
-  jobless_reason_tocome: "",
-  //jobless_training_cirtificate: "",
-  //jobless_evidence_card: "",
-  //jobless_priority_evidence: "",
-});
-
-const submitForm = async () => {
-  try {
-    const response = await useFetch("http://127.0.0.1:8000/api/jobless", {
-      method: "POST",
-      body: formState,
-    });
-
-    alert("Jobless information created successfully");
-  } catch (error) {
-    console.error("Error submitting form:");
-    alert("not saved");
-  }
-};
-</script>
