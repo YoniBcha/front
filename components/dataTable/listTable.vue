@@ -91,34 +91,156 @@
     @ok="confirmDelete"
     @cancel="cancelDelete"
   >
-    <div class="text-sm">
+    <div class="text-sm text-gray-400">
+      <!-- status button -->
       <div class="flex justify-end items-center gap-2">
-        Status:<button class="bg-[#0a58a4] px-4 py-1 text-white rounded">{{ state.recordToDelete?.member }}</button>
+        Status:<button class="bg-[#0a58a4] px-4 py-1 text-white rounded">
+          {{ state.recordToDelete?.member }}
+        </button>
       </div>
+      <!-- photo and fullname -->
       <div class="grid grid-cols-3 mt-5">
         <div class="flex gap-5">
-          <div class="pt-5">Jobless Photo:</div>
-          <div class="h-44 w-44 bg-red-600">
+          Jobless Photo:
+          <div class="h-44 w-52">
             {{ state.recordToDelete?.member }}
           </div>
         </div>
-        <div class="grid grid-row-3 p-5 bg-green-500">
-          <div class="">Full Name: {{ state.recordToDelete?.name }}</div>
-          <div class="">Grandfather Name: {{ state.recordToDelete?.name }}</div>
-          <div class="">Username: {{ state.recordToDelete?.name }}</div>
+        <div class="grid grid-row-3 p-5">
+          <div class="">
+            Full Name:
+            <span class="text-gray-600">{{ state.recordToDelete?.name }}</span>
+          </div>
+          <div class="">
+            Grandfather Name:
+            <span class="text-gray-600">{{ state.recordToDelete?.name }}</span>
+          </div>
+          <div class="">
+            Username:
+            <span class="text-gray-600">{{ state.recordToDelete?.name }}</span>
+          </div>
         </div>
-        <div class="grid grid-row-3 p-5 bg-blue-500">
+        <div class="grid grid-row-3 p-5">
           <div class="flex gap-8">
-            <div class="">Age: {{ state.recordToDelete?.name }}</div>
-            <div class="">Sex: {{ state.recordToDelete?.name }}</div>
+            <div class="">
+              Age:
+              <span class="text-gray-600">{{
+                state.recordToDelete?.name
+              }}</span>
+            </div>
+            <div class="">
+              Gender:
+              <span class="text-gray-600">{{
+                state.recordToDelete?.name
+              }}</span>
+            </div>
           </div>
           <div class="flex gap-5">
-            <div class="">City: {{ state.recordToDelete?.name }}</div>
-            <div class="">Subcity: {{ state.recordToDelete?.name }}</div>
+            <div class="">
+              City:
+              <span class="text-gray-600">{{
+                state.recordToDelete?.name
+              }}</span>
+            </div>
+            <div class="">
+              Subcity:
+              <span class="text-gray-600">{{
+                state.recordToDelete?.name
+              }}</span>
+            </div>
           </div>
           <div class="flex gap-5">
-            <div class="">Woreda: {{ state.recordToDelete?.name }}</div>
-            <div class="">Kebele: {{ state.recordToDelete?.name }}</div>
+            <div class="">
+              Woreda:
+              <span class="text-gray-600">{{
+                state.recordToDelete?.name
+              }}</span>
+            </div>
+            <div class="">
+              Kebele:
+              <span class="text-gray-600">{{
+                state.recordToDelete?.name
+              }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- identification card and email phone number -->
+      <div class="grid grid-cols-3 mt-5">
+        <div class="grid grid-row-3 p-5">
+          <div class="">
+            Phone Number:
+            <span class="text-gray-600">{{ state.recordToDelete?.name }}</span>
+          </div>
+          <div class="">
+            Email:
+            <span class="text-gray-600">{{ state.recordToDelete?.name }}</span>
+          </div>
+          <div class="">
+            Profession:
+            <span class="text-gray-600">{{ state.recordToDelete?.name }}</span>
+          </div>
+        </div>
+        <div class="grid grid-row-3 p-5">
+          <div class="">
+            House Number:
+            <span class="text-gray-600">{{ state.recordToDelete?.name }}</span>
+          </div>
+          <div class="">
+            Family Size:
+            <span class="text-gray-600">{{ state.recordToDelete?.name }}</span>
+          </div>
+          <div class="">
+            Living Status:
+            <span class="text-gray-600">{{ state.recordToDelete?.name }}</span>
+          </div>
+        </div>
+        <div class="gap-5">
+          <div class="">Jobless Identification Card:</div>
+          <div class="h-48">
+            {{ state.recordToDelete?.member }}
+          </div>
+        </div>
+      </div>
+      <div class="grid grid-cols-3 mt-10 gap-3">
+        <div class="">
+          <div class="">Identification Card:</div>
+          <div class="h-48">
+            {{ state.recordToDelete?.member }}
+          </div>
+        </div>
+        <div class="grid grid-row-3">
+          <div class="">training certificate:</div>
+          <div class="h-48">
+            {{ state.recordToDelete?.member }}
+          </div>
+        </div>
+        <div class="grid grid-row-3 p-5">
+          <div class="">
+            Birth Place:
+            <span class="text-gray-600">{{ state.recordToDelete?.name }}</span>
+          </div>
+          <div class="">
+            Family Status:
+            <span class="text-gray-600">{{ state.recordToDelete?.name }}</span>
+          </div>
+          <div class="">
+            Disability Status:
+            <span class="text-gray-600">{{ state.recordToDelete?.name }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 mt-10 gap-3">
+        <div class="">
+          <div class="">Identification Card:</div>
+          <div class="h-48">
+            {{ state.recordToDelete?.member }}
+          </div>
+        </div>
+        <div class="grid grid-row-3">
+          <div class="">Priority Evidence:</div>
+          <div class="h-48">
+            {{ state.recordToDelete?.member }}
           </div>
         </div>
       </div>

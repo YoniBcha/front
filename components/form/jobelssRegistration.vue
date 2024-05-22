@@ -1,5 +1,5 @@
 <script setup>
-import { reactive } from "vue";
+import { reactive, ref } from "vue";
 import { useFetch } from "@vueuse/core";
 
 const open = ref(false);
@@ -8,7 +8,7 @@ const showModal = () => {
 };
 
 const formState = reactive({
-  jobless_photo: null,
+  jobless_photo: [],
   jobless_full_name: "",
   jobless_username: "",
   jobless_password: "",
@@ -28,19 +28,25 @@ const formState = reactive({
   jobless_birthplace: "",
   jobless_family_status: "",
   jobless_martial_status: "",
-  jobless_identification_card: null,
+  jobless_identification_card: [],
   jobless_disability_status: "",
   jobless_reason_tocome: "",
-  jobless_training_cirtificate: null,
-  jobless_evidence_card: null,
-  jobless_priority_evidence: null,
+  jobless_training_cirtificate: [],
+  jobless_evidence_card: [],
+  jobless_priority_evidence: [],
 });
 
 const submitForm = async () => {
   try {
     const formData = new FormData();
     for (const key in formState) {
-      formData.append(key, formState[key]);
+      if (Array.isArray(formState[key]) && formState[key].length > 0) {
+        formState[key].forEach((file) => {
+          formData.append(key, file.originFileObj);
+        });
+      } else {
+        formData.append(key, formState[key]);
+      }
     }
 
     const response = await fetch("http://127.0.0.1:8000/api/jobless", {
@@ -88,7 +94,6 @@ const submitForm = async () => {
                 <a-upload-dragger
                   v-model:fileList="formState.jobless_photo"
                   name="photo"
-                  action="/upload.do"
                   :rules="[
                     {
                       required: false,
