@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "title": "News Lorem Ipsum Dolor Sit Amet",
+    "description": "newwwLorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor aliquet velit, eu tempus libero rhoncus nec.",
+    "urlToImage": "https://th.bing.com/th/id/OIP.3LlPBlmNxeV4ZoV8o26O6wHaE7?rs=1&pid=ImgDetMain"
+  },
+  {
+    "id": 2,
+    "title": "Consectetur Adipiscing Elit",
+    "description": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.",
+    "urlToImage": "https://th.bing.com/th/id/OIP.npEHdRzToYyf9G1o_zCg9AHaE4?rs=1&pid=ImgDetMain"
+  },
+  {
+    "id": 3,
+    "title": "Sed Do Eiusmod Tempor",
+    "description": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+    "urlToImage": "https://th.bing.com/th/id/R.9e2c4560e9b6e5d70428d957e9ec23e9?rik=Resaz%2bUdRUuAuw&pid=ImgRaw&r=0"
+  }
+]
