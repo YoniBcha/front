@@ -24,5 +24,9 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
+  server: {
+    host: "0",
+    port: "3000", // optional
+  },
   ssr: false,
 });

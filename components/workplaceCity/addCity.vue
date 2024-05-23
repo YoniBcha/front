@@ -14,16 +14,13 @@
         layout="vertical"
         name="form_in_modal"
       >
-        <a-form-item
-          name="name"
-          :rules="[{ required: true, message: 'Please input your city name!' }]"
-        >
+        <div class="w-full">
           <a-input
             v-model:value="formState.name"
             placeholder="enter city name"
             class="w-full"
           />
-        </a-form-item>
+        </div>
       </a-form>
     </a-modal>
   </div>
@@ -37,12 +34,10 @@ const formState = reactive({
 });
 
 const onOk = async () => {
-  // Made onOk async
   await formRef.value.validateFields(); // Await after validation
 
   try {
-    // Assuming ohmyfetch handles CSRF token automatically
-    const response = await useFetch("http://127.0.0.1:8000/api/cities", {
+    const response = await useFetch("http://127.0.0.1:8000/api/city", {
       method: "POST",
       body: formState,
     });

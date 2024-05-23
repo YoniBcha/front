@@ -44,7 +44,7 @@ const woredas = ref([]);
 
 const fetchCities = async () => {
   try {
-    const response = await fetch("http://127.0.0.1:8000/api/woredas");
+    const response = await fetch("http://127.0.0.1:8000/api/woreda");
     const data = await response.json();
     woredas.value = data;
   } catch (error) {
@@ -54,7 +54,7 @@ const fetchCities = async () => {
 
 const onOk = async () => {
   try {
-    const response = await useFetch("http://127.0.0.1:8000/api/kebeles", {
+    const response = await useFetch("http://127.0.0.1:8000/api/kebele", {
       method: "POST",
       body: {
         woreda_id: formState.woreda_id,
