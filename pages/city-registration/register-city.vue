@@ -99,8 +99,7 @@ const columns = [
   {
     title: "Operation",
     dataIndex: "operation",
-    width: "10%",
-    fixed: "right",
+    width: "20%",
   },
 ];
 
@@ -123,17 +122,60 @@ const fetchData = async () => {
       kebeleResponse.json(),
     ]);
 
-    dataSourceFromParent.value = cityData.map((city) => {
-      const subcity = subcityData.find((s) => s.city_id === city.id) || {};
-      const woreda = woredaData.find((w) => w.subcity_id === subcity.id) || {};
-      const kebele = kebeleData.find((k) => k.woreda_id === woreda.id) || {};
+    dataSourceFromParent.value = [];
 
-      return {
-        city: city.name,
-        subcity: subcity.name || "",
-        woreda: woreda.name || "",
-        kebele: kebele.name || "",
-      };
+    cityData.forEach((city) => {
+      const subcities = subcityData.filter(
+        (subcity) => subcity.city_id === city.id
+      );
+
+      subcities.forEach((subcity) => {
+        const woredas = woredaData.filter(
+          (woreda) => woreda.subcity_id === subcity.id
+        );
+
+        woredas.forEach((woreda) => {
+          const kebeles = kebeleData.filter(
+            (kebele) => kebele.woreda_id === woreda.id
+          );
+
+          kebeles.forEach((kebele) => {
+            dataSourceFromParent.value.push({
+              city: city.name,
+              subcity: subcity.name,
+              woreda: woreda.name,
+              kebele: kebele.name,
+            });
+          });
+
+          if (kebeles.length === 0) {
+            dataSourceFromParent.value.push({
+              city: city.name,
+              subcity: subcity.name,
+              woreda: woreda.name,
+              kebele: "",
+            });
+          }
+        });
+
+        if (woredas.length === 0) {
+          dataSourceFromParent.value.push({
+            city: city.name,
+            subcity: subcity.name,
+            woreda: "",
+            kebele: "",
+          });
+        }
+      });
+
+      if (subcities.length === 0) {
+        dataSourceFromParent.value.push({
+          city: city.name,
+          subcity: "",
+          woreda: "",
+          kebele: "",
+        });
+      }
     });
   } catch (error) {
     console.error("Error fetching data:", error);
