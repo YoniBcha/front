@@ -44,9 +44,12 @@ const cities = ref([]);
 
 const fetchCities = async () => {
   try {
-    const response = await fetch("http://127.0.0.1:8000/api/cities");
+    const response = await fetch("http://127.0.0.1:8000/api/city", {
+      method: "GET",
+    });
     const data = await response.json();
     cities.value = data;
+    console.log(data);
   } catch (error) {
     console.error("Error fetching data:", error);
     this.error = error.message; // Set error message
@@ -55,7 +58,7 @@ const fetchCities = async () => {
 
 const onOk = async () => {
   try {
-    const response = await useFetch("http://127.0.0.1:8000/api/subcities", {
+     const response = await useFetch("http://127.0.0.1:8000/api/subcity", {
       method: "POST",
       body: {
         city_id: formState.city_id,

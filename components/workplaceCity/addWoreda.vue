@@ -5,11 +5,11 @@
       v-model:open="visible"
       title="Register New Woreda"
       ok-text="Create"
-      cancel-text="Cancel"
+      cancel-text="save woreda"
       @ok.prevent="onOk"
     >
       <a-form :model="formState" layout="vertical" name="form_in_modal">
-        <a-form-item name="city_id" has-feedback>
+        <a-form-item name="subcity_id" has-feedback>
           <a-select
             v-model:value="formState.subcity_id"
             placeholder="Please select the subcity"
@@ -42,11 +42,12 @@ const formState = reactive({
 });
 const subcities = ref([]);
 
-const fetchCities = async () => {
+const fetchSubcity = async () => {
   try {
-    const response = await fetch("http://127.0.0.1:8000/api/subcities");
+    const response = await fetch("http://127.0.0.1:8000/api/subcity");
     const data = await response.json();
     subcities.value = data;
+    console.log(data);
   } catch (error) {
     console.error("Error fetching data:", error);
     this.error = error.message; // Set error message
@@ -55,7 +56,7 @@ const fetchCities = async () => {
 
 const onOk = async () => {
   try {
-    const response = await useFetch("http://127.0.0.1:8000/api/woredas", {
+    const response = await useFetch("http://127.0.0.1:8000/api/woreda", {
       method: "POST",
       body: {
         subcity_id: formState.subcity_id,
@@ -72,10 +73,8 @@ const onOk = async () => {
   } catch (error) {
     console.error("Error:", error);
   }
-
   visible.value = false;
 };
 
-fetchCities();
+fetchSubcity(); // Fetch cities when component is initialized
 </script>
-
