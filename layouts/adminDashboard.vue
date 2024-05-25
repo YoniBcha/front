@@ -57,7 +57,7 @@
         <a-sub-menu key="3">
           <template #title>
             <span>
-              <BankOutlined />
+              <TeamOutlined />
               <span> Enterprise Information</span>
             </span>
           </template>
@@ -130,6 +130,26 @@
           </a-menu-item>
         </a-sub-menu>
 
+         <!--Resource page-->
+         <a-sub-menu key="8" :style="submenuStyle">
+          <template #title>
+            <span>
+              <FolderOpenOutlined />
+              <span> Resourses </span>
+            </span>
+          </template>
+          <a-menu-item key="8.1">
+            <router-link to="/Resource/ManualsAndGuidelines">
+              <span> Manuals and Guidelines </span>
+            </router-link>
+          </a-menu-item>
+          <a-menu-item key="8.2">
+            <router-link to="/Resource/ReportFormats">
+           <span>Report Formats</span> 
+          </router-link>
+          </a-menu-item>
+        </a-sub-menu>
+
         <!--Resource page-->
         <a-sub-menu key="8" :style="submenuStyle">
           <template #title>
@@ -155,7 +175,10 @@
         <!-- LANDING PAGE -->
         <a-sub-menu key="7">
           <template #title>
-            <span> <GlobalOutlined /> <span>LandingPage</span> </span>
+            <span>
+              <TeamOutlined />
+              <span>LandingPage</span>
+            </span>
           </template>
           <a-menu-item key="7.1">
             <router-link to="/landingPage/our-services">
@@ -190,7 +213,7 @@
       </a-menu>
     </a-layout-sider>
 
-    <!-- HEADER PART -->
+       <!-- HEADER PART -->
     <a-layout>
       <a-layout-header
         style="background: #fff; padding: 0"

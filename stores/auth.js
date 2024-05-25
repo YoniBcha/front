@@ -1,52 +1,40 @@
 // stores/auth.js
 import { defineStore } from "pinia";
-import { ref } from "vue";
 
-export const useAuthStore = defineStore("auth", () => {
-  const token = ref(localStorage.getItem("token") || "");
-  const user = ref(null);
-  const errorMessage = ref("");
-
-  const setToken = (newToken) => {
-    token.value = newToken;
-    localStorage.setItem("token", newToken); // Store token in localStorage
-  };
-
-  const login = async (formState) => {
-    try {
-      const response = await fetch("http://127.0.0.1:8000/api/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formState),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || "Login failed");
+export const useAuthStore = defineStore("auth", {
+  state: () => ({
+    isLoggedIn: false, // Initial login state
+    user: null,
+    token: null,
+  }),
+  actions: {
+    async login(credentials) {
+      try {
+        const response = await fetch("http://127.0.0.1:8000/api/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(credentials),
+        });
+        if (!response.ok) {
+          throw new Error("Login failed");
+        }
+        const data = await response.json();
+        this.isLoggedIn = true;
+        this.user = data.user;
+        this.token = data.token; // Assuming API provides a token
+      } catch (error) {
+        console.error(error);
+        throw error; // Re-throw for handling in component
       }
-
-      setToken(data.access_token); // Set token after successful login
-      user.value = data.user;
-      errorMessage.value = "";
-    } catch (err) {
-      errorMessage.value = err.message || "Login failed";
-    }
-  };
-
-  const logout = () => {
-    token.value = "";
-    user.value = null;
-    localStorage.removeItem("token"); // Remove token from localStorage on logout
-  };
-
-  return {
-    token,
-    user,
-    errorMessage,
-    login,
-    logout,
-  };
+    },
+    logout() {
+      this.user = null;
+      this.token = null;
+    },
+  },
+  getters: {
+    isAuthenticated() {
+      return this.isLoggedIn; // Getter returning the authentication state
+    },
+  },
 });

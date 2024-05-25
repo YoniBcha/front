@@ -13,7 +13,7 @@
         <nuxt-link to="/">Home</nuxt-link>
         <nuxt-link to="/news">News</nuxt-link>
         <nuxt-link to="/login-signup">Login-signup page</nuxt-link>
-        <nuxt-link to="/">Contact Us</nuxt-link>
+        <nuxt-link to="/contact-us">Contact Us</nuxt-link>
         <nuxt-link to="/">Register</nuxt-link>
       </div>
     </div>
