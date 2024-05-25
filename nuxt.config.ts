@@ -1,17 +1,9 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 
 export default defineNuxtConfig({
-  app: {
-    head: {
-      meta: [{ name: "csrf-token", content: "{{ csrf_token() }}" }],
-    },
-  },
   antd: {},
-  router: {
-    // middleware: ["auth"],
-  },
   css: ["~/assets/css/main.css"],
-  devtools: { enabled: true },
+  devtools: { enabled: false },
   modules: [
     "@ant-design-vue/nuxt",
     "@pinia/nuxt",
@@ -23,10 +15,6 @@ export default defineNuxtConfig({
       tailwindcss: {},
       autoprefixer: {},
     },
-  },
-  server: {
-    host: "0",
-    port: "3000", // optional
   },
   ssr: false,
 });
