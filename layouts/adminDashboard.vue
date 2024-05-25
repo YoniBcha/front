@@ -13,7 +13,7 @@
       "
       class="h-[100vh] mr-3"
     >
-      <div class="flex justify-center items-center h-[40px] text-white mt-3">
+      <div class="flex justify-center items-center h-[70px] text-white mt-3">
         <img src="~assets/img/addis.png" class="w-16" />
       </div>
       <a-divider
@@ -52,11 +52,12 @@
             </router-link>
           </a-menu-item>
         </a-sub-menu>
+
         <!-- ENTERPRISE PAGE -->
         <a-sub-menu key="3">
           <template #title>
             <span>
-              <TeamOutlined />
+              <BankOutlined />
               <span> Enterprise Information</span>
             </span>
           </template>
@@ -75,7 +76,7 @@
         <a-sub-menu key="4">
           <template #title>
             <span>
-              <TeamOutlined />
+              <HomeOutlined />
               <span> Workplace Information</span>
             </span>
           </template>
@@ -94,7 +95,7 @@
         <a-sub-menu key="5">
           <template #title>
             <span>
-              <TeamOutlined />
+              <FileProtectOutlined />
               <span> Contract Document</span>
             </span>
           </template>
@@ -113,7 +114,7 @@
         <a-sub-menu key="6">
           <template #title>
             <span>
-              <TeamOutlined />
+              <FileTextOutlined />
               <span> Complain Document</span>
             </span>
           </template>
@@ -128,16 +129,33 @@
             </router-link>
           </a-menu-item>
         </a-sub-menu>
+
+        <!--Resource page-->
+        <a-sub-menu key="8" :style="submenuStyle">
+          <template #title>
+            <span>
+              <FolderOpenOutlined />
+              <span> Resourses </span>
+            </span>
+          </template>
+          <a-menu-item key="8.1">
+            <router-link to="/Resource/ManualsAndGuidelines">
+              <span> Manuals and Guidelines </span>
+            </router-link>
+          </a-menu-item>
+          <a-menu-item key="8.2">
+            <router-link to="/Resource/ReportFormats">
+              <span>Report Formats</span>
+            </router-link>
+          </a-menu-item>
+        </a-sub-menu>
         <a-divider
           style="background: white; margin-left: 12px; margin-right: 40px"
         />
         <!-- LANDING PAGE -->
         <a-sub-menu key="7">
           <template #title>
-            <span>
-              <TeamOutlined />
-              <span>LandingPage</span>
-            </span>
+            <span> <GlobalOutlined /> <span>LandingPage</span> </span>
           </template>
           <a-menu-item key="7.1">
             <router-link to="/landingPage/our-services">
@@ -157,7 +175,7 @@
         </a-sub-menu>
         <a-menu-item key="9" :style="sidebarMenuItemStyle">
           <router-link to="/city-registration/register-city">
-            <SettingOutlined />
+            <PlusSquareOutlined />
             <span> City Registration </span>
           </router-link>
         </a-menu-item>
