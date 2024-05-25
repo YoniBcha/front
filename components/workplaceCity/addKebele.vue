@@ -9,7 +9,7 @@
       @ok.prevent="onOk"
     >
       <a-form :model="formState" layout="vertical" name="form_in_modal">
-        <a-form-item name="city_id" has-feedback>
+        <a-form-item name="woreda_id" has-feedback>
           <a-select
             v-model:value="formState.woreda_id"
             placeholder="Please select woreda"
@@ -35,6 +35,10 @@
 </template>
 
 <script setup>
+import { ref, reactive } from "vue";
+import { notification } from "ant-design-vue";
+import eventBus from "@/eventBus"; // Update the path to eventBus.js accordingly
+
 const visible = ref(false);
 const formState = reactive({
   woreda_id: null,
@@ -42,38 +46,70 @@ const formState = reactive({
 });
 const woredas = ref([]);
 
-const fetchCities = async () => {
+const fetchWoreda = async () => {
   try {
     const response = await fetch("http://127.0.0.1:8000/api/woreda");
     const data = await response.json();
     woredas.value = data;
+    console.log(data);
   } catch (error) {
-    alert("Error fetching data");
+    console.error("Error fetching data:", error);
+    notification.error({
+      message: "Error",
+      description: "Error fetching woreda data.",
+    });
   }
 };
 
 const onOk = async () => {
   try {
-    const response = await useFetch("http://127.0.0.1:8000/api/kebele", {
+    const response = await fetch("http://127.0.0.1:8000/api/kebele", {
       method: "POST",
-      body: {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
         woreda_id: formState.woreda_id,
         name: formState.name,
-      },
+      }),
     });
 
-    if (response.ok) {
+    if (response.status === 201) {
+      // Assuming 201 means success
+      const responseData = await response.json();
+      notification.success({
+        message: "Success",
+        description: "Kebele created successfully!",
+      });
+      console.log("Kebele created successfully:", responseData);
+      eventBus.value.dispatchEvent(
+        new CustomEvent("kebele-added", { detail: responseData })
+      );
       formState.woreda_id = null;
       formState.name = "";
     } else {
-      console.error("Error saving subcity:", response.statusText);
+      notification.error({
+        message: "Error",
+        description: "Error creating kebele.",
+      });
+      console.error("Error creating kebele:", response.statusText);
     }
   } catch (error) {
-    console.error("Error:", error);
+    notification.error({
+      message: "Error",
+      description: "Unable to complete the request.",
+    });
+    console.error("Network or other error:", error);
   }
 
   visible.value = false;
 };
 
-fetchCities(); // Fetch cities when component is initialized
+fetchWoreda(); // Fetch woredas when component is initialized
 </script>
+
+<style scoped>
+.collection-create-form_last-form-item {
+  margin-bottom: 0;
+}
+</style>
