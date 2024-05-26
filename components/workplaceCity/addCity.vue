@@ -17,7 +17,7 @@
         <div class="w-full">
           <a-input
             v-model:value="formState.name"
-            placeholder="enter city name"
+            placeholder="Enter city name"
             class="w-full"
           />
         </div>
@@ -27,30 +27,48 @@
 </template>
 
 <script setup>
-const formRef = ref(null); // Changed to null initially
+import eventBus from '@/eventBus';  
+
+const formRef = ref(null);
 const visible = ref(false);
 const formState = reactive({
   name: "",
 });
 
 const onOk = async () => {
-  await formRef.value.validateFields(); // Await after validation
-
   try {
-    const response = await useFetch("http://127.0.0.1:8000/api/city", {
+    await formRef.value.validateFields();
+
+    const response = await fetch("http://127.0.0.1:8000/api/city", {
       method: "POST",
-      body: formState,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formState),
     });
 
-    if (response.ok) {
-      alert("City name saved successfully!");
-      console.log("City name saved successfully:", response.data);
+    const responseData = await response.json();
+
+    if (response.status === 201) {
+      notification.success({
+        message: 'City is Registered successfully',
+        description: responseData.message,
+      });
+      console.log("City name saved successfully:", responseData);
+      eventBus.value.dispatchEvent(new CustomEvent('city-added', { detail: responseData }));
       formState.name = "";
     } else {
-      console.error("Error saving city name:", response.statusText);
+      notification.error({
+        message: 'Error',
+        description: responseData.message || 'Error saving city name.',
+      });
+      console.error("Error saving city name:", responseData);
     }
   } catch (error) {
-    alert("City name is not saved!");
+    notification.error({
+      message: 'Error',
+      description: 'City name is not saved!',
+    });
     console.error("Error:", error);
   }
 
