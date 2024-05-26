@@ -33,7 +33,7 @@ const columns = [
     title: "Sex",
     dataIndex: "sex",
     fixed: "left",
-    width: "10%",
+    width: "11%",
   },
   {
     title: "Age",
@@ -90,7 +90,7 @@ const columns = [
     title: "Status",
     dataIndex: "status",
     fixed: "right",
-    width: "6%",
+    width: "20%",
   },
   {
     title: "operation",
@@ -113,9 +113,9 @@ const fetchJobless = async () => {
       sex: jobless.jobless_sex,
       age: jobless.jobless_age,
       address: jobless.jobless_city,
-      status: jobless.status,
       phonenumber: jobless.jobless_phonenumber,
       email: jobless.jobless_email,
+      status: jobless.jobless_status
     }));
     console.log(data);
   } catch (error) {

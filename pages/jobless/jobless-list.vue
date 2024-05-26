@@ -2,7 +2,7 @@
   <div class="flex justify-between mt-5 mb-10">
     <div class="text-2xl text-[#0a58a4] font-bold">Jobless List</div>
     <div class="text-sm text-gray-400 font-bold">
-      The jobless that fullfill the reqirement will appear here
+      The jobless that fulfill the requirement will appear here
     </div>
   </div>
   <div>
@@ -16,7 +16,7 @@ definePageMeta({
 });
 const columns = [
   {
-    title: "Jobelss Name",
+    title: "Jobless Name",
     dataIndex: "name",
     key: "name",
     fixed: "left",
@@ -31,7 +31,6 @@ const columns = [
       }
     },
   },
-
   {
     title: "Sex",
     dataIndex: "sex",
@@ -90,54 +89,55 @@ const columns = [
     },
   },
   {
-    title: "operation",
+    title: "Operation",
     dataIndex: "operation",
     fixed: "right",
     width: "8%",
   },
 ];
-const dataSourceFromParent = ref([
-  {
-    key: "1",
-    sex: "M",
-    name: "John Brown",
-    age: 32,
-    address: "New York No. 1 Lake Park",
-    status: ["pass"],
-    phonenumber: "+(251)567-48-47",
-    email: "test44@gmail.com",
-    member: "tonas"
-  },
-  {
-    key: "2",
-    name: "Joe Black",
-    sex: "M",
-    age: 42,
-    address: "London No. 1 Lake Park",
-    status: ["loser"],
-    phonenumber: "+(251)56657567-48-47",
-    email: "test44@gmasgfdil.com",
-  },
-  {
-    key: "3",
-    name: "Jim Green",
-    sex: "M",
-    age: 32,
-    address: "Sidney No. 1 Lake Park",
-    status: ["pass"],
-    phonenumber: "+(251)567-5675-47",
-    email: "test44@gmghail.com",
-    
-  },
-  {
-    key: "4",
-    name: "Jim Red",
-    age: 32,
-    sex: "F",
-    address: "London No. 2 Lake Park",
-    status: ["pending"],
-    phonenumber: "+(251)5656757",
-    email: "test44@gmail.djghjcom",
-  },
-]);
+const dataSourceFromParent = ref([]);
+
+const fetchJobless = async () => {
+  try {
+    const response = await fetch("http://127.0.0.1:8000/api/jobless", {
+      method: "GET",
+    });
+    const data = await response.json();
+    dataSourceFromParent.value = data.map((jobless, index) => ({
+      key: index + 1, // Ensure each item has a unique key
+      photoUrl: `http://127.0.0.1:8000/image/${jobless.jobless_photo}`,
+      name: jobless.jobless_full_name,
+      sex: jobless.jobless_sex,
+      age: jobless.jobless_age,
+      woreda: jobless.jobless_woreda,
+      kebele: jobless.jobless_kebele,
+      subcity: jobless.jobless_subcity,
+      city: jobless.jobless_city,
+      status: jobless.jobless_status,
+      phonenumber: jobless.jobless_phonenumber,
+      email: jobless.jobless_email,
+      username: jobless.jobless_username,
+      password: jobless.jobless_password,
+      grandfather_name: jobless.jobless_grandfather_name,
+      profession: jobless.jobless_profession,
+      housenumber: jobless.jobless_housenumber,
+      familysize: jobless.jobless_familysize,
+      livingstatus: jobless.jobless_livingstatus,
+      birthplace: jobless.jobless_birthplace,
+      family: jobless.jobless_family_status,
+      martial: jobless.jobless_martial_status,
+      disability: jobless.jobless_disability_status,
+      reason: jobless.jobless_reason_tocome,
+      identification: jobless.jobless_identification_card,
+      training: jobless.jobless_training_cirtificate,
+      evidence: jobless.jobless_evidence_card,
+      priority: jobless.jobless_priority_evidence,
+    }));
+    console.log(data);
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+};
+
+onMounted(fetchJobless);
 </script>

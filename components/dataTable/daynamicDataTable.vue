@@ -107,7 +107,7 @@
               v-for="tag in record.status"
               :key="tag"
               :color="
-                tag === 'loser'
+                tag === 'Failed'
                   ? 'volcano'
                   : tag.length > 5
                   ? 'geekblue'
