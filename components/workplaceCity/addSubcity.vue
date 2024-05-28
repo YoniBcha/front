@@ -35,6 +35,10 @@
 </template>
 
 <script setup>
+import { ref, reactive } from "vue";
+import { notification } from "ant-design-vue";
+import eventBus from "@/eventBus"; // Update the path to eventBus.js accordingly
+
 const visible = ref(false);
 const formState = reactive({
   city_id: null,
@@ -52,31 +56,62 @@ const fetchCities = async () => {
     console.log(data);
   } catch (error) {
     console.error("Error fetching data:", error);
-    this.error = error.message; // Set error message
+    notification.error({
+      message: "Error",
+      description: "Error fetching cities data.",
+    });
   }
 };
 
 const onOk = async () => {
   try {
-     const response = await useFetch("http://127.0.0.1:8000/api/subcity", {
+    const response = await fetch("http://127.0.0.1:8000/api/subcity", {
       method: "POST",
-      body: {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
         city_id: formState.city_id,
         name: formState.name,
-      },
+      }),
     });
 
-    if (response.ok) {
+    if (response.status === 201) {
+      // Assuming 201 means success
+      const responseData = await response.json();
+      notification.success({
+        message: "Success",
+        description: "Subcity created successfully!",
+      });
+      console.log("Subcity created successfully:", responseData);
+      eventBus.value.dispatchEvent(
+        new CustomEvent("subcity-added", { detail: responseData })
+      );
       formState.city_id = null;
       formState.name = "";
     } else {
-      console.error("Error saving subcity:", response.statusText);
+      notification.error({
+        message: "Error",
+        description: "Error creating subcity.",
+      });
+      console.error("Error creating subcity:", response.statusText);
     }
   } catch (error) {
-    console.error("Error:", error);
+    notification.error({
+      message: "Error",
+      description: "Unable to complete the request.",
+    });
+    console.error("Network or other error:", error);
   }
+
   visible.value = false;
 };
 
 fetchCities(); // Fetch cities when component is initialized
 </script>
+
+<style scoped>
+.collection-create-form_last-form-item {
+  margin-bottom: 0;
+}
+</style>

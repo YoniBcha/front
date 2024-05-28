@@ -5,7 +5,7 @@
       v-model:open="visible"
       title="Register New Woreda"
       ok-text="Create"
-      cancel-text="save woreda"
+      cancel-text="Cancel"
       @ok.prevent="onOk"
     >
       <a-form :model="formState" layout="vertical" name="form_in_modal">
@@ -35,6 +35,10 @@
 </template>
 
 <script setup>
+import { ref, reactive } from "vue";
+import { notification } from "ant-design-vue";
+import eventBus from "@/eventBus"; // Update the path to eventBus.js accordingly
+
 const visible = ref(false);
 const formState = reactive({
   subcity_id: null,
@@ -50,31 +54,62 @@ const fetchSubcity = async () => {
     console.log(data);
   } catch (error) {
     console.error("Error fetching data:", error);
-    this.error = error.message; // Set error message
+    notification.error({
+      message: "Error",
+      description: "Error fetching subcity data.",
+    });
   }
 };
 
 const onOk = async () => {
   try {
-    const response = await useFetch("http://127.0.0.1:8000/api/woreda", {
+    const response = await fetch("http://127.0.0.1:8000/api/woreda", {
       method: "POST",
-      body: {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
         subcity_id: formState.subcity_id,
         name: formState.name,
-      },
+      }),
     });
 
-    if (response.ok) {
+    if (response.status === 201) {
+      // Assuming 201 means success
+      const responseData = await response.json();
+      notification.success({
+        message: "Woreda created successfully!",
+        description: "Woreda created successfully!",
+      });
+      console.log("Woreda created successfully:", responseData);
+      eventBus.value.dispatchEvent(
+        new CustomEvent("woreda-added", { detail: responseData })
+      );
       formState.subcity_id = null;
       formState.name = "";
     } else {
-      console.error("Error saving subcity:", response.statusText);
+      notification.error({
+        message: "Error",
+        description: "Error creating woreda.",
+      });
+      console.error("Error creating woreda:", response.statusText);
     }
   } catch (error) {
-    console.error("Error:", error);
+    notification.error({
+      message: "Error",
+      description: "Unable to complete the request.",
+    });
+    console.error("Network or other error:", error);
   }
+
   visible.value = false;
 };
 
-fetchSubcity(); // Fetch cities when component is initialized
+fetchSubcity(); // Fetch subcities when component is initialized
 </script>
+
+<style scoped>
+.collection-create-form_last-form-item {
+  margin-bottom: 0;
+}
+</style>
