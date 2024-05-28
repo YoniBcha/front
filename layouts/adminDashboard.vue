@@ -153,6 +153,21 @@
         <a-divider
           style="background: white; margin-left: 12px; margin-right: 40px"
         />
+
+        <a-sub-menu key="7">
+          <template #title>
+            <span>
+              <TeamOutlined />
+              <span>Employee</span>
+            </span>
+          </template>
+          <a-menu-item key="7.1">
+            <router-link to="/admin/employee/employee-list">
+              <span>Employee</span>
+            </router-link>
+          </a-menu-item>
+        </a-sub-menu>
+
         <!-- LANDING PAGE -->
         <a-sub-menu key="7">
           <template #title>
@@ -161,6 +176,7 @@
               <span>LandingPage</span>
             </span>
           </template>
+
           <a-menu-item key="7.1">
             <router-link to="/admin/landingpage/our-services">
               <span> Our Services </span>

@@ -108,8 +108,8 @@ const handleSubmit = async () => {
     console.log("Form is valid:", formState);
     await authStore.login(formState);
     const userRole = authStore.user.role;
-    if (userRole === "jobless") {
-      router.push("/admin/dashboard");
+    if (userRole === "enterprise") {
+      router.push("/enterprise");
     } else {
       router.push("/");
     }

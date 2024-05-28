@@ -7,24 +7,36 @@
     >
       <div class="flex flex-col mx-10 mb-8 w-64">
         <a-input
-          v-model:value="formState.name"
-          placeholder="Enter your name"
-          :status="errors.name && touched.name ? 'error' : ''"
-          @blur="() => handleBlur('name')"
+          v-model:value="formState.employee_fullname"
+          placeholder="Enter your employee_fullname"
+          :status="
+            errors.employee_fullname && touched.employee_fullname ? 'error' : ''
+          "
+          @blur="() => handleBlur('employee_fullname')"
           class="mt-5"
         />
-        <div v-if="errors.name && touched.name" class="text-red-500">
-          {{ errors.name }}
+        <div
+          v-if="errors.employee_fullname && touched.employee_fullname"
+          class="text-red-500"
+        >
+          {{ errors.employee_fullname }}
         </div>
         <a-input
-          v-model:value="formState.username"
-          placeholder="Enter your username"
-          :status="errors.username && touched.username ? 'error' : ''"
-          @blur="() => handleBlur('username')"
+          v-model:value="formState.employee_user_name"
+          placeholder="Enter your employee_user_name"
+          :status="
+            errors.employee_user_name && touched.employee_user_name
+              ? 'error'
+              : ''
+          "
+          @blur="() => handleBlur('employee_user_name')"
           class="mt-5"
         />
-        <div v-if="errors.username && touched.username" class="text-red-500">
-          {{ errors.username }}
+        <div
+          v-if="errors.employee_user_name && touched.employee_user_name"
+          class="text-red-500"
+        >
+          {{ errors.employee_user_name }}
         </div>
         <a-input
           v-model:value="formState.email"
@@ -37,18 +49,23 @@
           {{ errors.email }}
         </div>
         <a-input-password
-          v-model:value="formState.password"
-          placeholder="Enter password"
-          :status="errors.password && touched.password ? 'error' : ''"
-          @blur="() => handleBlur('password')"
+          v-model:value="formState.employee_password"
+          placeholder="Enter employee_password"
+          :status="
+            errors.employee_password && touched.employee_password ? 'error' : ''
+          "
+          @blur="() => handleBlur('employee_password')"
           class="mt-5"
         />
-        <div v-if="errors.password && touched.password" class="text-red-500">
-          {{ errors.password }}
+        <div
+          v-if="errors.employee_password && touched.employee_password"
+          class="text-red-500"
+        >
+          {{ errors.employee_password }}
         </div>
         <a-input-password
           v-model:value="formState.confirm_password"
-          placeholder="confirm password"
+          placeholder="Confirm password"
           :status="
             errors.confirm_password && touched.confirm_password ? 'error' : ''
           "
@@ -79,39 +96,39 @@ import * as yup from "yup";
 const { register, error } = useAuthStore();
 
 const formState = reactive({
-  username: "",
-  name: "",
+  employee_user_name: "",
+  employee_fullname: "",
   email: "",
-  password: "",
+  employee_password: "",
   confirm_password: "",
 });
 
 const errors = reactive({
-  username: null,
-  name: null,
+  employee_user_name: null,
+  employee_fullname: null,
   email: null,
-  password: null,
+  employee_password: null,
   confirm_password: null,
 });
 
 const touched = reactive({
-  username: false,
-  name: false,
+  employee_user_name: false,
+  employee_fullname: false,
   email: false,
-  password: false,
+  employee_password: false,
   confirm_password: false,
 });
 
 const schema = yup.object({
-  username: yup
+  employee_user_name: yup
     .string()
-    .required("Username is required")
-    .min(3, "Username must be at least 3 characters long")
+    .required("Employee username is required")
+    .min(3, "Employee username must be at least 3 characters long")
     .matches(
       /^[a-zA-Z0-9_]+$/,
-      "Username must contain only letters, numbers, or underscores"
+      "Employee username must contain only letters, numbers, or underscores"
     ),
-  name: yup
+  employee_fullname: yup
     .string()
     .required("Name is required")
     .min(3, "Name must be at least 3 characters long")
@@ -120,7 +137,7 @@ const schema = yup.object({
     .string()
     .required("Email is required")
     .email("Invalid email format"),
-  password: yup
+  employee_password: yup
     .string()
     .required("Password is required")
     .matches(
@@ -129,18 +146,18 @@ const schema = yup.object({
     ),
   confirm_password: yup
     .string()
-    .required("Password is required")
-    .oneOf([yup.ref("password")], "Passwords must match"),
+    .required("Confirm password is required")
+    .oneOf([yup.ref("employee_password")], "Passwords must match"),
 });
 
 watch(
   formState,
   () => {
-    if (touched.username) validateField("username");
-    if (touched.name) validateField("name");
+    if (touched.employee_user_name) validateField("employee_user_name");
+    if (touched.employee_fullname) validateField("employee_fullname");
     if (touched.email) validateField("email");
-    if (touched.password) validateField("password");
-    if (touched.verifyPassword) validateField("verifyPassword");
+    if (touched.employee_password) validateField("employee_password");
+    if (touched.confirm_password) validateField("confirm_password");
   },
   { deep: true }
 );
@@ -150,15 +167,6 @@ const validateField = async (field) => {
   try {
     await schema.validateAt(field, formState);
     errors[field] = null;
-
-    if (field === "verifyPassword") {
-      if (formState.password === formState.verifyPassword) {
-        errors.verifyPassword = null; // Clear error message
-      } else {
-        // If passwords don't match, display error message
-        throw new Error("Passwords must match");
-      }
-    }
   } catch (error) {
     errors[field] = error.message;
   }
@@ -167,26 +175,35 @@ const validateField = async (field) => {
 const handleSubmit = async () => {
   try {
     await schema.validate(formState, { abortEarly: false });
-    console.log("Form is valid:", formState);
-    const data = JSON.stringify(formState);
 
-    const response = await useFetch("http://127.0.0.1:8000/api/register", {
+    const formData = {
+      employee_user_name: formState.employee_user_name,
+      employee_fullname: formState.employee_fullname,
+      email: formState.email,
+      employee_password: formState.employee_password,
+      confirm_password: formState.confirm_password,
+    };
+
+    const response = await fetch("http://127.0.0.1:8000/api/employee", {
       method: "POST",
-      body: data,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
     });
 
-    if (!response.ok) {
-      throw new Error(`API request failed with status ${response.status}`);
+    if (response.ok) {
+      message.success("employee information created successfully");
+      // Reset form or close modal as necessary
     } else {
-      alert("registered");
+      const errorData = await response.json();
+      message.error(
+        `Failed to save employee information: ${errorData.message}`
+      );
     }
-
-    const responseData = await response.json();
-    // alert("API response:", responseData);
-
-    // Handle successful form submission (e.g., display success message)
   } catch (error) {
-    console.error("Form validation error:", error.message);
+    console.error("Error submitting form:", error);
+    message.error("Error submitting form");
   }
 };
 
