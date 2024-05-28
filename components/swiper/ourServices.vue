@@ -68,7 +68,7 @@ export default {
         const response = await fetch("http://127.0.0.1:8000/api/services");
         const data = await response.json();
         this.services = data;
-        console.log(this.services.services);
+        console.log(this.services);
       } catch (error) {
         console.error("Error fetching data:", error);
         this.error = error.message; // Set error message

@@ -1,6 +1,7 @@
 <template>
+
   <div class="grid grid-cols-12 h-[100vh]">
-    <div class="hero-background flex flex-col justify-center col-span-6">
+    <div class="hero-background flex flex-col justify-center col-span-6 bg-[url('assets/img/dot.svg')] bg-no-repeat bg-center bg-cover">
       <div class="font-bold text-gray-500 mb-5 text-3xl text-italic">
         "WellCome To . . ."
       </div>
@@ -14,6 +15,7 @@
       <img src="~assets/illus/enterprise.png" width="550"/>
     </div>
   </div>
+
   <!-- our service -->
   <div class="grid grid-cols-12 mt-10 mb-10 w-full">
     <div

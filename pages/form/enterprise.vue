@@ -1,5 +1,6 @@
 <template>
   <div class="w-[1000px] mx-auto my-20 border-2 border-blue-600 p-5">
+    <div class="text-xl font-bold">Enterprise Form</div>
     <a-form @submit.prevent="submitForm" name="validate_other">
       <div class="mt-10">
         <div class="grid grid-cols-3 grid-rows-3 gap-2 h-60">
