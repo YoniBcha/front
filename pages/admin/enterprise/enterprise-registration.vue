@@ -1,20 +1,16 @@
 <template>
-  <div class="flex justify-between mt-5 mb-10">
-    <div class="text-2xl text-[#0a58a4] font-bold">Enterprise List</div>
-    <div class="text-sm text-gray-400 font-bold">
-      The enterprise that fullfill the reqirement will appear here
-    </div>
+  <div class="">
+    <FormEnterpriseRegistration />
   </div>
   <div>
-    <DataTableListTable
-      :data="dataSourceFromParent"
+    <DataTableDaynamicDataTable
+      :data-source="dataSourceFromParent"
       :columns="columns"
     />
   </div>
 </template>
 
 <script setup>
-
 definePageMeta({
   layout: "admin-dashboard",
 });
@@ -82,6 +78,13 @@ const columns = [
       }
     },
   },
+
+  {
+    title: "Status",
+    dataIndex: "status",
+    fixed: "right",
+    width: "20%",
+  },
   {
     title: "operation",
     dataIndex: "operation",
@@ -89,47 +92,27 @@ const columns = [
     width: "8%",
   },
 ];
+const dataSourceFromParent = ref([]);
 
-const dataSourceFromParent = ref([
-  {
-    key: "1",
-    sex: "M",
-    name: "John Brown",
-    age: 32,
-    address: "New York No. 1 Lake Park",
-    status: ["pass"],
-    phonenumber: "+(251)567-48-47",
-    email: "test44@gmail.com",
-  },
-  {
-    key: "2",
-    name: "Joe Black",
-    sex: "M",
-    age: 42,
-    address: "London No. 1 Lake Park",
-    status: ["loser"],
-    phonenumber: "+(251)56657567-48-47",
-    email: "test44@gmasgfdil.com",
-  },
-  {
-    key: "3",
-    name: "Jim Green",
-    sex: "M",
-    age: 32,
-    address: "Sidney No. 1 Lake Park",
-    status: ["pass"],
-    phonenumber: "+(251)567-5675-47",
-    email: "test44@gmghail.com",
-  },
-  {
-    key: "4",
-    name: "Jim Red",
-    age: 32,
-    sex: "F",
-    address: "London No. 2 Lake Park",
-    status: ["pending"],
-    phonenumber: "+(251)5656757",
-    email: "test44@gmail.djghjcom",
-  },
-]);
+const fetchEnterprise = async () => {
+  try {
+    const response = await fetch("http://127.0.0.1:8000/api/enterprise", {
+      method: "GET",
+    });
+    const data = await response.json();
+    dataSourceFromParent.value = data.map((enterprise, index) => ({
+      key: index + 1, // Ensure each item has a unique key
+      name: enterprise.enterprise_name,
+      phonenumber: enterprise.enterprise_phone_number,
+      email: enterprise.enterprise_email,
+      address: enterprise.enterprise_city,
+      status: enterprise.enterprise_status,
+    }));
+    console.log(data);
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+};
+
+onMounted(fetchEnterprise);
 </script>

@@ -103,6 +103,8 @@
                 >
                 <a-select-option value="Contractions"
                   >Contractions</a-select-option
+                ><a-select-option value="Technology"
+                  >Technology</a-select-option
                 >
                 <a-select-option value="Urban farming "
                   >Urban Farming
@@ -275,7 +277,7 @@
               </a-form-item>
               <a-form-item>
                 <a-input
-                  v-model:value="formState.username"
+                  v-model:value="formState.enterprise_username"
                   :rules="[
                     {
                       required: false,
@@ -289,7 +291,7 @@
               </a-form-item>
               <a-form-item>
                 <a-input
-                  v-model:value="formState.password"
+                  v-model:value="formState.enterprise_password"
                   :rules="[
                     {
                       required: false,
@@ -671,7 +673,6 @@ const onWoredaChange = (selectedWoreda) => {
     filteredKebeles.value = [];
   }
 };
-
 const formState = reactive({
   enterprise_logo: [],
   enterprise_name: "",
@@ -702,15 +703,31 @@ const formState = reactive({
 
 const submitForm = async () => {
   try {
-    const response = await useFetch("http://127.0.0.1:8000/api/enterprises", {
+    const formData = new FormData();
+    for (const key in formState) {
+      if (Array.isArray(formState[key])) {
+        formState[key].forEach((file) => {
+          formData.append(key, file.originFileObj);
+        });
+      } else {
+        formData.append(key, formState[key]);
+      }
+    }
+
+    const response = await fetch("http://127.0.0.1:8000/api/enterprise", {
       method: "POST",
-      body: formState,
+      body: formData,
     });
 
-    alert("enteprise information created successfully");
+    if (response.ok) {
+      message.success("Enterprise information created successfully");
+      open.value = false;
+    } else {
+      message.error("Failed to save enterprise information");
+    }
   } catch (error) {
-    console.error("Error submitting form:");
-    alert("not saved");
+    console.error("Error submitting form:", error);
+    message.error("Error submitting form");
   }
 };
 </script>

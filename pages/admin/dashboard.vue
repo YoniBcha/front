@@ -55,10 +55,10 @@
     </div>
     <div class="grid gap-3 sm:grid-cols-1 xl:grid-cols-2 mr-3 mt-20">
       <div class="">
-        <linegraph />
+        <DashboardLinegraph />
       </div>
       <div>
-        <pichart class="mr-10" />
+        <DashboardPichart class="mr-10" />
       </div>
     </div>
   </div>

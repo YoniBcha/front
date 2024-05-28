@@ -1,10 +1,13 @@
 <template>
-  <div class="">
-    <FormNewContract />
+  <div class="flex justify-between mt-5 mb-10">
+    <div class="text-2xl text-[#0a58a4] font-bold">Workplace List</div>
+    <div class="text-sm text-gray-400 font-bold">
+      This is the workplace list that we have.
+    </div>
   </div>
   <div>
-    <DataTableDaynamicDataTable
-      :data-source="dataSourceFromParent"
+    <WorkplaceListTableWorkplaceTable
+      :data="dataSourceFromParent"
       :columns="columns"
     />
   </div>
@@ -14,18 +17,16 @@
 definePageMeta({
   layout: "admin-dashboard",
 });
+
 const columns = [
   {
     title: "Workplace Name",
-    dataIndex: "wokplacename",
-    key: "workplace",
+    dataIndex: "name",
+    key: "name",
     fixed: "left",
     customFilterDropdown: true,
     onFilter: (value, record) =>
-      record.wokplacename
-        .toString()
-        .toLowerCase()
-        .includes(value.toLowerCase()),
+      record.name.toString().toLowerCase().includes(value.toLowerCase()),
     onFilterDropdownOpenChange: (visible) => {
       if (visible) {
         setTimeout(() => {
@@ -60,7 +61,10 @@ const columns = [
     key: "workplacecity",
     customFilterDropdown: true,
     onFilter: (value, record) =>
-      record.phonenumber.toString().toLowerCase().includes(value.toLowerCase()),
+      record.workplacecity
+        .toString()
+        .toLowerCase()
+        .includes(value.toLowerCase()),
     onFilterDropdownOpenChange: (visible) => {
       if (visible) {
         setTimeout(() => {
@@ -73,10 +77,13 @@ const columns = [
   {
     title: "Workplace Subcity",
     dataIndex: "workplacesubcity",
-    key: "address",
+    key: "workplacesubcity",
     customFilterDropdown: true,
     onFilter: (value, record) =>
-      record.address.toString().toLowerCase().includes(value.toLowerCase()),
+      record.workplacesubcity
+        .toString()
+        .toLowerCase()
+        .includes(value.toLowerCase()),
     onFilterDropdownOpenChange: (visible) => {
       if (visible) {
         setTimeout(() => {
@@ -91,12 +98,6 @@ const columns = [
     key: "workplacesize",
   },
   {
-    title: "Status",
-    dataIndex: "status",
-    fixed: "right",
-    width: "6%",
-  },
-  {
     title: "operation",
     dataIndex: "operation",
     fixed: "right",
@@ -104,46 +105,30 @@ const columns = [
   },
 ];
 
-const dataSourceFromParent = ref([
-  {
-    key: "1",
-    wokplacename: "Yonas Million",
-    workplacesize: "34m2",
-    workplacecity: "New York No. 1 Lake Park",
-    status: ["pass"],
-    workplcecity: "+(251)567-48-47",
-    workplacetype: "test44@gmail.com",
-    workplacesubcity: "ldeta",
-  },
-  {
-    key: "2",
-    wokplacename: "Joe Black",
-    workplacecity: "London No. 1 Lake Park",
-    workplacesize: "34m2",
-    status: ["loser"],
-    phonenumber: "+(251)56657567-48-47",
-    workplacetype: "test44@gmasgfdil.com",
-    workplacesubcity: "piassa",
-  },
-  {
-    key: "3",
-    wokplacename: "Jim Green",
-    workplacecity: "Sidney No. 1 Lake Park",
-    status: ["pass"],
-    workplacesize: "34m2",
-    phonenumber: "+(251)567-5675-47",
-    workplacetype: "test44@gmghail.com",
-    workplacesubcity: "bole",
-  },
-  {
-    key: "4",
-    wokplacename: "Jim Red",
-    workplacecity: "London No. 2 Lake Park",
-    status: ["pending"],
-    workplacesize: "34m2",
-    phonenumber: "+(251)5656757",
-    workplacetype: "test44@gmail.djghjcom",
-    workplacesubcity: "arada",
-  },
-]);
+const dataSourceFromParent = ref([]);
+
+const fetchWorkplace = async () => {
+  try {
+    const response = await fetch("http://127.0.0.1:8000/api/workplace", {
+      method: "GET",
+    });
+    const data = await response.json();
+    dataSourceFromParent.value = data.map((enterprise, index) => ({
+      key: index + 1,
+      name: enterprise.workplace_name,
+      workplacetype: enterprise.workplace_type,
+      workplacecity: enterprise.workplace_city,
+      workplacesubcity: enterprise.workplace_subcity,
+      kebele: enterprise.enterprise_kebele,
+      city: enterprise.enterprise_city,
+      status: enterprise.enterprise_status,
+      workplacesize: enterprise.workplace_block_size,
+    }));
+    console.log(data);
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+};
+
+onMounted(fetchWorkplace);
 </script>

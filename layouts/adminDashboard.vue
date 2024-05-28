@@ -28,7 +28,7 @@
       >
         <!-- DASHBOARD -->
         <a-menu-item key="1" :style="sidebarMenuItemStyle">
-          <router-link to="/dashboard">
+          <router-link to="/admin/dashboard">
             <AppstoreOutlined />
             <span> Dashboard </span>
           </router-link>
@@ -42,12 +42,12 @@
             </span>
           </template>
           <a-menu-item key="2.1">
-            <router-link to="/jobless/jobless-list">
+            <router-link to="/admin/jobless/jobless-list">
               <span>Jobless List</span>
             </router-link>
           </a-menu-item>
           <a-menu-item key="2.2">
-            <router-link to="/jobless/jobless-registration">
+            <router-link to="/admin/jobless/jobless-registration">
               <span>Jobless Registration</span>
             </router-link>
           </a-menu-item>
@@ -62,12 +62,12 @@
             </span>
           </template>
           <a-menu-item key="3.1">
-            <router-link to="/enterprise/enterprise-list">
+            <router-link to="/admin/enterprise/enterprise-list">
               <span> Enterprise List </span>
             </router-link>
           </a-menu-item>
           <a-menu-item key="3.2">
-            <router-link to="/enterprise/enterprise-registration">
+            <router-link to="/admin/enterprise/enterprise-registration">
               <span> Enterprise Registration </span>
             </router-link>
           </a-menu-item>
@@ -81,12 +81,12 @@
             </span>
           </template>
           <a-menu-item key="4.1">
-            <router-link to="/workplace/workplace-list">
+            <router-link to="/admin/workplace/workplace-list">
               <span> Workplace List </span>
             </router-link>
           </a-menu-item>
           <a-menu-item key="4.2">
-            <router-link to="/workplace/workplace-registration">
+            <router-link to="/admin/workplace/workplace-registration">
               <span> Workplace Registration </span>
             </router-link>
           </a-menu-item>
@@ -100,12 +100,12 @@
             </span>
           </template>
           <a-menu-item key="5.1">
-            <router-link to="/contract/contract-list">
+            <router-link to="/admin/contract/contract-list">
               <span> Contract List </span>
             </router-link>
           </a-menu-item>
           <a-menu-item key="5.2">
-            <router-link to="/contract/make-agreement">
+            <router-link to="/admin/contract/make-agreement">
               <span> Make Agreement </span>
             </router-link>
           </a-menu-item>
@@ -119,34 +119,14 @@
             </span>
           </template>
           <a-menu-item key="6.1">
-            <router-link to="/complain/complain-list">
+            <router-link to="/admin/complain/complain-list">
               <span> Complain List </span>
             </router-link>
           </a-menu-item>
           <a-menu-item key="6.2">
-            <router-link to="/complain/accept-complain">
+            <router-link to="/admin/complain/accept-complain">
               <span> Accept Complain </span>
             </router-link>
-          </a-menu-item>
-        </a-sub-menu>
-
-         <!--Resource page-->
-         <a-sub-menu key="8" :style="submenuStyle">
-          <template #title>
-            <span>
-              <FolderOpenOutlined />
-              <span> Resourses </span>
-            </span>
-          </template>
-          <a-menu-item key="8.1">
-            <router-link to="/Resource/ManualsAndGuidelines">
-              <span> Manuals and Guidelines </span>
-            </router-link>
-          </a-menu-item>
-          <a-menu-item key="8.2">
-            <router-link to="/Resource/ReportFormats">
-           <span>Report Formats</span> 
-          </router-link>
           </a-menu-item>
         </a-sub-menu>
 
@@ -159,16 +139,17 @@
             </span>
           </template>
           <a-menu-item key="8.1">
-            <router-link to="/Resource/ManualsAndGuidelines">
+            <router-link to="/admin/Resource/ManualsAndGuidelines">
               <span> Manuals and Guidelines </span>
             </router-link>
           </a-menu-item>
           <a-menu-item key="8.2">
-            <router-link to="/Resource/ReportFormats">
+            <router-link to="/admin/Resource/ReportFormats">
               <span>Report Formats</span>
             </router-link>
           </a-menu-item>
         </a-sub-menu>
+
         <a-divider
           style="background: white; margin-left: 12px; margin-right: 40px"
         />
@@ -181,39 +162,31 @@
             </span>
           </template>
           <a-menu-item key="7.1">
-            <router-link to="/landingPage/our-services">
+            <router-link to="/admin/landingpage/our-services">
               <span> Our Services </span>
             </router-link>
           </a-menu-item>
           <a-menu-item key="7.2">
-            <router-link to="/landingPage/news">
+            <router-link to="admin/landingpage/news">
               <span> News Page</span>
             </router-link>
           </a-menu-item>
           <a-menu-item key="7.3">
-            <router-link to="/landingPage/contact-us">
+            <router-link to="admin/landingpage/contact-us">
               <span> Contact Us</span>
             </router-link>
           </a-menu-item>
         </a-sub-menu>
         <a-menu-item key="9" :style="sidebarMenuItemStyle">
-          <router-link to="/city-registration/register-city">
+          <router-link to="admin/city-registration/register-city">
             <PlusSquareOutlined />
             <span> City Registration </span>
-          </router-link>
-        </a-menu-item>
-
-        <!-- SETTING PAGE -->
-        <a-menu-item key="10" :style="sidebarMenuItemStyle">
-          <router-link to="/setting">
-            <SettingOutlined />
-            <span> Setting </span>
           </router-link>
         </a-menu-item>
       </a-menu>
     </a-layout-sider>
 
-       <!-- HEADER PART -->
+    <!-- HEADER PART -->
     <a-layout>
       <a-layout-header
         style="background: #fff; padding: 0"
@@ -251,7 +224,7 @@
             >
               <span class="sr-only">Open user menu</span>
               <img
-                class="w-8 rounded-full"
+                class="w-8 rounded-[50%]"
                 src="~assets/img/pinia.png"
                 alt="user photo"
               />
@@ -274,32 +247,31 @@
               </div>
               <ul class="py-2" aria-labelledby="user-menu-button">
                 <li>
-                  <a
-                    href="#"
+                  <nuxt-link
+                    to="/profile/userProfile"
                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-400 dark:hover:bg-blue-600 dark:text-gray-200 dark:hover:text-white"
-                    >Earnings</a
+                    >Profile</nuxt-link
                   >
                 </li>
                 <li>
                   <nuxt-link
-                    to="/profile/userProfile"
+                    to="/admin/dashboard"
                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-400 dark:hover:bg-blue-600 dark:text-gray-200 dark:hover:text-white"
                     >Dashboard</nuxt-link
                   >
                 </li>
                 <li>
-                  <a
-                    href="#"
+                  <nuxt-link
+                    to="/profile/setting"
                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-400 dark:hover:bg-blue-600 dark:text-gray-200 dark:hover:text-white"
-                    >Settings</a
+                    >Setting</nuxt-link
                   >
                 </li>
 
                 <li>
-                  <a
-                    href="#"
+                  <nuxt-link
                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-400 dark:hover:bg-blue-600 dark:text-gray-200 dark:hover:text-white"
-                    >Sign out</a
+                    >Sign out</nuxt-link
                   >
                 </li>
               </ul>

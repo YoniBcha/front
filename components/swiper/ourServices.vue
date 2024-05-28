@@ -65,7 +65,7 @@ export default {
   methods: {
     async fetchData() {
       try {
-        const response = await fetch("http://127.0.0.1:8000/api/ourservices");
+        const response = await fetch("http://127.0.0.1:8000/api/services");
         const data = await response.json();
         this.services = data;
         console.log(this.services.services);

@@ -113,6 +113,7 @@ const fetchJobless = async () => {
     dataSourceFromParent.value = data.map((jobless, index) => ({
       key: index + 1, // Ensure each item has a unique key
       name: jobless.jobless_full_name,
+      grandfather_name: jobless.jobless_grandfather_name,
       sex: jobless.jobless_sex,
       age: jobless.jobless_age,
       address: jobless.jobless_city,
