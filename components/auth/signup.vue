@@ -8,7 +8,7 @@
       <div class="flex flex-col mx-10 mb-8 w-64">
         <a-input
           v-model:value="formState.employee_fullname"
-          placeholder="Enter your employee_fullname"
+          placeholder="Enter your full name"
           :status="
             errors.employee_fullname && touched.employee_fullname ? 'error' : ''
           "
@@ -21,9 +21,10 @@
         >
           {{ errors.employee_fullname }}
         </div>
+
         <a-input
           v-model:value="formState.employee_user_name"
-          placeholder="Enter your employee_user_name"
+          placeholder="Enter your username"
           :status="
             errors.employee_user_name && touched.employee_user_name
               ? 'error'
@@ -38,6 +39,7 @@
         >
           {{ errors.employee_user_name }}
         </div>
+
         <a-input
           v-model:value="formState.email"
           placeholder="Enter your email"
@@ -48,9 +50,10 @@
         <div v-if="errors.email && touched.email" class="text-red-500">
           {{ errors.email }}
         </div>
+
         <a-input-password
           v-model:value="formState.employee_password"
-          placeholder="Enter employee_password"
+          placeholder="Enter your password"
           :status="
             errors.employee_password && touched.employee_password ? 'error' : ''
           "
@@ -63,9 +66,10 @@
         >
           {{ errors.employee_password }}
         </div>
+
         <a-input-password
           v-model:value="formState.confirm_password"
-          placeholder="Confirm password"
+          placeholder="Confirm your password"
           :status="
             errors.confirm_password && touched.confirm_password ? 'error' : ''
           "
@@ -88,9 +92,10 @@
 </template>
 
 <script setup>
-import { reactive, watch, computed } from "vue";
+import { reactive, watch } from "vue";
 import { useAuthStore } from "@/stores/auth"; // Assuming store is in `src/stores/auth.js`
 import * as yup from "yup";
+import { message } from "ant-design-vue";
 
 // Pinia store
 const { register, error } = useAuthStore();
@@ -130,9 +135,9 @@ const schema = yup.object({
     ),
   employee_fullname: yup
     .string()
-    .required("Name is required")
-    .min(3, "Name must be at least 3 characters long")
-    .matches(/^[a-zA-Z]+$/, "Name must contain only letters"),
+    .required("Full name is required")
+    .min(3, "Full name must be at least 3 characters long")
+    .matches(/^[a-zA-Z]+$/, "Full name must contain only letters"),
   email: yup
     .string()
     .required("Email is required")
@@ -193,8 +198,8 @@ const handleSubmit = async () => {
     });
 
     if (response.ok) {
-      message.success("employee information created successfully");
-      // Reset form or close modal as necessary
+      message.success("Employee information created successfully");
+      // Reset form or handle success as necessary
     } else {
       const errorData = await response.json();
       message.error(
@@ -212,3 +217,7 @@ const handleBlur = (field) => {
   validateField(field);
 };
 </script>
+
+<style>
+/* Add any necessary styles here */
+</style>

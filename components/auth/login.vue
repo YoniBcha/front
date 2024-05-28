@@ -39,6 +39,7 @@ import { reactive, watch } from "vue";
 import { useRouter } from "vue-router";
 import * as yup from "yup";
 import { useAuthStore } from "@/stores/auth";
+import { message } from "ant-design-vue";
 
 const router = useRouter();
 
@@ -107,14 +108,32 @@ const handleSubmit = async () => {
     await schema.validate(formState, { abortEarly: false });
     console.log("Form is valid:", formState);
     await authStore.login(formState);
+
     const userRole = authStore.user.role;
-    if (userRole === "enterprise") {
-      router.push("/enterprise");
-    } else {
-      router.push("/");
+    switch (userRole) {
+      case "jobless":
+        router.push("/jobless");
+        break;
+      case "enterprise":
+        router.push("/enterprise");
+        break;
+      case "admin":
+        router.push("/admin");
+        break;
+      case "con_comp_maker":
+        router.push("/con_comp_maker");
+        break;
+      case "recorders":
+        router.push("/recorders");
+        break;
+      default:
+        router.push("/login");
+        break;
     }
+    message.success("Login successful!");
   } catch (error) {
     console.error("Error:", error.message);
+    message.error("Login failed. Please check your credentials and try again.");
   }
 };
 

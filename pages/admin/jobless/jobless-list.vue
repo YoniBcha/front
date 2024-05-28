@@ -6,7 +6,7 @@
     </div>
   </div>
   <div>
-    <DataTableListTable :data="dataSourceFromParent" :columns="columns" />
+    <JoblessDatatTableJoblessList :data="dataSourceFromParent" :columns="columns" />
   </div>
 </template>
 

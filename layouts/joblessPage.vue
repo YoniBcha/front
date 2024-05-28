@@ -6,14 +6,11 @@
     >
       <div class="flex gap-4 font-bold text-xl">
         <div class="">Logo</div>
-        <div class="">Enterprise name</div>
+        <div class="">Jobless name</div>
       </div>
       <div class="">
         <ul class="flex font-bold gap-4">
           <li>complain</li>
-          <li>workplace request</li>
-          <li>rent payment</li>
-          <li>make contract</li>
           <li>contract update</li>
         </ul>
       </div>
@@ -22,12 +19,10 @@
     <div
       class="fixed top-[72px] right-10 left-10 h-[590px] overflow-y-scroll custom-scrollbar"
     >
-      <div class="h-[800px]">enterprise page</div>
+      <div class="h-[800px]">jobless page</div>
     </div>
   </div>
 </template>
-
-
 <style>
 .hero-background {
   position: relative;

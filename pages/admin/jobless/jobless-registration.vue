@@ -3,7 +3,10 @@
     <FormJobelssRegistration />
   </div>
   <div>
-    <DataTableDaynamicDataTable :data-source="dataSourceFromParent" :columns="columns" />
+    <JoblessDatatTableJoblessDataTable
+      :data-source="dataSourceFromParent"
+      :columns="columns"
+    />
   </div>
 </template>
 
@@ -116,7 +119,7 @@ const fetchJobless = async () => {
       address: jobless.jobless_city,
       phonenumber: jobless.jobless_phonenumber,
       email: jobless.jobless_email,
-      status: jobless.jobless_status
+      status: jobless.jobless_status,
     }));
     console.log(data);
   } catch (error) {
