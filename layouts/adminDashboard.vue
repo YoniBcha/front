@@ -269,10 +269,12 @@
                 </li>
 
                 <li>
-                  <nuxt-link
+                  <button
+                    @click="logout"
                     class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-400 dark:hover:bg-blue-600 dark:text-gray-200 dark:hover:text-white"
-                    >Sign out</nuxt-link
                   >
+                    Sign out
+                  </button>
                 </li>
               </ul>
             </div>
@@ -323,5 +325,27 @@ const switchToSignUpMode = () => {
 
 const switchToSignInMode = () => {
   isSignUpMode.value = false;
+};
+
+import { useRouter } from "vue-router";
+import { useAuthStore } from "@/stores/auth";
+
+const router = useRouter();
+const authStore = useAuthStore();
+
+const logout = async () => {
+  try {
+    await fetch("http://127.0.0.1:8000/api/logout", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${authStore.token}`,
+      },
+    });
+    authStore.logout();
+    router.push("/login-signup");
+  } catch (error) {
+    console.error("Logout failed:", error);
+  }
 };
 </script>

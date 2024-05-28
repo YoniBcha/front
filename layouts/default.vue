@@ -11,13 +11,47 @@
       <!-- links in nav bar -->
       <div class="flex gap-10 text-white text-lg font-semibold p-5">
         <nuxt-link to="/">Home</nuxt-link>
-        <nuxt-link to="/news">News</nuxt-link>
+        <nuxt-link to="/landingpage/news">News</nuxt-link>
         <nuxt-link to="/login-signup">Login-signup page</nuxt-link>
-        <nuxt-link to="/contact-us">Contact Us</nuxt-link>
-        <nuxt-link to="/">Register</nuxt-link>
+        <nuxt-link to="/landingpage/contact-us">Contact Us</nuxt-link>
+        <button @click="toggleDropdown">Register</button>
       </div>
     </div>
-
+    <div
+      class="fixed right-16 top-10 z-50 mt-7 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-[#0a58a4]"
+      id="user-dropdown"
+      v-show="isDropdownVisible"
+      ref="dropdownMenu"
+    >
+      <ul class="py-2" aria-labelledby="user-menu-button">
+        <li>
+          <nuxt-link
+            to="/form/jobless"
+            class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-400 dark:hover:bg-blue-600 dark:text-gray-200 dark:hover:text-white"
+            >Register as Jobless</nuxt-link
+          >
+        </li>
+        <li>
+          <nuxt-link
+            to="/form/enterprise"
+            class="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-400 dark:hover:bg-blue-600 dark:text-gray-200 dark:hover:text-white"
+            >Register as Enterprise</nuxt-link
+          >
+        </li>
+      </ul>
+    </div>
+    <a-modal
+      v-model:visible="codeEntryVisible"
+      title="Enter 4-Digit Code"
+      :footer="null"
+    >
+      <a-form :form="form" @finish="handleSubmit">
+        <a-form-item label="Code" name="code">
+          <a-input-number :min="0" :max="9999" style="width: 100%" />
+        </a-form-item>
+        <a-button html-type="submit" type="primary">Submit</a-button>
+      </a-form>
+    </a-modal>
     <!-- home section -->
     <div
       class="fixed top-[66px] right-16 left-16 h-[100vh] pb-20 overflow-y-auto custom-scrollbar"
@@ -158,6 +192,30 @@
     </div>
   </div>
 </template>
+
+<script setup>
+import { ref } from "vue";
+import { notification } from "ant-design-vue";
+
+const isDropdownVisible = ref(false);
+const toggleDropdown = () => {
+  isDropdownVisible.value = !isDropdownVisible.value;
+};
+
+const handleJoblessRegistration = () => {
+  // Show code entry section
+  codeEntryVisible.value = true;
+};
+
+const handleEnterpriseRegistration = () => {
+  // Show code entry section
+  codeEntryVisible.value = true;
+};
+
+const handleSubmit = () => {
+  // Handle code submission here
+};
+</script>
 
 <style lang="less" scoped>
 .custom-scrollbar::-webkit-scrollbar {

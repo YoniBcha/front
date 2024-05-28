@@ -36,10 +36,12 @@
 
 <script setup>
 import { reactive, watch } from "vue";
+import { useRouter } from "vue-router";
 import * as yup from "yup";
 import { useAuthStore } from "@/stores/auth";
 
-// Reactive state for form data, errors, and touch states
+const router = useRouter();
+
 const formState = reactive({
   username: "",
   password: "",
@@ -56,7 +58,6 @@ const touched = reactive({
   password: false,
 });
 
-// yup schema for form validation
 const schema = yup.object({
   username: yup
     .string()
@@ -76,7 +77,6 @@ const schema = yup.object({
     ),
 });
 
-// Watch the formState for changes and validate fields
 watch(
   formState,
   () => {
@@ -86,10 +86,9 @@ watch(
   { deep: true }
 );
 
-// Function to validate a single field
 const validateField = async (field) => {
   if (!touched[field]) {
-    touched[field] = true; // Mark the field as touched when validated
+    touched[field] = true;
   }
   try {
     if (schema.fields[field]) {
@@ -100,20 +99,25 @@ const validateField = async (field) => {
     errors[field] = error.message;
   }
 };
+
 const authStore = useAuthStore();
-// Function to handle form submission
+
 const handleSubmit = async () => {
   try {
     await schema.validate(formState, { abortEarly: false });
     console.log("Form is valid:", formState);
     await authStore.login(formState);
-    router.push("/");
+    const userRole = authStore.user.role;
+    if (userRole === "jobless") {
+      router.push("/admin/dashboard");
+    } else {
+      router.push("/");
+    }
   } catch (error) {
     console.error("Error:", error.message);
   }
 };
 
-// Function to handle blur event on input fields
 const handleBlur = (field) => {
   touched[field] = true;
   validateField(field);

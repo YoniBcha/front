@@ -1,6 +1,7 @@
 <script setup>
 definePageMeta({
   layout: "login-signup",
+  middleware: [],
 });
 </script>
 
