@@ -118,13 +118,13 @@ const handleSubmit = async () => {
         router.push("/enterprise");
         break;
       case "admin":
-        router.push("/admin");
+        router.push("/admin/dashboard");
         break;
       case "con_comp_maker":
-        router.push("/con_comp_maker");
+        router.push("/admin/dashboard");
         break;
       case "recorders":
-        router.push("/recorders");
+        router.push("/admin/dashboard");
         break;
       default:
         router.push("/login");

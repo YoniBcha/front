@@ -1,9 +1,9 @@
 <template>
-  <div class=""></div>
+  <div class="">ENterprise Home</div>
 </template>
 
 <script setup>
 definePageMeta({
-  layout: "jobless-page",
+  layout: "enterprise-page",
 });
 </script>

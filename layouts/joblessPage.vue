@@ -10,8 +10,7 @@
       </div>
       <div class="">
         <ul class="flex font-bold gap-4">
-          <li>complain</li>
-          <li>contract update</li>
+          <nuxt-link to="">Profile update</nuxt-link>
         </ul>
       </div>
     </div>
@@ -23,6 +22,8 @@
     </div>
   </div>
 </template>
+
+
 <style>
 .hero-background {
   position: relative;

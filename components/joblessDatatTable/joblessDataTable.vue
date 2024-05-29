@@ -6,10 +6,13 @@
       :data-source="dataSource"
       :columns="columns"
       :scroll="{ x: 1300, y: 1000 }"
+      :loading="loading"
     >
       <!-- Header cell template -->
       <template #headerCell="{ column }">
-        <span v-if="column.key === 'name'" style="color: #1890ff">{{ column.title }}</span>
+        <span v-if="column.key === 'name'" style="color: #1890ff">{{
+          column.title
+        }}</span>
       </template>
 
       <!-- Custom filter dropdown template -->
@@ -62,7 +65,7 @@
         <template
           v-if="
             column.dataIndex === 'name' ||
-            column.dataIndex === 'wokplacename' ||
+            column.dataIndex === 'workplacename' ||
             column.dataIndex === 'sex' ||
             column.dataIndex === 'age' ||
             column.dataIndex === 'phonenumber' ||
@@ -75,31 +78,62 @@
           "
         >
           <div class="editable-cell">
-            <div v-if="editableData[record.key]" class="editable-cell-input-wrapper">
-              <a-input v-model:value="editableData[record.key][column.dataIndex]" @pressEnter="save(record.key)" />
-              <check-outlined class="editable-cell-icon-check" @click="save(record.key)" />
+            <div
+              v-if="editableData[record.key]"
+              class="editable-cell-input-wrapper"
+            >
+              <a-input
+                v-model:value="editableData[record.key][column.dataIndex]"
+                @pressEnter="save(record.key)"
+              />
+              <check-outlined
+                class="editable-cell-icon-check"
+                @click="save(record.key)"
+              />
             </div>
             <div v-else class="editable-cell-text-wrapper">
               {{ text || " " }}
-              <edit-outlined class="editable-cell-icon" @click="edit(record.key)" />
+              <edit-outlined
+                class="editable-cell-icon"
+                @click="edit(record.key)"
+              />
             </div>
           </div>
         </template>
         <template v-else-if="column.dataIndex === 'status'">
-          <a-select v-model:value="record.status" @change="handleStatusChange(record.key, $event)">
+          <a-select v-model:value="record.status">
             <a-select-option value="Pending">Pending</a-select-option>
             <a-select-option value="Approved">Approved</a-select-option>
             <a-select-option value="Failed">Failed</a-select-option>
           </a-select>
         </template>
         <template v-else-if="column.dataIndex === 'operation'">
-          <a-popconfirm v-if="dataSource.length" :title="'Sure to delete? ' + record.name" @confirm="onDelete(record.key)">
+          <a-popconfirm
+            v-if="dataSource.length"
+            :title="'Sure to delete? ' + record.name"
+            @confirm="onDelete(record.key)"
+          >
             <a>Delete</a>
           </a-popconfirm>
         </template>
-        <span v-if="state.searchText && state.searchedColumn === column.dataIndex">
-          <template v-for="(fragment, i) in text.toString().split(new RegExp(`(?<=${state.searchText})|(?=${state.searchText})`, 'i'))">
-            <mark v-if="fragment.toLowerCase() === state.searchText.toLowerCase()" :key="i" class="highlight">
+        <span
+          v-if="state.searchText && state.searchedColumn === column.dataIndex"
+        >
+          <template
+            v-for="(fragment, i) in text
+              .toString()
+              .split(
+                new RegExp(
+                  `(?<=${state.searchText})|(?=${state.searchText})`,
+                  'i'
+                )
+              )"
+          >
+            <mark
+              v-if="fragment.toLowerCase() === state.searchText.toLowerCase()"
+              :key="i"
+              class="highlight"
+            >
               {{ fragment }}
             </mark>
             <template v-else>{{ fragment }}</template>
@@ -111,7 +145,7 @@
 </template>
 
 <script setup>
-import { defineProps, defineEmits, reactive, ref } from "vue";
+import { defineProps, reactive, ref } from "vue";
 import { cloneDeep } from "lodash-es";
 
 const props = defineProps({
@@ -121,6 +155,10 @@ const props = defineProps({
   },
   columns: {
     type: Array,
+    required: true,
+  },
+  loading: {
+    type: Boolean,
     required: true,
   },
 });
@@ -146,24 +184,24 @@ const handleReset = (clearFilters) => {
 const editableData = reactive({});
 
 const edit = (key) => {
-  editableData[key] = cloneDeep(props.dataSource.find((item) => key === item.key));
+  editableData[key] = cloneDeep(
+    props.dataSource.find((item) => key === item.key)
+  );
 };
 
 const save = (key) => {
-  Object.assign(props.dataSource.find((item) => key === item.key), editableData[key]);
+  Object.assign(
+    props.dataSource.find((item) => key === item.key),
+    editableData[key]
+  );
   delete editableData[key];
 };
 
-const handleStatusChange = (key, value) => {
-  const record = props.dataSource.find((item) => key === item.key);
-  if (record) {
-    record.status = value;
-    // You can make an API call here to save the updated status to the server.
-  }
-};
-
 const onDelete = (key) => {
-  props.dataSource.splice(props.dataSource.findIndex((item) => item.key === key), 1);
+  props.dataSource.splice(
+    props.dataSource.findIndex((item) => item.key === key),
+    1
+  );
 };
 </script>
 

@@ -24,7 +24,7 @@
         theme="light"
         mode="inline"
         class="mt-5"
-        style="background: #0a58a4; color: white; margin-top: 20px"
+        style="background: #0a58a4; color: white; margin-top: 20px; padding-bottom:40px"
       >
         <!-- DASHBOARD -->
         <a-menu-item key="1" :style="sidebarMenuItemStyle">
@@ -154,6 +154,13 @@
           style="background: white; margin-left: 12px; margin-right: 40px"
         />
 
+        <a-menu-item key="9" :style="sidebarMenuItemStyle">
+          <router-link to="/admin/cityregistration/registercity">
+            <PlusSquareOutlined />
+            <span> City Registration </span>
+          </router-link>
+        </a-menu-item>
+
         <a-sub-menu key="7">
           <template #title>
             <span>
@@ -169,7 +176,7 @@
         </a-sub-menu>
 
         <!-- LANDING PAGE -->
-        <a-sub-menu key="7">
+        <a-sub-menu key="10">
           <template #title>
             <span>
               <TeamOutlined />
@@ -177,28 +184,22 @@
             </span>
           </template>
 
-          <a-menu-item key="7.1">
+          <a-menu-item key="10.1">
             <router-link to="/admin/landingpage/our-services">
               <span> Our Services </span>
             </router-link>
           </a-menu-item>
-          <a-menu-item key="7.2">
-            <router-link to="admin/landingpage/news">
+          <a-menu-item key="10.2">
+            <router-link to="/admin/landingpage/news">
               <span> News Page</span>
             </router-link>
           </a-menu-item>
-          <a-menu-item key="7.3">
-            <router-link to="admin/landingpage/contact-us">
+          <a-menu-item key="10.3">
+            <router-link to="/admin/landingpage/contact-us">
               <span> Contact Us</span>
             </router-link>
           </a-menu-item>
         </a-sub-menu>
-        <a-menu-item key="9" :style="sidebarMenuItemStyle">
-          <router-link to="admin/city-registration/register-city">
-            <PlusSquareOutlined />
-            <span> City Registration </span>
-          </router-link>
-        </a-menu-item>
       </a-menu>
     </a-layout-sider>
 

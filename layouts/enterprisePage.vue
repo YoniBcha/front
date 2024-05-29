@@ -10,11 +10,16 @@
       </div>
       <div class="">
         <ul class="flex font-bold gap-4">
-          <li>complain</li>
-          <li>workplace request</li>
-          <li>rent payment</li>
-          <li>make contract</li>
-          <li>contract update</li>
+          <nuxt-link to="/enterprisepage/home">Home</nuxt-link>
+          <nuxt-link to="/enterprisepage/complain">complain</nuxt-link>
+          <nuxt-link to="/enterprisepage/contract-update"
+            >workplace request</nuxt-link
+          >
+          <nuxt-link to="/enterprisepage/make-contract">rent payment</nuxt-link>
+          <nuxt-link to="/enterprisepage/rent-payment">make contract</nuxt-link>
+          <nuxt-link to="/enterprisepage/workplace-request"
+            >contract update</nuxt-link
+          >
         </ul>
       </div>
     </div>
@@ -22,11 +27,10 @@
     <div
       class="fixed top-[72px] right-10 left-10 h-[590px] overflow-y-scroll custom-scrollbar"
     >
-      <div class="h-[800px]">enterprise page</div>
+      <router-view></router-view>
     </div>
   </div>
 </template>
-
 
 <style>
 .hero-background {
