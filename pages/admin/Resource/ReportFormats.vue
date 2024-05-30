@@ -6,7 +6,7 @@
       <!-- Resource cards -->
       <div class="flex flex-wrap justify-center">
         <!-- PDF files -->
-        <div v-for="(file, index) in filteredPdfFiles" :key="index" class="relative flex flex-col w-56 m-4 rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
+        <div v-for="(file, index) in filteredPdfFiles" :key="index" class="relative flex flex-col w-56 m-4 rounded-xl bg-white bg-clip-border text-gray-700 shadow-md bg-blue-200">
           <div class="relative h-40 overflow-hidden rounded-t-xl bg-blue-gray-500 bg-clip-border text-white shadow-lg shadow-blue-gray-500/40">
             <img class="absolute inset-0 w-full h-full object-cover object-center" :src="file.img" alt="File Image" />
           </div>
@@ -34,7 +34,7 @@
             <h5 class="mb-2 block font-sans text-sm font-semibold leading-snug tracking-normal text-blue-900 antialiased text-sm">
               {{ file.name }}
             </h5>
-            <p class="block font-sans text-base font-light leading-relaxed text-inherit antialiased text-xs">
+            <p class="block font-sans text-base font-light leading-relaxed text-inherit antialiased text-s">
               {{ file.description }}
             </p>
           </div>
@@ -58,10 +58,10 @@ const pdfFiles = [
 ];
 
 const xlsxFiles = [
-  { name: "Report 2015 ድጋፍና ክትትል", description: "Description of Excel file", path: "/Report 2015 ድጋፍና ክትትል.xlsx", img: "/addis.png" },
-  { name: "Report 2015 አስተዳደር", description: "Description of Excel file", path: "/Report 2015 አስተዳደር.xlsx", img: "/addis.png" },
-  { name: "Report 2015 ማስተላለፍ", description: "Description of Excel file", path: "/Report 2015 ማስተላለፍ.xlsx", img: "/addis.png" },
-  { name: "LH report format", description: "Description of Excel file", path: "/LH report format.docx", img: "/addis.png" },
+  { name: "Report 2015 ድጋፍና ክትትል", description: "This is a report for the 2015 ድጋፍና ክትትል", path: "/Report 2015 ድጋፍና ክትትል.xlsx", img: "/addis.png" },
+  { name: "Report 2015 አስተዳደር", description: "This is a report for the 2015 አስተዳደር", path: "/Report 2015 አስተዳደር.xlsx", img: "/addis.png" },
+  { name: "Report 2015 ማስተላለፍ", description: "This is a report for the 2015 ማስተላለፍ", path: "/Report 2015 ማስተላለፍ.xlsx", img: "/addis.png" },
+  { name: "LH report format", description: "This is a report of LH", path: "/LH report format.docx", img: "/addis.png" },
   // Add more XLSX files as needed
 ];
 

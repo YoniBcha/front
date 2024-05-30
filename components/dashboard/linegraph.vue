@@ -42,16 +42,16 @@ export default defineComponent({
       },
       series: [
         {
-          name: "Series 1",
-          data: [190, 150, 35, 50, 49, 60, 70, 91, 10],
+          name: "Enterprises",
+          data: [2, 5, 5, 6, 5, 12, 13, 14, 15],
         },
         {
-          name: "Series 2",
-          data: [23, 101, 32, 19, 37, 28, 105, 55, 159],
+          name: "workplaces",
+          data: [5, 6, 9, 6, 7, 6, 6, 5, 6],
         },
         {
-          name: "Series 3",
-          data: [45, 70, 50, 80, 150, 85, 75, 95, 110],
+          name: "Jobless",
+          data: [5, 10, 12, 14, 15, 17, 18, 20, 20],
         },
       ],
     };

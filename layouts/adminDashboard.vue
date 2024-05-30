@@ -207,7 +207,7 @@
     <a-layout>
       <a-layout-header
         style="background: #fff; padding: 0"
-        class="flex h-full z-10 justify-between items-center"
+        class="flex h-full z-10 justify-between items-center color-blue-500"
       >
         <div class="flex justify-between w-full mr-10">
           <div class="flex items-center h-full px-5 border-b">
@@ -223,7 +223,7 @@
             />
           </div>
 
-          <div class="font-bold text-3xl text-[#0a58a4]">
+          <div class="font-bold text-3xl text-[#0a58a4]     ">
             Lideta Subcity Enterprise Registration System
           </div>
 
