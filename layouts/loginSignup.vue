@@ -6,7 +6,6 @@
           <h2 class="title text-black">Sign in</h2>
           <authLogin />
         </form>
-
         <form
           class="sign-up-form shadow-2xl mx-auto px-2 rounded-lg bg-gray-50"
         >

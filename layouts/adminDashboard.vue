@@ -241,8 +241,8 @@
             >
               <span class="sr-only">Open user menu</span>
               <img
-                class="w-8 rounded-[50%]"
-                src="~assets/img/pinia.png"
+                class="w-10 rounded-[50%]"
+                src="~assets/img/admin-Img.jfif"
                 alt="user photo"
               />
             </button>
@@ -255,11 +255,11 @@
             >
               <div class="px-4 py-3">
                 <span class="block text-sm text-gray-900 dark:text-white"
-                  >Bonnie Green</span
+                  >Admin</span
                 >
                 <span
                   class="block text-sm text-gray-500 truncate dark:text-gray-400"
-                  >name@flowbite.com</span
+                  >admin@gmail.com</span
                 >
               </div>
               <ul class="py-2" aria-labelledby="user-menu-button">
