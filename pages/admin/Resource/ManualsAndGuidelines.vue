@@ -5,7 +5,7 @@
       type="text"
       v-model="searchQuery"
       placeholder="Search resources..."
-      class="p-1 border border-blue-700 rounded-md mb-4"
+      class="p-1 border border-blue-700 rounded-md mb-4 text-s"
     />
 
     <!-- Resource cards -->
@@ -13,7 +13,7 @@
       <div
         v-for="(file, index) in filteredPdfFiles"
         :key="index"
-        class="relative flex flex-col w-56 m-4 rounded-xl bg-white bg-clip-border text-gray-700 shadow-md"
+        class="relative flex flex-col w-56 m-4 rounded-xl bg-white bg-clip-border text-gray-700 shadow-md bg-blue-200"
       >
         <div
           class="relative h-40 overflow-hidden rounded-t-xl bg-blue-gray-500 bg-clip-border text-white shadow-lg shadow-blue-gray-500/40"
@@ -31,7 +31,7 @@
             {{ file.name }}
           </h5>
           <p
-            class="block font-sans text-base font-light leading-relaxed text-inherit antialiased text-xs"
+            class="block font-sans text-base font-light leading-relaxed text-inherit antialiased text-s"
           >
             {{ file.description }}
           </p>
@@ -71,12 +71,6 @@ const pdfFiles = ref([
     name: "Public Work Manual",
     description: "የከተሞች የምግብ ዋስትና ፕሮግራም የህብረተሰብ ተሳትፎ ማስፈጸሚያ ማንዋል ",
     path: "/public work manual.docx",
-    img: "/addis.png",
-  },
-  {
-    name: "File 5",
-    description: "Description of file 5",
-    path: "/file5.pdf",
     img: "/addis.png",
   },
 ]);
