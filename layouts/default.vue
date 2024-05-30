@@ -5,8 +5,8 @@
       class="fixed top-4 left-16 z-0 overflow-hidden right-16 flex justify-between items-center h-[70px] rounded-md border-t border-gray-200 bg-gradient-to-r from-gray-50 to-[#0a58a4]"
     >
       <!-- logo -->
-      <div class="w-16 p-2">
-        <img src="~assets/img/addis.png" alt="" />
+      <div class="w-20 p-2">
+       <a href="/"><img src="~assets/img/addis.png" alt="" /></a> 
       </div>
       <!-- links in nav bar -->
       <div class="flex gap-10 text-white text-lg font-semibold p-5">
