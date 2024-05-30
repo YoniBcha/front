@@ -10,7 +10,7 @@
       </div>
       <div class="">
         <ul class="flex font-bold gap-4">
-          <nuxt-link to="/enterprisepage/home">Home</nuxt-link>
+          <nuxt-link to="/enterprise">Home</nuxt-link>
           <nuxt-link to="/enterprisepage/complain">complain</nuxt-link>
           <nuxt-link to="/enterprisepage/contract-update"
             >workplace request</nuxt-link

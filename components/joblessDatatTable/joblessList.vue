@@ -4,6 +4,7 @@
     :scroll="{ x: 1300, y: 1000 }"
     :data-source="data"
     :columns="columns"
+    :loading="loading"
     @row-click="handleRowClick"
   >
     <template #headerCell="{ column }">
@@ -95,7 +96,7 @@
       <!-- status button -->
       <div class="flex justify-end items-center gap-2">
         Status:<button class="bg-[#0a58a4] px-4 py-1 text-white rounded">
-          {{ state.recordToShow?.member }}
+          {{ state.recordToShow?.status }}
         </button>
       </div>
       <!-- photo and fullname -->
@@ -103,63 +104,61 @@
         <div class="flex gap-5">
           Jobless Photo:
           <div class="h-44 w-52">
-            {{ state.recordToShow?.member }}
+            <!-- Placeholder for jobless photo -->
           </div>
         </div>
         <div class="grid grid-row-3 p-5">
-          <div class="">
+          <div>
             Full Name:
             <span class="text-gray-600">{{ state.recordToShow?.name }}</span>
           </div>
-          <div class="">
+          <div>
             Grandfather Name:
-            <span class="text-gray-600">{{ state.recordToShow?.grandfather_name }}</span>
+            <span class="text-gray-600">{{
+              state.recordToShow?.grandfather_name
+            }}</span>
           </div>
-          <div class="">
+          <div>
             Username:
-            <span class="text-gray-600">{{ state.recordToShow?.name }}</span>
+            <span class="text-gray-600">{{
+              state.recordToShow?.username
+            }}</span>
           </div>
         </div>
         <div class="grid grid-row-3 p-5">
           <div class="flex gap-8">
-            <div class="">
+            <div>
               Age:
-              <span class="text-gray-600">{{
-                state.recordToShow?.name
-              }}</span>
+              <span class="text-gray-600">{{ state.recordToShow?.age }}</span>
             </div>
-            <div class="">
+            <div>
               Gender:
-              <span class="text-gray-600">{{
-                state.recordToShow?.name
-              }}</span>
+              <span class="text-gray-600">{{ state.recordToShow?.sex }}</span>
             </div>
           </div>
           <div class="flex gap-5">
-            <div class="">
+            <div>
               City:
-              <span class="text-gray-600">{{
-                state.recordToShow?.name
-              }}</span>
+              <span class="text-gray-600">{{ state.recordToShow?.city }}</span>
             </div>
-            <div class="">
+            <div>
               Subcity:
               <span class="text-gray-600">{{
-                state.recordToShow?.name
+                state.recordToShow?.subcity
               }}</span>
             </div>
           </div>
           <div class="flex gap-5">
-            <div class="">
+            <div>
               Woreda:
               <span class="text-gray-600">{{
-                state.recordToShow?.name
+                state.recordToShow?.woreda
               }}</span>
             </div>
-            <div class="">
+            <div>
               Kebele:
               <span class="text-gray-600">{{
-                state.recordToShow?.name
+                state.recordToShow?.kebele
               }}</span>
             </div>
           </div>
@@ -168,79 +167,93 @@
       <!-- identification card and email phone number -->
       <div class="grid grid-cols-3 mt-5">
         <div class="grid grid-row-3 p-5">
-          <div class="">
+          <div>
             Phone Number:
-            <span class="text-gray-600">{{ state.recordToShow?.name }}</span>
+            <span class="text-gray-600">{{
+              state.recordToShow?.phonenumber
+            }}</span>
           </div>
-          <div class="">
+          <div>
             Email:
-            <span class="text-gray-600">{{ state.recordToShow?.name }}</span>
+            <span class="text-gray-600">{{ state.recordToShow?.email }}</span>
           </div>
-          <div class="">
+          <div>
             Profession:
-            <span class="text-gray-600">{{ state.recordToShow?.name }}</span>
+            <span class="text-gray-600">{{
+              state.recordToShow?.profession
+            }}</span>
           </div>
         </div>
         <div class="grid grid-row-3 p-5">
-          <div class="">
+          <div>
             House Number:
-            <span class="text-gray-600">{{ state.recordToShow?.name }}</span>
+            <span class="text-gray-600">{{
+              state.recordToShow?.housenumber
+            }}</span>
           </div>
-          <div class="">
+          <div>
             Family Size:
-            <span class="text-gray-600">{{ state.recordToShow?.name }}</span>
+            <span class="text-gray-600">{{
+              state.recordToShow?.familysize
+            }}</span>
           </div>
-          <div class="">
+          <div>
             Living Status:
-            <span class="text-gray-600">{{ state.recordToShow?.name }}</span>
+            <span class="text-gray-600">{{
+              state.recordToShow?.livingstatus
+            }}</span>
           </div>
         </div>
         <div class="gap-5">
-          <div class="">Jobless Identification Card:</div>
+          <div>Jobless Identification Card:</div>
           <div class="h-48">
-            {{ state.recordToShow?.member }}
+            <!-- Placeholder for jobless ID card -->
           </div>
         </div>
       </div>
       <div class="grid grid-cols-3 mt-10 gap-3">
-        <div class="">
-          <div class="">Identification Card:</div>
+        <div>
+          <div>Identification Card:</div>
           <div class="h-48">
-            {{ state.recordToShow?.member }}
+            <!-- Placeholder for identification card -->
           </div>
         </div>
         <div class="grid grid-row-3">
-          <div class="">training certificate:</div>
+          <div>Training Certificate:</div>
           <div class="h-48">
-            {{ state.recordToShow?.member }}
+            <!-- Placeholder for training certificate -->
           </div>
         </div>
         <div class="grid grid-row-3 p-5">
-          <div class="">
+          <div>
             Birth Place:
-            <span class="text-gray-600">{{ state.recordToShow?.name }}</span>
+            <span class="text-gray-600">{{
+              state.recordToShow?.birthplace
+            }}</span>
           </div>
-          <div class="">
+          <div>
             Family Status:
-            <span class="text-gray-600">{{ state.recordToShow?.name }}</span>
+            <span class="text-gray-600">{{ state.recordToShow?.family }}</span>
           </div>
-          <div class="">
+          <div>
             Disability Status:
-            <span class="text-gray-600">{{ state.recordToShow?.name }}</span>
+            <span class="text-gray-600">{{
+              state.recordToShow?.disability
+            }}</span>
           </div>
         </div>
       </div>
       <div class="grid grid-cols-2 mt-10 gap-3">
-        <div class="">
-          <div class="">Identification Card:</div>
+        <div>
+          <div>Identification Card:</div>
           <div class="h-48">
-            {{ state.recordToShow?.member }}
+            <!-- Placeholder for identification card -->
           </div>
         </div>
         <div class="grid grid-row-3">
-          <div class="">Priority Evidence:</div>
+          <div>Priority Evidence:</div>
           <div class="h-48">
-            {{ state.recordToShow?.member }}
+            <!-- Placeholder for priority evidence -->
           </div>
         </div>
       </div>
@@ -252,6 +265,7 @@
 const props = defineProps({
   data: Array,
   columns: Array,
+  loading: Boolean,
 });
 const emits = defineEmits(["row-clicked"]);
 

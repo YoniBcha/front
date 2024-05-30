@@ -360,7 +360,7 @@ const logout = async () => {
       },
     });
     authStore.logout();
-    router.push("/login-signup");
+    router.push("/login");
   } catch (error) {
     console.error("Logout failed:", error);
   }

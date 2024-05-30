@@ -3,7 +3,7 @@
   <div class="mb-24">
     <a-table
       bordered
-      :data-source="dataSource"
+      :data-source="filteredData"
       :columns="columns"
       :scroll="{ x: 1300, y: 1000 }"
       :loading="loading"
@@ -101,9 +101,12 @@
           </div>
         </template>
         <template v-else-if="column.dataIndex === 'status'">
-          <a-select v-model:value="record.status">
+          <a-select
+            v-model:value="record.status"
+            @change="updateStatus(record.key, record.status)"
+          >
             <a-select-option value="Pending">Pending</a-select-option>
-            <a-select-option value="Approved">Approved</a-select-option>
+            <a-select-option value="Accepted">Accepted</a-select-option>
             <a-select-option value="Failed">Failed</a-select-option>
           </a-select>
         </template>
@@ -145,8 +148,9 @@
 </template>
 
 <script setup>
-import { defineProps, reactive, ref } from "vue";
+import { defineProps, reactive, ref, computed } from "vue";
 import { cloneDeep } from "lodash-es";
+import axios from "axios";
 
 const props = defineProps({
   dataSource: {
@@ -181,6 +185,18 @@ const handleReset = (clearFilters) => {
   state.searchText = "";
 };
 
+const filteredData = computed(() => {
+  if (!state.searchText) {
+    return props.dataSource;
+  }
+  return props.dataSource.filter((item) => {
+    return item[state.searchedColumn]
+      ?.toString()
+      .toLowerCase()
+      .includes(state.searchText.toLowerCase());
+  });
+});
+
 const editableData = reactive({});
 
 const edit = (key) => {
@@ -189,19 +205,55 @@ const edit = (key) => {
   );
 };
 
-const save = (key) => {
-  Object.assign(
-    props.dataSource.find((item) => key === item.key),
-    editableData[key]
-  );
-  delete editableData[key];
+const save = async (key) => {
+  const record = props.dataSource.find((item) => item.key === key);
+  const updatedData = { ...editableData[key] };
+  delete updatedData.key;
+  try {
+    const response = await axios.put(
+      `http://127.0.0.1:8000/api/jobless/${key}`,
+      updatedData
+    );
+    if (response.status === 200) {
+      Object.assign(record, editableData[key]);
+      delete editableData[key];
+    } else {
+      console.error("Failed to save changes: ", response.data);
+    }
+  } catch (error) {
+    console.error("Failed to save changes:", error);
+  }
 };
 
-const onDelete = (key) => {
-  props.dataSource.splice(
-    props.dataSource.findIndex((item) => item.key === key),
-    1
-  );
+const onDelete = async (key) => {
+  try {
+    await axios.delete(`http://127.0.0.1:8000/api/jobless/${key}`);
+    const index = props.dataSource.findIndex((item) => item.key === key);
+    if (index !== -1) {
+      props.dataSource.splice(index, 1);
+    }
+  } catch (error) {
+    console.error("Failed to delete record:", error);
+  }
+};
+
+const updateStatus = async (key, status) => {
+  try {
+    const response = await axios.put(
+      `http://127.0.0.1:8000/api/jobless/${key}/status`,
+      { jobless_status: status }
+    );
+    if (response.status === 200) {
+      const record = props.dataSource.find((item) => item.key === key);
+      if (record) {
+        record.status = status;
+      }
+    } else {
+      console.error("Failed to update status: ", response.data);
+    }
+  } catch (error) {
+    console.error("Failed to update status:", error);
+  }
 };
 </script>
 

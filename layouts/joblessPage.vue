@@ -10,7 +10,7 @@
       </div>
       <div class="">
         <ul class="flex font-bold gap-4">
-          <nuxt-link to="">Profile update</nuxt-link>
+          <nuxt-link to="/jobless">Profile update</nuxt-link>
         </ul>
       </div>
     </div>
@@ -18,11 +18,10 @@
     <div
       class="fixed top-[72px] right-10 left-10 h-[590px] overflow-y-scroll custom-scrollbar"
     >
-      <div class="h-[800px]">jobless page</div>
+      <router-view />
     </div>
   </div>
 </template>
-
 
 <style>
 .hero-background {

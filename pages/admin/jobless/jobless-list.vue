@@ -105,7 +105,6 @@ const fetchJobless = async () => {
     const data = await response.json();
     dataSourceFromParent.value = data.map((jobless, index) => ({
       key: index + 1, // Ensure each item has a unique key
-      photoUrl: `http://127.0.0.1:8000/image/${jobless.jobless_photo}`,
       name: jobless.jobless_full_name,
       sex: jobless.jobless_sex,
       age: jobless.jobless_age,
