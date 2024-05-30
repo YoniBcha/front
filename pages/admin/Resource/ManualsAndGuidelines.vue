@@ -5,7 +5,7 @@
       type="text"
       v-model="searchQuery"
       placeholder="Search resources..."
-      class="p-1 border border-blue-700 rounded-md mb-4 text-s"
+      class="p-1 border border-blue-700 rounded-md mb-4"
     />
 
     <!-- Resource cards -->
@@ -13,7 +13,7 @@
       <div
         v-for="(file, index) in filteredPdfFiles"
         :key="index"
-        class="relative flex flex-col w-56 m-4 rounded-xl bg-white bg-clip-border text-gray-700 shadow-md bg-blue-200"
+        class="relative flex flex-col w-56 m-4 rounded-xl bg-white bg-clip-border text-gray-700 shadow-md bg-blue-00"
       >
         <div
           class="relative h-40 overflow-hidden rounded-t-xl bg-blue-gray-500 bg-clip-border text-white shadow-lg shadow-blue-gray-500/40"
@@ -31,11 +31,16 @@
             {{ file.name }}
           </h5>
           <p
-            class="block font-sans text-base font-light leading-relaxed text-inherit antialiased text-s"
+            class="block font-sans text-base font-light leading-relaxed text-inherit antialiased text-xs"
           >
             {{ file.description }}
           </p>
         </div>
+        <div class="p-6 pt-0">
+            <a :href="file.path" target="_blank" class="select-none rounded-lg bg-blue-500 py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-black-500/20 transition-all hover:shadow-lg hover:shadow-black-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none">
+              Download PDF
+            </a>
+          </div>
       </div>
     </div>
   </div>
@@ -71,6 +76,12 @@ const pdfFiles = ref([
     name: "Public Work Manual",
     description: "የከተሞች የምግብ ዋስትና ፕሮግራም የህብረተሰብ ተሳትፎ ማስፈጸሚያ ማንዋል ",
     path: "/public work manual.docx",
+    img: "/addis.png",
+  },
+  {
+    name: "File 5",
+    description: "Description of file 5",
+    path: "/file5.pdf",
     img: "/addis.png",
   },
 ]);
