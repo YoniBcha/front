@@ -7,64 +7,69 @@
     >
       <div class="flex flex-col mx-10 mb-8 w-64">
         <a-input
-          v-model:value="formState.employee_fullname"
+          v-model:value="formState.name"
           placeholder="Enter your full name"
           :status="
-            errors.employee_fullname && touched.employee_fullname ? 'error' : ''
-          "
-          @blur="() => handleBlur('employee_fullname')"
-          class="mt-5"
-        />
-        <div
-          v-if="errors.employee_fullname && touched.employee_fullname"
-          class="text-red-500"
-        >
-          {{ errors.employee_fullname }}
-        </div>
-
-        <a-input
-          v-model:value="formState.employee_user_name"
-          placeholder="Enter your username"
-          :status="
-            errors.employee_user_name && touched.employee_user_name
+            errors.name && touched.name
               ? 'error'
               : ''
           "
-          @blur="() => handleBlur('employee_user_name')"
+          @blur="() => handleBlur('name')"
           class="mt-5"
         />
         <div
-          v-if="errors.employee_user_name && touched.employee_user_name"
+          v-if="errors.name && touched.name"
           class="text-red-500"
         >
-          {{ errors.employee_user_name }}
+          {{ errors.name }}
         </div>
 
         <a-input
-          v-model:value="formState.email"
-          placeholder="Enter your email"
-          :status="errors.email && touched.email ? 'error' : ''"
-          @blur="() => handleBlur('email')"
-          class="mt-5"
-        />
-        <div v-if="errors.email && touched.email" class="text-red-500">
-          {{ errors.email }}
-        </div>
-
-        <a-input-password
-          v-model:value="formState.employee_password"
-          placeholder="Enter your password"
+          v-model:value="formState.username"
+          placeholder="Enter your username"
           :status="
-            errors.employee_password && touched.employee_password ? 'error' : ''
+            errors.username && touched.username ? 'error' : ''
           "
-          @blur="() => handleBlur('employee_password')"
+          @blur="() => handleBlur('username')"
           class="mt-5"
         />
         <div
-          v-if="errors.employee_password && touched.employee_password"
+          v-if="errors.username && touched.username"
           class="text-red-500"
         >
-          {{ errors.employee_password }}
+          {{ errors.username }}
+        </div>
+
+        <a-input
+          v-model:value="formState.emial"
+          placeholder="Enter your email"
+          :status="
+            errors.emial && touched.emial ? 'error' : ''
+          "
+          @blur="() => handleBlur('emial')"
+          class="mt-5"
+        />
+        <div
+          v-if="errors.emial && touched.emial"
+          class="text-red-500"
+        >
+          {{ errors.emial }}
+        </div>
+
+        <a-input-password
+          v-model:value="formState.password"
+          placeholder="Enter your password"
+          :status="
+            errors.password && touched.password ? 'error' : ''
+          "
+          @blur="() => handleBlur('password')"
+          class="mt-5"
+        />
+        <div
+          v-if="errors.password && touched.password"
+          class="text-red-500"
+        >
+          {{ errors.password }}
         </div>
 
         <a-input-password
@@ -101,31 +106,31 @@ import { message } from "ant-design-vue";
 const { register, error } = useAuthStore();
 
 const formState = reactive({
-  employee_user_name: "",
-  employee_fullname: "",
-  email: "",
-  employee_password: "",
+  username: "",
+  name: "",
+  emial: "",
+  password: "",
   confirm_password: "",
 });
 
 const errors = reactive({
-  employee_user_name: null,
-  employee_fullname: null,
-  email: null,
-  employee_password: null,
+  username: null,
+  name: null,
+  emial: null,
+  password: null,
   confirm_password: null,
 });
 
 const touched = reactive({
-  employee_user_name: false,
-  employee_fullname: false,
-  email: false,
-  employee_password: false,
+  username: false,
+  name: false,
+  emial: false,
+  password: false,
   confirm_password: false,
 });
 
 const schema = yup.object({
-  employee_user_name: yup
+  username: yup
     .string()
     .required("Employee username is required")
     .min(3, "Employee username must be at least 3 characters long")
@@ -133,16 +138,16 @@ const schema = yup.object({
       /^[a-zA-Z0-9_]+$/,
       "Employee username must contain only letters, numbers, or underscores"
     ),
-  employee_fullname: yup
+  name: yup
     .string()
     .required("Full name is required")
     .min(3, "Full name must be at least 3 characters long")
     .matches(/^[a-zA-Z]+$/, "Full name must contain only letters"),
-  email: yup
+  emial: yup
     .string()
     .required("Email is required")
     .email("Invalid email format"),
-  employee_password: yup
+  password: yup
     .string()
     .required("Password is required")
     .matches(
@@ -152,16 +157,16 @@ const schema = yup.object({
   confirm_password: yup
     .string()
     .required("Confirm password is required")
-    .oneOf([yup.ref("employee_password")], "Passwords must match"),
+    .oneOf([yup.ref("password")], "Passwords must match"),
 });
 
 watch(
   formState,
   () => {
-    if (touched.employee_user_name) validateField("employee_user_name");
-    if (touched.employee_fullname) validateField("employee_fullname");
-    if (touched.email) validateField("email");
-    if (touched.employee_password) validateField("employee_password");
+    if (touched.username) validateField("username");
+    if (touched.name) validateField("name");
+    if (touched.emial) validateField("emial");
+    if (touched.password) validateField("password");
     if (touched.confirm_password) validateField("confirm_password");
   },
   { deep: true }
@@ -182,21 +187,19 @@ const handleSubmit = async () => {
     await schema.validate(formState, { abortEarly: false });
 
     const formData = {
-      employee_user_name: formState.employee_user_name,
-      employee_fullname: formState.employee_fullname,
-      email: formState.email,
-      employee_password: formState.employee_password,
+      username: formState.username,
+      name: formState.name,
+      emial: formState.emial,
+      password: formState.password,
       confirm_password: formState.confirm_password,
     };
-
-    const response = await fetch("http://127.0.0.1:8000/api/employee", {
+    const response = await fetch("http://127.0.0.1:8000/api/user", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(formData),
     });
-
     if (response.ok) {
       message.success("Employee information created successfully");
       // Reset form or handle success as necessary
@@ -217,7 +220,3 @@ const handleBlur = (field) => {
   validateField(field);
 };
 </script>
-
-<style>
-/* Add any necessary styles here */
-</style>
