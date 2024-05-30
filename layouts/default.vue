@@ -97,7 +97,7 @@
                 aria-label="Our email"
                 title="Our email"
                 class="transition-colors duration-300 text-gray-400 hover:text-deep-purple-800"
-                >yonasmillion29@gmail.com</a
+                >lidetajobcreation@gmail.com</a
               >
             </div>
             <div class="flex">
@@ -110,7 +110,7 @@
                 title="Our address"
                 class="transition-colors duration-300 text-gray-400 hover:text-deep-purple-800"
               >
-                312 Lovely Street, NY
+                Lideta, Addis ababa
               </a>
             </div>
           </div>
