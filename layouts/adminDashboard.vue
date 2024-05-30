@@ -224,7 +224,7 @@
           </div>
 
           <div class="font-bold text-3xl text-[#0a58a4]">
-            Ldeta Subcity Enterprise Management System
+            Lideta Subcity Enterprise Registration System
           </div>
 
           <div
