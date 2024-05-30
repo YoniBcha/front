@@ -1,9 +1,9 @@
 <template>
   <div class="">
     <div class="grid grid-cols-3 gap-3 mr-3">
-      <div class="grid gird-col-3 bg-[#f5f5f5] mt-5 rounded-md">
+      <div class="grid gird-col-3 bg-[#f5f5f5] mt-5 rounded-md bg-blue-200">
         <div class="flex flex-col justify-between py-4 pl-3">
-          <div class="text-lg font-bold">Total Enterprise</div>
+          <div class="text-lg font-bold ">Total Enterprise</div>
           <div class="">
             <p class="font-bold text-4xl mb-1">12</p>
             <p class="text-xs">Number of Enterprises Registered</p>
@@ -18,7 +18,7 @@
           />
         </div>
       </div>
-      <div class="grid gird-col-3 bg-[#f5f5f5] mt-5 rounded-md">
+      <div class="grid gird-col-3 bg-[#f5f5f5] mt-5 rounded-md bg-blue-200">
         <div class="flex flex-col justify-between py-4 pl-3">
           <div class="text-lg font-bold">Total Workplace</div>
           <div class="">
@@ -35,7 +35,7 @@
           />
         </div>
       </div>
-      <div class="grid gird-col-3 bg-[#f5f5f5] mt-5 rounded-md">
+      <div class="grid gird-col-3 bg-[#f5f5f5] mt-5 rounded-md bg-blue-200">
         <div class="flex flex-col justify-between py-4 pl-3">
           <div class="text-lg font-bold">Total Jobless</div>
           <div class="">

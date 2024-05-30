@@ -47,7 +47,7 @@ export default defineComponent({
         },
         {
           name: "workplaces",
-          data: [5, 6, 9, 11, 7, 6, 6, 5, 6],
+          data: [5, 6, 9, 6, 7, 6, 6, 5, 6],
         },
         {
           name: "Jobless",
