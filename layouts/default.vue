@@ -10,7 +10,7 @@
       </div>
       <!-- links in nav bar -->
       <div class="flex gap-10 text-white text-lg font-semibold p-5">
-        <nuxt-link to="/">Home</nuxt-link>
+        <nuxt-link to="/index">Home</nuxt-link>
         <nuxt-link to="/landingpage/news">News</nuxt-link>
         <nuxt-link to="/landingpage/contact-us">Contact Us</nuxt-link>
         <nuxt-link to="/login">Login/signup</nuxt-link>
