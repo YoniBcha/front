@@ -6,7 +6,6 @@
           <h2 class="title text-black">Sign in</h2>
           <authLogin />
         </form>
-
         <form
           class="sign-up-form shadow-2xl mx-auto px-2 rounded-lg bg-gray-50"
         >
@@ -21,8 +20,7 @@
         <div class="content">
           <h3>New here ?</h3>
           <p>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis,
-            ex ratione. Aliquid!
+            Register now!
           </p>
           <button class="btn transparent" @click="switchToSignUpMode">
             Sign up
@@ -34,8 +32,7 @@
         <div class="content">
           <h3>One of us ?</h3>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum
-            laboriosam ad deleniti.
+           Sign in if you have exising account!
           </p>
           <button class="btn transparent" @click="switchToSignInMode">
             Sign in

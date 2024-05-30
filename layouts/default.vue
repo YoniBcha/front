@@ -2,7 +2,7 @@
   <div class="mx-16">
     <!-- header -->
     <div
-      class="fixed top-4 left-16 z-0 overflow-hidden right-16 flex justify-between items-center h-[50px] rounded-md border-t border-gray-200 bg-gradient-to-r from-gray-50 to-[#0a58a4]"
+      class="fixed top-4 left-16 z-0 overflow-hidden right-16 flex justify-between items-center h-[70px] rounded-md border-t border-gray-200 bg-gradient-to-r from-gray-50 to-[#0a58a4]"
     >
       <!-- logo -->
       <div class="w-16 p-2">
@@ -10,10 +10,10 @@
       </div>
       <!-- links in nav bar -->
       <div class="flex gap-10 text-white text-lg font-semibold p-5">
-        <nuxt-link to="/">Home</nuxt-link>
+        <nuxt-link to="/index">Home</nuxt-link>
         <nuxt-link to="/landingpage/news">News</nuxt-link>
-        <nuxt-link to="/login">Login-signup page</nuxt-link>
         <nuxt-link to="/landingpage/contact-us">Contact Us</nuxt-link>
+        <nuxt-link to="/login">Login/signup</nuxt-link>
         <button @click="toggleDropdown">Register</button>
       </div>
     </div>
@@ -71,10 +71,10 @@
             </div>
             <div class="mt-6 lg:max-w-sm">
               <p class="text-sm text-gray-400 font-bold">
-                Ldeta Subcity Enterprise Management System.
+                Lideta Subcity Enterprise Registration System
               </p>
               <p class="mt-4">
-                Make our workplace enviroment a better place for you and for us
+                Team up and Innovate!
               </p>
             </div>
           </div>
@@ -97,7 +97,7 @@
                 aria-label="Our email"
                 title="Our email"
                 class="transition-colors duration-300 text-gray-400 hover:text-deep-purple-800"
-                >yonasmillion29@gmail.com</a
+                >lidetajobcreation@gmail.com</a
               >
             </div>
             <div class="flex">
@@ -110,7 +110,7 @@
                 title="Our address"
                 class="transition-colors duration-300 text-gray-400 hover:text-deep-purple-800"
               >
-                312 Lovely Street, NY
+                Lideta, Addis ababa
               </a>
             </div>
           </div>
@@ -150,8 +150,8 @@
               </a>
             </div>
             <p class="mt-4 text-sm">
-              if you want to get us with other social media here is our link
-              contact us!
+              Here is our link
+              to contact us!
             </p>
           </div>
         </div>
@@ -159,8 +159,7 @@
           class="flex flex-col-reverse justify-between pt-7 pb-10 border-t lg:flex-row"
         >
           <p class="text-sm font-bold">
-            © Copyright 2020 Ldeta subcity enterprise management system Inc. All
-            rights reserved.
+            © Copyright 2024
           </p>
           <ul
             class="flex flex-col mb-3 space-y-2 lg:mb-0 sm:space-y-0 sm:space-x-5 sm:flex-row"
